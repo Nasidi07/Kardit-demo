@@ -1,13 +1,13 @@
 /* ─────────────────────────────────────────────────────────────
-   Kardit Mini CMS — Customers module (UJR005 + UJR007)
-   UJR005: Customer data capture (form → saved draft)
-   UJR007: View customer (search list → profile)
+   Kardit Mini CMS — Customers module ( + )
+   : Customer data capture (form → saved draft)
+   : View customer (search list → profile)
    ───────────────────────────────────────────────────────────── */
 
 // ─────────────────────────────────────────────────────────────
 // Mock customer dataset (shared between search and profile)
 // Seeded with realistic Nigerian customers. CUST-2026-00345 is
-// the draft customer captured via UJR005 — keeps continuity.
+// the draft customer captured via  — keeps continuity.
 // ─────────────────────────────────────────────────────────────
 
 const CUSTOMERS = [
@@ -196,7 +196,7 @@ function mountHStepper(steps, activeStep) {
 function refreshIcons() { if (window.lucide) lucide.createIcons(); }
 
 // ─────────────────────────────────────────────────────────────
-// UJR005 — New customer (form + saved)
+//  — New customer (form + saved)
 // ─────────────────────────────────────────────────────────────
 
 const NEW_CUSTOMER_STEPS = [
@@ -258,7 +258,7 @@ function initSaved() {
 function initPage(activeStep) { initFormPage(activeStep); }
 
 // ─────────────────────────────────────────────────────────────
-// UJR007 — Customer search (SCR-VCUS-01)
+//  — Customer search ()
 // ─────────────────────────────────────────────────────────────
 
 const searchState = { query: "", kyc: "all", status: "all" };
@@ -378,7 +378,7 @@ function initSearch() {
 }
 
 // ─────────────────────────────────────────────────────────────
-// UJR007 — Customer profile (SCR-VCUS-02)
+//  — Customer profile ()
 // ─────────────────────────────────────────────────────────────
 
 function getQueryParam(name) {
@@ -452,7 +452,7 @@ function renderProfile(c) {
         </div>
       </div>
       <div class="profile-actions">
-        <a href="#" class="btn btn-secondary btn-sm" onclick="event.preventDefault(); alert('Edit profile — not in UJR007 scope (UJR005 owns capture).');">
+        <a href="#" class="btn btn-secondary btn-sm" onclick="event.preventDefault(); alert('Edit profile — not in  scope ( owns capture).');">
           <i data-lucide="edit-2"></i> Edit
         </a>
         <a href="../issue-card/01-start.html?customerId=${encodeURIComponent(c.ref)}" class="btn btn-primary">
@@ -503,7 +503,7 @@ function renderCardRow(card) {
       </div>
       <div class="card-actions">
         <a href="../card/index.html?cardId=${encodeURIComponent(card.id)}" class="btn btn-ghost btn-sm"><i data-lucide="wallet"></i> Balance</a>
-        <a href="#" class="btn btn-ghost btn-sm" onclick="event.preventDefault(); alert('UJR018 (Transactions) — coming later.');"><i data-lucide="list"></i> Txns</a>
+        <a href="#" class="btn btn-ghost btn-sm" onclick="event.preventDefault(); alert(' (Transactions) — coming later.');"><i data-lucide="list"></i> Txns</a>
         ${card.status === "ACTIVE"
           ? `<a href="../card/freeze.html?cardId=${encodeURIComponent(card.id)}" class="btn btn-ghost btn-sm"><i data-lucide="snowflake"></i> Freeze</a>`
           : card.status === "FROZEN"
@@ -524,7 +524,7 @@ function renderProfileNotFound(ref) {
       <div class="empty-list-title">Customer not found</div>
       <div class="empty-list-sub">
         ${ref ? `No customer in your tenant scope with reference <span class="mono" style="color:var(--cs-ink-700)">${ref}</span>.` : "No customer reference was provided."}<br/>
-        It may belong to a different tenant or have been removed. Per FR-VCUS-API-01-08, you only see customers in your scope.
+        It may belong to a different tenant or have been removed. Per -08, you only see customers in your scope.
       </div>
       <a href="index.html" class="btn btn-primary"><i data-lucide="arrow-left"></i> Back to customers</a>
     </div>

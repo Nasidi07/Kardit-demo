@@ -1,6 +1,6 @@
 /* ─────────────────────────────────────────────────────────────
-   Kardit Mini CMS — UJR008 Unified Customer + Card Issuance
-   Per SRS §5382. Six screens (SCR-ISS-01 through 06), two entry
+   Kardit Mini CMS —  Unified Customer + Card Issuance
+   Per . Six screens ( through 06), two entry
    paths (cold from dashboard / warm from customer profile via
    ?customerId), session-stored payload across screens.
    ───────────────────────────────────────────────────────────── */
@@ -188,7 +188,7 @@ function initStart() {
   }
 }
 
-// 02-customer.html — capture form (mirrors UJR005)
+// 02-customer.html — capture form (mirrors )
 function initCustomerCapture() {
   const form = document.getElementById("issuance-customer-form");
   if (!form) return;
@@ -404,7 +404,7 @@ function initReview() {
     deliveryPanel.style.display = "none";
   }
 
-  // Idempotency key (FR-ISS-S03)
+  // Idempotency key ()
   const idemKey = state.idempotencyKey || genIdempotencyKey();
   const reqId = state.requestId || genRequestId();
   setState({ idempotencyKey: idemKey, requestId: reqId });
@@ -453,7 +453,7 @@ function initResult() {
   // Title + sub
   document.getElementById("result-title").textContent = isVirtual ? "Card issued" : "Card sent for personalization";
   document.getElementById("result-sub").innerHTML = isVirtual
-    ? `Virtual card is <strong>ACTIVE</strong> and ready for funding. Linked virtual account provisioned per FR-ISS-VA-01.`
+    ? `Virtual card is <strong>ACTIVE</strong> and ready for funding. Linked virtual account provisioned per .`
     : `Physical card is <strong>PERSONALIZING</strong>. Bureau push succeeded — typical personalization 24–48 hours.`;
 
   // Icon variant
@@ -516,11 +516,11 @@ function initResult() {
     nextGrid.innerHTML = `
       <a class="next-link" href="../load-funds/01-form.html?cardId=${encodeURIComponent(o.cardId)}">
         <span class="nl-icon"><i data-lucide="wallet"></i></span>
-        <div><div class="nl-label">Load funds</div><div class="nl-meta">UJR012</div></div>
+        <div><div class="nl-label">Load funds</div><div class="nl-meta"></div></div>
       </a>
       <a class="next-link" href="../card/index.html?cardId=${encodeURIComponent(o.cardId)}">
         <span class="nl-icon"><i data-lucide="circle-dollar-sign"></i></span>
-        <div><div class="nl-label">View balance</div><div class="nl-meta">UJR015</div></div>
+        <div><div class="nl-label">View balance</div><div class="nl-meta"></div></div>
       </a>
       <a class="next-link" href="../customers/profile.html?ref=${encodeURIComponent(state.customerId)}">
         <span class="nl-icon"><i data-lucide="user"></i></span>
@@ -529,9 +529,9 @@ function initResult() {
     `;
   } else {
     nextGrid.innerHTML = `
-      <a class="next-link disabled" href="#" onclick="event.preventDefault(); alert('UJR027 (Physical card tracking) — coming later.');">
+      <a class="next-link disabled" href="#" onclick="event.preventDefault(); alert(' (Physical card tracking) — coming later.');">
         <span class="nl-icon"><i data-lucide="truck"></i></span>
-        <div><div class="nl-label">Track delivery</div><div class="nl-meta">UJR027</div></div>
+        <div><div class="nl-label">Track delivery</div><div class="nl-meta"></div></div>
       </a>
       <a class="next-link disabled" href="#" onclick="event.preventDefault(); alert('Funding unlocks once card status is ACTIVE.');">
         <span class="nl-icon"><i data-lucide="wallet"></i></span>
