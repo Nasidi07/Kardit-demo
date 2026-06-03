@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Application Status · Kardit Onboarding</title>
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="onb-scr">
+    <div id="appbar-mount"></div>
+    <div class="onb-body">
+      <div id="rail-mount"></div>
+      <main class="onb-main">
+        <div class="container">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:24px; margin-bottom:24px; flex-wrap:wrap">
+            <div>
+              <div class="onb-eyebrow">Application</div>
+              <h2 class="onb-title" id="case-id-h">KAR-2026-04-0431</h2>
+              <p style="font-size:14px; color:var(--cs-ink-200); margin:4px 0 0">Acme Microfinance Bank Ltd · Submitted 30 Apr 2026</p>
+            </div>
+            <div style="display:flex; gap:10px; align-items:center">
+              <button type="button" class="onb-btn onb-btn-ghost" style="padding:8px 12px; font-size:13px"><i data-lucide="refresh-cw" style="width:14px; height:14px"></i> Refresh</button>
+              <button type="button" class="onb-btn onb-btn-secondary" style="padding:8px 14px; font-size:13px" onclick="alert('Download summary — not wired in prototype.')"><i data-lucide="download" style="width:14px; height:14px"></i> Download summary</button>
+            </div>
+          </div>
+
+          <div id="clarification-banner" style="display:none">
+            <div class="onb-card pad" style="border-left:4px solid var(--cs-red-700); background:var(--cs-red-100); margin-bottom:18px">
+              <div style="display:flex; align-items:flex-start; gap:14px">
+                <div style="width:36px; height:36px; border-radius:999px; background:#fff; color:var(--cs-red-700); display:grid; place-items:center; flex-shrink:0"><i data-lucide="message-square" style="width:18px; height:18px"></i></div>
+                <div style="flex:1">
+                  <div style="font-weight:700; color:var(--cs-red-900)">Clarification requested</div>
+                  <p style="font-size:14px; color:var(--cs-ink-400); margin:4px 0 12px; line-height:1.55">
+                    Compliance asks: "Could you re-upload the proof of address — the file appears partially redacted on page 2."
+                  </p>
+                  <a href="respond.html" class="onb-btn onb-btn-accent">Respond to Clarification <i data-lucide="arrow-right"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="onb-card pad">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:22px">
+              <h4 style="font-family:var(--cs-font-display); font-weight:700; font-size:18px; color:var(--cs-ink-700); margin:0">Timeline</h4>
+              <span id="stage-tag" class="onb-tag info" style="padding:6px 12px; font-size:13px">● In review</span>
+            </div>
+            <div id="timeline-mount" style="position:relative; padding-left:4px"></div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="app.js"></script>
+  <script>
+    const MILESTONES = [
+      { k: "submitted",     label: "Submitted",     desc: "Application received",                     when: "30 Apr 2026, 09:14" },
+      { k: "review",        label: "In Review",     desc: "Compliance team reviewing your documents", when: "30 Apr 2026, 14:02" },
+      { k: "clarification", label: "Clarification", desc: "We need a small piece of extra info",      when: "01 May 2026, 11:20" },
+      { k: "approved",      label: "Approved",      desc: "Welcome aboard — credentials issued",      when: "—" },
+    ];
+
+    function renderStatus() {
+      const state = getState();
+      document.getElementById("case-id-h").textContent = state.caseId;
+
+      const stage = state.statusStage;
+      const idx = MILESTONES.findIndex(m => m.k === stage);
+
+      const tag = document.getElementById("stage-tag");
+      if (stage === "clarification") {
+        tag.className = "onb-tag warn";
+        tag.textContent = "● Awaiting your response";
+        document.getElementById("clarification-banner").style.display = "block";
+      } else if (stage === "approved") {
+        tag.className = "onb-tag ok";
+        tag.textContent = "● Approved";
+      } else {
+        tag.className = "onb-tag info";
+        tag.textContent = "● In review";
+      }
+
+      tag.style.padding = "6px 12px";
+      tag.style.fontSize = "13px";
+
+      const html = MILESTONES.map((m, i) => {
+        const done = i < idx;
+        const active = i === idx;
+        const lineColor = done ? "var(--cs-green-500)" : "var(--cs-line)";
+        const dotBg = done ? "var(--cs-green-500)" : active ? "#fff" : "var(--cs-mist)";
+        const dotColor = done ? "#fff" : active ? "var(--cs-green-700)" : "var(--cs-ink-100)";
+        const dotBorder = done ? "var(--cs-green-500)" : active ? "var(--cs-green-700)" : "var(--cs-line-strong)";
+        const dotShadow = active ? "0 0 0 4px rgba(43, 161, 93, 0.20)" : "none";
+        const labelColor = (done || active) ? "var(--cs-ink-700)" : "var(--cs-ink-100)";
+        const icon = done ? `<i data-lucide="check" style="width:14px; height:14px"></i>` : active ? `<i data-lucide="clock" style="width:14px; height:14px"></i>` : `<span style="font-size:11px; font-weight:700">${i+1}</span>`;
+        const connector = i < MILESTONES.length - 1 ? `<div style="position:absolute; left:14px; top:30px; bottom:0; width:2px; background:${lineColor}"></div>` : "";
+        return `
+          <div style="display:flex; gap:18px; padding-bottom:${i < MILESTONES.length - 1 ? '20px' : '0'}; position:relative">
+            ${connector}
+            <div style="width:30px; height:30px; border-radius:999px; flex-shrink:0; background:${dotBg}; color:${dotColor}; border:2px solid ${dotBorder}; display:grid; place-items:center; box-shadow:${dotShadow}">${icon}</div>
+            <div style="flex:1; padding-top:3px">
+              <div style="font-weight:600; color:${labelColor}; font-size:15px">${m.label}</div>
+              <div style="font-size:13px; color:var(--cs-ink-200); margin-top:2px">${m.desc}</div>
+              <div style="font-size:12px; color:var(--cs-ink-100); margin-top:4px">${m.when}</div>
+            </div>
+          </div>
+        `;
+      }).join("");
+      document.getElementById("timeline-mount").innerHTML = html;
+      if (window.lucide) lucide.createIcons();
+    }
+    document.addEventListener("DOMContentLoaded", renderStatus);
+  </script>
+</body>
+</html>

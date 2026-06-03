@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 120">
+  <rect width="260" height="120" rx="20" fill="#3B0F5F" />
+  <path d="M40 80L80 24L108 80L146 24L178 80L218 24" fill="none" stroke="#D7037F" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" />
+  <text x="130" y="105" text-anchor="middle" fill="#fff" font-family="Inter, sans-serif" font-size="22" font-weight="800">WEMA BANK</text>
+</svg>

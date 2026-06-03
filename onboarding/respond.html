@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Respond to Clarification · Kardit Onboarding</title>
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="onb-scr">
+    <div id="appbar-mount"></div>
+    <div class="onb-body">
+      <div id="rail-mount"></div>
+      <main class="onb-main">
+        <div class="container">
+          <a href="status.html" class="onb-btn onb-btn-ghost" style="margin-bottom:14px; padding:6px 10px; font-size:13px"><i data-lucide="chevron-left" style="width:14px; height:14px"></i> Back to status</a>
+
+          <div class="onb-eyebrow">Clarification</div>
+          <h2 class="onb-title">Respond to compliance</h2>
+          <p class="onb-sub">Reply to our message and re-upload any missing or corrected documents. Your application stays in clarification status until you submit a response.</p>
+
+          <div class="onb-card pad" style="background:var(--cs-mist)">
+            <div style="font-size:12px; color:var(--cs-ink-100); text-transform:uppercase; letter-spacing:0.1em; font-weight:700">Original request · 01 May, 11:20</div>
+            <p style="margin:8px 0 0; font-size:14px; color:var(--cs-ink-400); line-height:1.55">
+              "Could you re-upload the proof of address — the file appears partially redacted on page 2."
+            </p>
+          </div>
+
+          <div class="onb-card pad" style="margin-top:14px">
+            <h4>Your reply</h4>
+            <div class="onb-field">
+              <label for="reply-msg">Message</label>
+              <textarea id="reply-msg" rows="5" placeholder="Add a short note for the compliance team..." style="resize:vertical; min-height:120px"></textarea>
+            </div>
+
+            <div style="margin-top:18px">
+              <div class="onb-field">
+                <label>Re-upload document</label>
+                <div id="upload-zone" style="border:2px dashed var(--cs-line-strong); border-radius:12px; padding:22px; text-align:center; background:var(--cs-paper)">
+                  <i data-lucide="upload" style="width:24px; height:24px; color:var(--cs-ink-100)"></i>
+                  <div style="font-weight:600; color:var(--cs-ink-700); margin-top:8px">Drop file here or click to browse</div>
+                  <div style="font-size:12px; color:var(--cs-ink-100); margin-top:4px">PDF, JPG, PNG · max 5MB</div>
+                  <button type="button" id="browse-btn" class="onb-btn onb-btn-secondary" style="margin-top:12px; padding:8px 14px; font-size:13px">Browse files</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="onb-step-actions">
+            <a href="status.html" class="onb-btn onb-btn-ghost">Cancel</a>
+            <button type="button" id="submit-resp" class="onb-btn onb-btn-primary" disabled>Submit response <i data-lucide="arrow-right"></i></button>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="app.js"></script>
+  <script>
+    let hasFile = false;
+    function refreshBtn() {
+      const msg = document.getElementById("reply-msg").value.trim();
+      document.getElementById("submit-resp").disabled = !msg && !hasFile;
+    }
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("reply-msg").addEventListener("input", refreshBtn);
+      document.getElementById("browse-btn").addEventListener("click", () => {
+        hasFile = true;
+        document.getElementById("upload-zone").innerHTML = `
+          <div style="display:flex; align-items:center; justify-content:center; gap:12px">
+            <i data-lucide="file-text" style="width:20px; height:20px; color:var(--cs-green-700)"></i>
+            <span style="font-weight:600; color:var(--cs-ink-700)">proof_of_address_v2.pdf</span>
+            <span style="font-size:12px; color:var(--cs-ink-100)">1.4 MB</span>
+            <button type="button" class="onb-btn onb-btn-ghost" style="padding:4px 10px; font-size:12px; color:var(--cs-red-700)" id="remove-file">Remove</button>
+          </div>
+        `;
+        if (window.lucide) lucide.createIcons();
+        document.getElementById("remove-file").addEventListener("click", () => location.reload());
+        refreshBtn();
+      });
+      document.getElementById("submit-resp").addEventListener("click", () => {
+        setState({ statusStage: "review" });
+        window.location.href = "status.html";
+      });
+    });
+  </script>
+</body>
+</html>

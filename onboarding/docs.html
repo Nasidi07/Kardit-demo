@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KYB / KYC Documents · Kardit Onboarding</title>
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="onb-scr">
+    <div id="appbar-mount"></div>
+    <div class="onb-body">
+      <div id="rail-mount"></div>
+      <main class="onb-main">
+        <div class="container">
+          <div class="onb-eyebrow">Step 2 of 4</div>
+          <h2 class="onb-title">Upload required documents</h2>
+          <p class="onb-sub">All documents must be in PDF, JPG or PNG format and under 5MB. We accept clear scans or smartphone photos.</p>
+
+          <div class="onb-card pad" style="border-style:dashed; border-color:var(--cs-green-300); background:var(--cs-green-100); margin-bottom:18px">
+            <div style="display:flex; align-items:center; gap:16px">
+              <div style="width:48px; height:48px; border-radius:12px; background:#fff; color:var(--cs-green-700); display:grid; place-items:center"><i data-lucide="upload" style="width:22px; height:22px"></i></div>
+              <div style="flex:1">
+                <div style="font-weight:700; color:var(--cs-ink-900)">Drag and drop files here</div>
+                <div style="font-size:13px; color:var(--cs-ink-200); margin-top:2px">or click to browse — we'll auto-detect document type where possible.</div>
+              </div>
+              <button type="button" class="onb-btn onb-btn-secondary" onclick="alert('Browse files — not wired in prototype.')">Browse files</button>
+            </div>
+          </div>
+
+          <div class="onb-card">
+            <div style="padding:14px 22px; border-bottom:1px solid var(--cs-line); display:flex; justify-content:space-between; align-items:center">
+              <div style="font-weight:700; font-size:14px; color:var(--cs-ink-700)">Required documents (<span id="uploaded-count">0</span>/5)</div>
+              <span class="onb-tag info" id="remaining-tag">5 remaining</span>
+            </div>
+            <div id="doc-list"></div>
+          </div>
+
+          <div class="onb-step-actions">
+            <a href="org.html" class="onb-btn onb-btn-ghost">← Back</a>
+            <div style="display:flex; gap:10px">
+              <a href="index.html" class="onb-btn onb-btn-secondary">Save Draft</a>
+              <a href="banks.html" class="onb-btn onb-btn-primary">Next: Banks <i data-lucide="arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="app.js"></script>
+  <script>
+    const REQUIRED_DOCS = [
+      { key: "cac",       label: "CAC Certificate",       desc: "Certificate of Incorporation (PDF, max 5MB)" },
+      { key: "memart",    label: "Memorandum & Articles", desc: "MEMART or constitution document" },
+      { key: "tin",       label: "TIN Certificate",       desc: "Tax Identification Number certificate" },
+      { key: "directors", label: "Director ID(s)",        desc: "Government-issued ID for each director" },
+      { key: "utility",   label: "Proof of Address",      desc: "Utility bill, dated within 3 months" },
+    ];
+
+    function renderDocs() {
+      const state = getState();
+      const docs = state.docs;
+      const list = document.getElementById("doc-list");
+      list.innerHTML = REQUIRED_DOCS.map((d, i) => {
+        const file = docs[d.key];
+        return `
+          <div style="display:flex; align-items:center; gap:16px; padding:16px 22px; ${i < REQUIRED_DOCS.length - 1 ? 'border-bottom:1px solid var(--cs-line)' : ''}">
+            <div style="width:40px; height:40px; border-radius:10px; background:${file ? 'var(--cs-green-100)' : 'var(--cs-mist)'}; color:${file ? 'var(--cs-green-700)' : 'var(--cs-ink-100)'}; display:grid; place-items:center; flex-shrink:0">
+              <i data-lucide="${file ? 'check' : 'file-text'}" style="width:18px; height:18px"></i>
+            </div>
+            <div style="flex:1; min-width:0">
+              <div style="font-weight:600; font-size:14px; color:var(--cs-ink-700)">${d.label}</div>
+              <div style="font-size:12px; color:var(--cs-ink-100); margin-top:2px">
+                ${file ? `<strong style="color:var(--cs-ink-400)">${file.name}</strong> · ${file.size} · uploaded` : d.desc}
+              </div>
+            </div>
+            ${file ? `
+              <div style="display:flex; gap:6px">
+                <button type="button" class="onb-btn onb-btn-ghost" style="padding:6px 10px; font-size:12px" onclick="toggleDoc('${d.key}')"><i data-lucide="refresh-ccw" style="width:14px; height:14px"></i> Replace</button>
+                <button type="button" class="onb-btn onb-btn-ghost" style="padding:6px 10px; font-size:12px; color:var(--cs-red-700)" onclick="toggleDoc('${d.key}')" aria-label="Remove ${d.label}"><i data-lucide="trash-2" style="width:14px; height:14px"></i></button>
+              </div>
+            ` : `
+              <button type="button" class="onb-btn onb-btn-secondary" style="padding:8px 14px; font-size:13px" onclick="toggleDoc('${d.key}')">Upload</button>
+            `}
+          </div>
+        `;
+      }).join("");
+
+      const count = Object.values(docs).filter(Boolean).length;
+      document.getElementById("uploaded-count").textContent = count;
+      document.getElementById("remaining-tag").textContent = `${REQUIRED_DOCS.length - count} remaining`;
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function toggleDoc(k) {
+      const state = getState();
+      const docs = { ...state.docs };
+      docs[k] = docs[k] ? null : { name: `${k}_certificate.pdf`, size: "1.2 MB" };
+      setState({ docs });
+      renderDocs();
+    }
+
+    document.addEventListener("DOMContentLoaded", renderDocs);
+  </script>
+</body>
+</html>

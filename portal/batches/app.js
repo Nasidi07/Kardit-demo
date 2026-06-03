@@ -1,5 +1,5 @@
 /* ─────────────────────────────────────────────────────────────
-   Kardit Mini CMS —  Batch Onboarding
+   Kardit Mini CMS — UJR006 Batch Onboarding
    Shared shell renderer matching the Affiliate Portal pattern
    used in flows/affiliate_onboarding/. Each screen-specific HTML
    calls initPage(stepNumber).

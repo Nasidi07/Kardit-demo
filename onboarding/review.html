@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Review & Submit · Kardit Onboarding</title>
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="onb-scr">
+    <div id="appbar-mount"></div>
+    <div class="onb-body">
+      <div id="rail-mount"></div>
+      <main class="onb-main">
+        <div class="container">
+          <div class="onb-eyebrow">Step 4 of 4</div>
+          <h2 class="onb-title">Review your application</h2>
+          <p class="onb-sub">Take a moment to confirm everything is right. Once submitted, our team will review within 2 working days.</p>
+
+          <div id="review-mount" style="display:flex; flex-direction:column; gap:14px"></div>
+
+          <div class="onb-card pad" style="margin-top:18px">
+            <label style="display:flex; gap:12px; align-items:flex-start; cursor:pointer">
+              <input type="checkbox" id="terms-check" style="margin-top:3px; width:18px; height:18px; accent-color:var(--cs-green-700)">
+              <span style="font-size:14px; color:var(--cs-ink-400); line-height:1.55">
+                I confirm that all information provided is accurate, and I have authority to submit this application on behalf of my organization. I accept the <a href="#terms" style="color:var(--cs-green-700); font-weight:600">Kardit Affiliate Terms</a> and <a href="#privacy" style="color:var(--cs-green-700); font-weight:600">Privacy Policy</a>.
+              </span>
+            </label>
+            <label style="display:flex; gap:12px; align-items:flex-start; cursor:pointer; margin-top:12px">
+              <input type="checkbox" id="contact-check" style="margin-top:3px; width:18px; height:18px; accent-color:var(--cs-green-700)">
+              <span style="font-size:14px; color:var(--cs-ink-400); line-height:1.55">
+                Kardit may contact me about my application via email or phone.
+              </span>
+            </label>
+          </div>
+
+          <div class="onb-step-actions">
+            <a href="banks.html" class="onb-btn onb-btn-ghost">← Back</a>
+            <button type="button" id="submit-btn" class="onb-btn onb-btn-accent" disabled>Submit application <i data-lucide="arrow-right"></i></button>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="app.js"></script>
+  <script>
+    function renderReview() {
+      const state = getState();
+      const f = state.formData;
+      const docs = state.docs;
+      const banks = state.banks || [];
+      const docsCount = Object.values(docs).filter(Boolean).length;
+
+      const sectionHTML = (title, editHref, rows) => `
+        <div class="onb-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 22px; border-bottom:1px solid var(--cs-line)">
+            <div style="font-family:var(--cs-font-display); font-weight:700; font-size:16px; color:var(--cs-ink-700)">${title}</div>
+            <a href="${editHref}" class="onb-btn onb-btn-ghost" style="padding:6px 10px; font-size:13px; color:var(--cs-green-700)"><i data-lucide="pencil" style="width:14px; height:14px"></i> Edit</a>
+          </div>
+          <div style="padding:8px 22px 16px">${rows}</div>
+        </div>
+      `;
+
+      const row = (k, v) => `<div class="onb-row"><div class="k">${k}</div><div class="v">${v}</div></div>`;
+
+      const orgRows =
+        row("Legal name", f.legalName || "—") +
+        row("RC number",  f.regNo || "—") +
+        row("TIN",        f.tin || "—") +
+        row("Address",    f.address || "—") +
+        row("Industry",   f.industry) +
+        row("Contact",    `${f.contactName} · ${f.contactRole}`) +
+        row("Email",      f.email) +
+        row("Phone",      f.phone);
+
+      const docsRows = Object.entries(docs).map(([k, v]) => row(k.toUpperCase(),
+        v ? `<i data-lucide="check" style="width:13px; height:13px; color:var(--cs-green-700)"></i> ${v.name}`
+          : `<span style="color:var(--cs-red-700)">Missing</span>`
+      )).join("");
+
+      const bankPills = banks.length
+        ? banks.map(b => `<span class="onb-tag ok" style="text-transform:uppercase">${b}</span>`).join("")
+        : `<span style="color:var(--cs-red-700); font-size:13px">No banks selected</span>`;
+      const banksContent = `<div style="display:flex; flex-wrap:wrap; gap:8px">${bankPills}</div>`;
+
+      document.getElementById("review-mount").innerHTML =
+        sectionHTML("Organization & contact", "org.html", orgRows) +
+        sectionHTML(`Documents (${docsCount}/5)`, "docs.html", docsRows) +
+        sectionHTML(`Issuing banks (${banks.length})`, "banks.html", banksContent);
+
+      // Restore checkbox state
+      document.getElementById("terms-check").checked = state.confirmed.terms;
+      document.getElementById("contact-check").checked = state.confirmed.contact;
+      document.getElementById("submit-btn").disabled = !state.confirmed.terms;
+
+      if (window.lucide) lucide.createIcons();
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderReview();
+      document.getElementById("terms-check").addEventListener("change", e => {
+        const state = getState();
+        setState({ confirmed: { ...state.confirmed, terms: e.target.checked } });
+        document.getElementById("submit-btn").disabled = !e.target.checked;
+      });
+      document.getElementById("contact-check").addEventListener("change", e => {
+        const state = getState();
+        setState({ confirmed: { ...state.confirmed, contact: e.target.checked } });
+      });
+      document.getElementById("submit-btn").addEventListener("click", () => {
+        const state = getState();
+        const docsCount = Object.values(state.docs).filter(Boolean).length;
+        if (docsCount < 5 || (state.banks || []).length === 0) {
+          window.location.href = "errors.html";
+        } else {
+          window.location.href = "submitted.html";
+        }
+      });
+    });
+  </script>
+</body>
+</html>

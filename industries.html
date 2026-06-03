@@ -2,263 +2,192 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Industries — Kardit | Built for the Way Africa Pays</title>
+  <title>Industries — Kardit</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Kardit industry verticals: financial institutions, government, transport, education, healthcare, retail, telecoms, HR & payroll." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Lato:wght@400;600;700;900&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
-  <style>
-    :root{--cs-green-900:#0F4F2E;--cs-green-700:#1B7A45;--cs-green-500:#2BA15D;--cs-green-300:#BFE5CE;--cs-green-100:#E8F6EE;--cs-red-900:#9A1A1A;--cs-red-700:#C8242C;--cs-red-500:#E63946;--cs-white:#FFF;--cs-paper:#FAFBF9;--cs-mist:#F2F4F1;--cs-line:#E4E7E2;--cs-line-strong:#C9CEC4;--cs-ink-100:#8C9189;--cs-ink-200:#5C6359;--cs-ink-400:#2F3530;--cs-ink-700:#161A17;--cs-ink-900:#0A0C0A;--cs-fg:var(--cs-ink-700);--cs-fg-muted:var(--cs-ink-200);--cs-bg:var(--cs-paper);--cs-primary:var(--cs-green-700);--cs-accent:var(--cs-red-700);--cs-shadow-sm:0 2px 6px rgba(15,30,18,.06),0 1px 2px rgba(15,30,18,.04);--cs-shadow-md:0 6px 18px rgba(15,30,18,.08),0 2px 4px rgba(15,30,18,.05);--cs-shadow-lg:0 18px 48px rgba(15,30,18,.12),0 4px 12px rgba(15,30,18,.06);--cs-font-display:"Plus Jakarta Sans",system-ui,sans-serif;--cs-font-body:"Lato",system-ui,-apple-system,"Segoe UI",sans-serif;--cs-font-mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,monospace}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:var(--cs-font-body);color:var(--cs-fg);background:var(--cs-bg);-webkit-font-smoothing:antialiased;overflow-x:hidden}a{color:inherit;text-decoration:none}
-    .container{max-width:1200px;margin:0 auto;padding:0 32px}@media(max-width:720px){.container{padding:0 24px}}
-    .site-header{position:sticky;top:0;z-index:60;height:72px;background:rgba(255,255,255,.65);border-bottom:1px solid transparent;transition:background 200ms ease,border-color 200ms ease,box-shadow 200ms ease}
-    .site-header.is-scrolled{background:rgba(255,255,255,.85);backdrop-filter:blur(12px);border-bottom-color:var(--cs-line);box-shadow:0 1px 0 rgba(15,30,18,.02)}
-    .site-header__inner{max-width:1200px;margin:0 auto;height:100%;display:flex;align-items:center;gap:28px;padding:0 32px}
-    .logo-mark{font-family:var(--cs-font-display);font-weight:800;font-size:26px;line-height:1;letter-spacing:-.02em;color:var(--cs-green-900);display:inline-flex;align-items:baseline;user-select:none}
-    .logo-mark__i{position:relative;display:inline-block}
-    .logo-mark__i::after{content:"";position:absolute;top:-.18em;left:50%;width:.22em;height:.22em;border-radius:50%;background:var(--cs-red-700);transform:translate(-50%,0);transition:transform 220ms cubic-bezier(.34,1.56,.64,1)}
-    .site-header__inner:hover .logo-mark__i::after{transform:translate(-50%,-3px)}
-    .site-header__nav{display:flex;gap:4px;flex:1;margin-left:32px}
-    .site-header__nav a{position:relative;font-weight:600;font-size:14px;color:var(--cs-ink-700);padding:10px 14px;border-radius:8px;transition:color 150ms ease}
-    .site-header__nav a:hover{color:var(--cs-green-700)}
-    .site-header__cta{display:flex;align-items:center;gap:8px;margin-left:auto}
-    .site-header__cta a.signin{padding:10px 14px;font-size:14px;font-weight:600;color:var(--cs-ink-700);white-space:nowrap}
-    .site-header__cta a.signin:hover{color:var(--cs-green-700)}
-    .btn-mobile{display:none;background:none;border:none;cursor:pointer;padding:8px;width:36px;height:36px;flex-direction:column;justify-content:center;gap:4px}
-    .btn-mobile span{display:block;height:2px;background:var(--cs-ink-700);border-radius:1px}
-    .mobile-menu{display:none!important}
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--cs-font-body);font-weight:700;font-size:15px;padding:14px 22px;border-radius:10px;border:1.5px solid transparent;cursor:pointer;text-decoration:none;transition:background 150ms ease,color 150ms ease,border-color 150ms ease,box-shadow 150ms ease,transform 100ms ease}
-    .btn:active{transform:scale(.98);box-shadow:var(--cs-shadow-sm)}
-    .btn--primary{background:var(--cs-green-700);color:#fff;box-shadow:0 2px 6px rgba(15,30,18,.1)}
-    .btn--primary:hover{background:var(--cs-green-900)}
-    .btn--accent{background:var(--cs-red-700);color:#fff;box-shadow:0 2px 6px rgba(200,36,44,.2)}
-    .btn--accent:hover{background:var(--cs-red-900)}
-    .btn--ghost{background:#fff;color:var(--cs-ink-700);border-color:var(--cs-line-strong)}
-    .btn--ghost:hover{border-color:var(--cs-ink-700)}
-    .eyebrow{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--cs-green-700)}
-    .eyebrow--muted{color:var(--cs-ink-100)}
-    .section{padding:96px 0}
-    .section--tight{padding:64px 0}
-    .section--white{background:#fff}
-    .section--paper{background:var(--cs-paper)}
-    .section--ink{background:var(--cs-green-900);color:#fff;position:relative;overflow:hidden}
-    .section-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;gap:32px;flex-wrap:wrap}
-    .section-head__title{font-family:var(--cs-font-display);font-weight:800;font-size:clamp(28px,3.6vw,44px);letter-spacing:-.02em;color:var(--cs-ink-900);margin:8px 0 0;line-height:1.1}
-    .section-head__lede{font-size:16px;color:var(--cs-ink-200);max-width:380px;line-height:1.6;margin:0}
-    .section--ink .section-head__title{color:#fff}
-    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-    .card{background:#fff;border:1px solid var(--cs-line);border-radius:16px;padding:28px;box-shadow:var(--cs-shadow-sm);transition:box-shadow 200ms ease,transform 200ms ease,border-color 200ms ease;display:flex;flex-direction:column;gap:12px}
-    .card:hover{box-shadow:var(--cs-shadow-md);transform:translateY(-2px);border-color:var(--cs-line-strong)}
-    .card__icon{width:48px;height:48px;border-radius:12px;background:var(--cs-green-100);color:var(--cs-green-900);display:flex;align-items:center;justify-content:center;transition:background 200ms ease,color 200ms ease,transform 200ms ease}
-    .card:hover .card__icon{background:var(--cs-green-700);color:#fff;transform:rotate(-3deg) scale(1.04)}
-    .card__name{font-family:var(--cs-font-display);font-weight:700;font-size:22px;color:var(--cs-ink-700)}
-    .card__desc{font-size:14px;color:var(--cs-ink-200);line-height:1.6;margin:0;flex:1}
-    .dotted-list{list-style:none;padding:0;margin:0}
-    .dotted-list li{padding:6px 0 6px 20px;position:relative;font-size:14px;color:var(--cs-ink-200);line-height:1.5}
-    .dotted-list li::before{content:"";position:absolute;left:0;top:15px;width:6px;height:6px;border-radius:50%;background:var(--cs-green-300);border:1px solid var(--cs-green-500)}
-    .subhero{position:relative;overflow:hidden;padding:80px 0 64px}
-    .subhero__title{font-family:var(--cs-font-display);font-weight:800;font-size:clamp(34px,5vw,56px);letter-spacing:-.025em;line-height:1.04;color:var(--cs-ink-900);margin:12px 0 0}
-    .subhero__lede{font-size:18px;line-height:1.6;color:var(--cs-ink-200);margin-top:14px;max-width:700px}
-    .hero__bg{position:absolute;inset:0;z-index:0;pointer-events:none}
-    .hero__bg svg{position:absolute;inset:0;width:100%;height:100%}
-    .chips{display:flex;gap:8px;flex-wrap:wrap}
-    .chip{padding:8px 16px;border-radius:999px;background:#fff;border:1px solid var(--cs-line);font-size:13px;font-weight:600;color:var(--cs-ink-700);transition:border-color 150ms ease,color 150ms ease,background 150ms ease;text-decoration:none}
-    .chip:hover{border-color:var(--cs-green-500);color:var(--cs-green-700);background:var(--cs-green-100)}
-    .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-top:24px}
-    .stats-grid .stat__num{font-family:var(--cs-font-display);font-weight:800;font-size:clamp(40px,5vw,64px);letter-spacing:-.025em;line-height:1;color:#fff;font-variant-numeric:tabular-nums}
-    .stats-grid .stat__lab{margin-top:10px;font-size:14px;color:var(--cs-green-300);line-height:1.5}
-    .cta-band{background:#fff;border:1px solid var(--cs-line);border-radius:24px;padding:56px 64px;box-shadow:var(--cs-shadow-md);display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center}
-    .cta-band__title{font-family:var(--cs-font-display);font-weight:800;font-size:clamp(34px,4vw,48px);letter-spacing:-.02em;color:var(--cs-ink-900);margin:0;line-height:1.1}
-    .cta-band__lede{font-size:17px;color:var(--cs-ink-200);margin-top:12px;max-width:540px;line-height:1.6}
-    .cta-band__actions{display:flex;flex-direction:column;gap:10px}
-    .site-footer{background:var(--cs-ink-900);color:#fff;padding-top:72px}
-    .site-footer__grid{max-width:1200px;margin:0 auto;padding:0 32px 48px;display:grid;grid-template-columns:1.4fr repeat(4,1fr);gap:48px}
-    .site-footer__brand p{font-size:14px;color:rgba(255,255,255,.65);margin-top:18px;line-height:1.65;max-width:320px}
-    .site-footer__brand .addr{font-size:13px;color:rgba(255,255,255,.5);margin-top:16px;line-height:1.6}
-    .site-footer__col h4{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--cs-green-300);margin:0}
-    .site-footer__col ul{list-style:none;padding:0;margin:16px 0 0;display:flex;flex-direction:column;gap:10px}
-    .site-footer__col a{color:rgba(255,255,255,.78);font-size:14px;transition:color 150ms ease}
-    .site-footer__col a:hover{color:#fff}
-    .site-footer__rule{border-top:1px solid rgba(255,255,255,.12)}
-    .site-footer__rule .row{max-width:1200px;margin:0 auto;padding:24px 32px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
-    .site-footer__rule .copy{font-size:12px;color:rgba(255,255,255,.5)}
-    .site-footer__badges{display:flex;gap:8px}
-    .site-footer__badges span{padding:3px 9px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:.05em}
-    .site-footer__badges .b1{background:var(--cs-green-700);color:#fff}
-    .site-footer__badges .b2,.site-footer__badges .b3{background:rgba(255,255,255,.1);color:#fff}
-    .reveal{opacity:0;transform:translateY(18px);transition:opacity 600ms cubic-bezier(.2,.7,.2,1),transform 600ms cubic-bezier(.2,.7,.2,1);will-change:opacity,transform}
-    .reveal.is-visible{opacity:1;transform:translateY(0)}
-    .reveal[data-delay="1"].is-visible{transition-delay:80ms}
-    .reveal[data-delay="2"].is-visible{transition-delay:160ms}
-    .reveal[data-delay="3"].is-visible{transition-delay:240ms}
-    @media(max-width:980px){.site-header__nav{display:none}.btn-mobile{display:flex}.stats-grid{grid-template-columns:1fr 1fr;gap:24px}.site-footer__grid{grid-template-columns:1fr 1fr}.cta-band{grid-template-columns:1fr;padding:40px 28px}}
-    @media(max-width:720px){.grid-2{grid-template-columns:1fr}}
-    @media(max-width:640px){.section{padding:64px 0}.stats-grid{grid-template-columns:1fr 1fr}.mobile-menu{display:none!important;flex-direction:column;gap:4px;padding:16px 24px 24px;background:#fff;border-bottom:1px solid var(--cs-line)}.mobile-menu.is-open{display:flex!important}.mobile-menu a{padding:10px 4px;font-weight:600;color:var(--cs-ink-700)}.mobile-menu a:hover{color:var(--cs-green-700)}.site-footer__grid{grid-template-columns:1fr;gap:32px}.cta-band{padding:32px 24px}}
-    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}.reveal{opacity:1!important;transform:none!important}}
-  </style>
+  <link rel="stylesheet" href="colors_and_type.css" />
+  <link rel="stylesheet" href="assets/site.css" />
 </head>
-<body>
+<body data-screen-label="Kardit — Industries">
+
   <header class="site-header" role="banner">
     <div class="site-header__inner">
-      <a href="home.html" class="site-header__logo" aria-label="Kardit home"><span class="logo-mark">Kard<span class="logo-mark__i">i</span>t</span></a>
+      <a class="site-header__logo" href="index.html"><span class="logo-mark">Kard<span class="logo-mark__i">ı</span>t</span></a>
       <nav class="site-header__nav" aria-label="Primary">
-        <a href="home.html">Home</a><a href="solutions.html">Platform</a><a href="industries.html">Industries</a><a href="partners.html">Partners</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+        <a href="solutions.html">Solutions</a>
+        <a href="industries.html" aria-current="page">Industries</a>
+        <a href="about.html">About</a>
+        <a href="partners.html">Partners</a>
       </nav>
-      <div class="site-header__cta">
-        <a class="signin" href="signin.html">Sign in</a>
-        <a class="btn btn--accent" href="contact.html">Start enrollment</a>
+      <div class="site-header__cta"><a class="signin" href="signin.html">Sign in</a><a class="btn btn--accent btn--small" href="contact.html">Let's Talk</a></div>
       </div>
-      <button class="btn-mobile" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
-    </div>
-    <div class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
-      <a href="home.html">Home</a><a href="solutions.html">Platform</a><a href="industries.html">Industries</a><a href="partners.html">Partners</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="signin.html">Sign in</a>
-      <a class="btn btn--accent" href="contact.html" style="justify-content:center;margin-top:8px">Start enrollment</a>
-    </div>
   </header>
 
-  <main>
-    <section class="subhero">
-      <div class="hero__bg" aria-hidden="true">
-        <svg viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice">
-          <defs>
-            <linearGradient id="t" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#9A1A1A" stop-opacity="0"/><stop offset=".55" stop-color="#C8242C" stop-opacity=".50"/><stop offset="1" stop-color="#E63946" stop-opacity="0"/></linearGradient>
-            <linearGradient id="n" x1="0" x2="1" y1="0" y2="0"><stop offset=".4" stop-color="#E63946" stop-opacity=".30"/><stop offset=".85" stop-color="#E63946" stop-opacity="0"/></linearGradient>
-          </defs>
-          <path d="M-40 420 C 160 350, 280 180, 480 200 C 640 216, 740 80, 920 100 C 1040 114, 1140 200, 1240 190" fill="none" stroke="url(#t)" stroke-width="32" stroke-linecap="round"/>
-          <path d="M-40 460 C 160 390, 290 240, 470 240 C 610 240, 740 175, 900 190 C 1050 204, 1160 260, 1240 240" fill="none" stroke="url(#n)" stroke-width="14" stroke-linecap="round"/>
-        </svg>
-      </div>
-      <div class="container" style="position:relative;z-index:1">
-        <span class="eyebrow">Industries</span>
-        <h1 class="subhero__title">Built for the way Nigeria — and West Africa — actually pays.</h1>
-        <p class="subhero__lede">Eight verticals, one platform. Each industry profile ships with the schemes, integrations and reconciliation rules that operators in that sector actually need.</p>
-      </div>
-    </section>
-
-    <section class="section section--tight section--white">
-      <div class="container reveal">
-        <div class="chips">
-          <a class="chip" href="#financial">Financial Institutions</a>
-          <a class="chip" href="#transport">Public Transport</a>
-          <a class="chip" href="#government">Government</a>
-          <a class="chip" href="#education">Education</a>
-          <a class="chip" href="#health">Healthcare</a>
-          <a class="chip" href="#retail">Retail</a>
-          <a class="chip" href="#telecoms">Telecoms</a>
-          <a class="chip" href="#hr">HR & Payroll</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section--paper">
-      <div class="container">
-        <div class="grid-2" style="gap:24px">
-          <article class="card reveal" data-delay="1" id="financial">
-            <div class="card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><path d="M9 21v-7h6v7"/></svg></div>
-            <span class="eyebrow" style="color:var(--cs-ink-100)">Banks & PSPs</span>
-            <div class="card__name">Financial Institutions</div>
-            <p class="card__desc">Card issuance, ATM driving, POS acquiring and switching for tier-1 banks, microfinance and payment service providers. Direct integration with the NIBSS Instant Payment rail and all major card schemes.</p>
-            <ul class="dotted-list"><li>Real-time switching, sub-200ms typical</li><li>EMV, 3-D Secure, tokenization</li><li>Chargeback and dispute workflow</li></ul>
-          </article>
-          <article class="card reveal" data-delay="2" id="transport">
-            <div class="card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M5 17H3V6a1 1 0 0 1 1-1h10v12"/><path d="M14 9h4l3 4v4h-2"/></svg></div>
-            <span class="eyebrow" style="color:var(--cs-ink-100)">Cashless transit</span>
-            <div class="card__name">Public Transport</div>
-            <p class="card__desc">Powering MX Move — fare collection across BRT corridors, ferry terminals and intercity bus operators. Closed-loop transit cards, open-loop card acceptance, and reconciliation for operators.</p>
-          </article>
-          <article class="card reveal" data-delay="3" id="government">
-            <div class="card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V10l7-3 7 3v11"/><path d="M9 21V14h6v7"/></svg></div>
-            <span class="eyebrow" style="color:var(--cs-ink-100)">Public sector</span>
-            <div class="card__name">Government</div>
-            <p class="card__desc">Internally-Generated Revenue (IGR) collection, treasury single-account integrations, levy collection and licensing. Audit trails meet SAS and federal reconciliation requirements.</p>
-          </article>
-          <article class="card reveal" data-delay="1" id="education">
-            <div class="card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg></div>
-            <span class="eyebrow" style="color:var(--cs-ink-100)">Universities & schools</span>
-            <div class="card__name">Education</div>
-            <p class="card__desc">Tuition, hostels, ID cards, library fines, levies — one rail across faculties. MX Campus integrates with the most common bursar and student-information systems.</p>
-          </article>
-          <article class="card reveal" data-delay="2" id="health">
-            <div class="card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></div>
-            <span class="eyebrow" style="color:var(--cs-ink-100)">Hospitals & HMOs</span>
-            <div class="card__name">Healthcare</div>
-            <p class="card__desc">HMO claims, point-of-care collection, drug levies and hospital-wide billing — wired to the schemes patients actually carry.</p>
-          </article>
-          <article class="card reveal" data-delay="3" id="retail">
-            <div class="card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
-            <span class="eyebrow" style="color:var(--cs-ink-100)">Merchants</span>
-            <div class="card__name">Retail</div>
-            <p class="card__desc">Single-tap acceptance — card, USSD, transfer, QR — for chains, SMEs and standalone outlets. Daily settlement to your operating account.</p>
-          </article>
-          <article class="card reveal" data-delay="1" id="telecoms">
-            <div class="card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12a10 10 0 0 1 20 0"/><path d="M5 12a7 7 0 0 1 14 0"/><path d="M8.5 12a3.5 3.5 0 0 1 7 0"/><circle cx="12" cy="12" r="1"/></svg></div>
-            <span class="eyebrow" style="color:var(--cs-ink-100)">Mobile operators</span>
-            <div class="card__name">Telecoms</div>
-            <p class="card__desc">Airtime, data and VAS billing — direct integrations with MTN, Airtel, Glo and 9mobile, plus reconciliation for partner agents.</p>
-          </article>
-          <article class="card reveal" data-delay="2" id="hr">
-            <div class="card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-            <span class="eyebrow" style="color:var(--cs-ink-100)">Workforce payouts</span>
-            <div class="card__name">HR & Payroll</div>
-            <p class="card__desc">Bulk salary, contractor and benefits disbursement via Naira Plus — schedule, audit, and pay across any Nigerian bank in one batch.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section--ink">
-      <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.12" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <path d="M-40 420 C 160 350, 280 180, 480 200 C 640 216, 740 80, 920 100 C 1040 114, 1140 200, 1240 190" fill="none" stroke="#2BA15D" stroke-width="32" stroke-linecap="round"/>
-        <path d="M-40 460 C 160 390, 290 240, 470 240 C 610 240, 740 175, 900 190 C 1050 204, 1160 260, 1240 240" fill="none" stroke="#2BA15D" stroke-width="14" stroke-linecap="round"/>
+  <section class="subhero" data-swoosh>
+    <div class="hero__bg" aria-hidden="true">
+      <svg class="swoosh" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="thickGradI" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0" stop-color="#9A1A1A" stop-opacity="0.0"/>
+            <stop offset="0.55" stop-color="#C8242C" stop-opacity="0.50"/>
+            <stop offset="1" stop-color="#E63946" stop-opacity="0.0"/>
+          </linearGradient>
+          <linearGradient id="thinGradI" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0.4" stop-color="#E63946" stop-opacity="0.30"/>
+            <stop offset="0.85" stop-color="#E63946" stop-opacity="0.0"/>
+          </linearGradient>
+        </defs>
+        <path data-stroke="thick" d="" stroke="url(#thickGradI)" stroke-width="32" stroke-linecap="round" fill="none"/>
+        <path data-stroke="thin"  d="" stroke="url(#thinGradI)"  stroke-width="14" stroke-linecap="round" fill="none"/>
       </svg>
-      <div class="container" style="padding:96px 32px;position:relative;z-index:1">
-        <div class="section-head reveal">
-          <div>
-            <span class="eyebrow" style="color:var(--cs-green-300)">Across all verticals</span>
-            <h2 class="section-head__title" style="color:#fff">One switch. Many sectors.</h2>
-          </div>
-        </div>
-        <div class="stats-grid">
-          <div class="reveal"><div class="stat__num" data-count="8" data-suffix="">0</div><div class="stat__lab">verticals served</div></div>
-          <div class="reveal" data-delay="1"><div class="stat__num" data-count="36" data-suffix="">0</div><div class="stat__lab">states with active deployments</div></div>
-          <div class="reveal" data-delay="2"><div class="stat__num" data-count="120" data-suffix="+">0</div><div class="stat__lab">institutional integrations</div></div>
-          <div class="reveal" data-delay="3"><div class="stat__num">99.95%</div><div class="stat__lab">platform uptime, trailing 12 months</div></div>
+    </div>
+    <div class="container" style="position:relative; z-index:1">
+      <span class="eyebrow">Industries</span>
+      <h1 class="subhero__title">Built for the way Nigeria — and West Africa — actually pays.</h1>
+      <p class="subhero__lede">Eight verticals, one platform. Each industry profile ships with the schemes, integrations and reconciliation rules that operators in that sector actually need.</p>
+    </div>
+  </section>
+
+  <!-- Filter chips (visual only, all in the same grid) -->
+  <section class="section section--tight section--white">
+    <div class="container reveal">
+      <div class="chips">
+        <a class="chip" href="#financial">Financial Institutions</a>
+        <a class="chip" href="#transport">Public Transport</a>
+        <a class="chip" href="#government">Government</a>
+        <a class="chip" href="#education">Education</a>
+        <a class="chip" href="#health">Healthcare</a>
+        <a class="chip" href="#retail">Retail</a>
+        <a class="chip" href="#telecoms">Telecoms</a>
+        <a class="chip" href="#hr">HR & Payroll</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Industry cards -->
+  <section class="section section--paper">
+    <div class="container">
+      <div class="grid-2" style="gap:24px">
+        <article class="card reveal" data-delay="1" id="financial">
+          <div class="card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><path d="M9 21v-7h6v7"/></svg></div>
+          <div class="eyebrow eyebrow--muted">Banks & PSPs</div>
+          <div class="card__name">Financial Institutions</div>
+          <p class="card__desc">Card issuance, ATM driving, POS acquiring and switching for tier-1 banks, microfinance and payment service providers. Direct integration with the NIBSS Instant Payment rail and all major card schemes.</p>
+          <ul class="dotted-list" style="margin-top:8px">
+            <li>Real-time switching, sub-200ms typical</li>
+            <li>EMV, 3-D Secure, tokenization</li>
+            <li>Chargeback and dispute workflow</li>
+          </ul>
+        </article>
+
+        <article class="card reveal" data-delay="2" id="transport">
+          <div class="card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M5 17H3V6a1 1 0 0 1 1-1h10v12"/><path d="M14 9h4l3 4v4h-2"/></svg></div>
+          <div class="eyebrow eyebrow--muted">Cashless transit</div>
+          <div class="card__name">Public Transport</div>
+          <p class="card__desc">Powering MX Move — fare collection across BRT corridors, ferry terminals and intercity bus operators. Closed-loop transit cards, open-loop card acceptance, and reconciliation for operators.</p>
+        </article>
+
+        <article class="card reveal" data-delay="3" id="government">
+          <div class="card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V10l7-3 7 3v11"/><path d="M9 21V14h6v7"/></svg></div>
+          <div class="eyebrow eyebrow--muted">Public sector</div>
+          <div class="card__name">Government</div>
+          <p class="card__desc">Internally-Generated Revenue (IGR) collection, treasury single-account integrations, levy collection and licensing. Audit trails meet SAS and federal reconciliation requirements.</p>
+        </article>
+
+        <article class="card reveal" data-delay="1" id="education">
+          <div class="card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg></div>
+          <div class="eyebrow eyebrow--muted">Universities & schools</div>
+          <div class="card__name">Education</div>
+          <p class="card__desc">Tuition, hostels, ID cards, library fines, levies — one rail across faculties. MX Campus integrates with the most common bursar and student-information systems.</p>
+        </article>
+
+        <article class="card reveal" data-delay="2" id="health">
+          <div class="card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></div>
+          <div class="eyebrow eyebrow--muted">Hospitals & HMOs</div>
+          <div class="card__name">Healthcare</div>
+          <p class="card__desc">HMO claims, point-of-care collection, drug levies and hospital-wide billing — wired to the schemes patients actually carry.</p>
+        </article>
+
+        <article class="card reveal" data-delay="3" id="retail">
+          <div class="card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
+          <div class="eyebrow eyebrow--muted">Merchants</div>
+          <div class="card__name">Retail</div>
+          <p class="card__desc">Single-tap acceptance — card, USSD, transfer, QR — for chains, SMEs and standalone outlets. Daily settlement to your operating account.</p>
+        </article>
+
+        <article class="card reveal" data-delay="1" id="telecoms">
+          <div class="card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12a10 10 0 0 1 20 0"/><path d="M5 12a7 7 0 0 1 14 0"/><path d="M8.5 12a3.5 3.5 0 0 1 7 0"/><circle cx="12" cy="12" r="1"/></svg></div>
+          <div class="eyebrow eyebrow--muted">Mobile operators</div>
+          <div class="card__name">Telecoms</div>
+          <p class="card__desc">Airtime, data and VAS billing — direct integrations with MTN, Airtel, Glo and 9mobile, plus reconciliation for partner agents.</p>
+        </article>
+
+        <article class="card reveal" data-delay="2" id="hr">
+          <div class="card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div class="eyebrow eyebrow--muted">Workforce payouts</div>
+          <div class="card__name">HR & Payroll</div>
+          <p class="card__desc">Bulk salary, contractor and benefits disbursement via Naira Plus — schedule, audit, and pay across any Nigerian bank in one batch.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== STATS BAND ===================== -->
+  <section class="section section--ink" data-swoosh>
+    <div class="hero__bg" aria-hidden="true">
+      <svg class="swoosh" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice">
+        <path data-stroke="thick" d="" stroke="rgba(43,161,93,0.18)" stroke-width="32" stroke-linecap="round" fill="none"/>
+        <path data-stroke="thin"  d="" stroke="rgba(191,229,206,0.16)" stroke-width="14" stroke-linecap="round" fill="none"/>
+      </svg>
+    </div>
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <div class="eyebrow eyebrow--inverse">Across all verticals</div>
+          <h2 class="section-head__title">One switch. Many sectors.</h2>
         </div>
       </div>
-    </section>
+      <div class="stats-grid">
+        <div class="reveal"><div class="stat__num" data-count="8" data-suffix="">0</div><div class="stat__lab">verticals served</div></div>
+        <div class="reveal" data-delay="1"><div class="stat__num" data-count="36" data-suffix="">0</div><div class="stat__lab">states with active deployments</div></div>
+        <div class="reveal" data-delay="2"><div class="stat__num" data-count="120" data-suffix="+">0</div><div class="stat__lab">institutional integrations</div></div>
+        <div class="reveal" data-delay="3"><div class="stat__num">99.95%</div><div class="stat__lab">platform uptime, trailing 12 months</div></div>
+      </div>
+    </div>
+  </section>
 
-    <section class="section section--paper">
-      <div class="container reveal">
-        <div class="cta-band">
-          <div>
-            <h2 class="cta-band__title">Don't see your vertical?</h2>
-            <p class="cta-band__lede">If your sector has a payments problem, we have probably switched something close to it. Send us the brief — we will tell you honestly whether Kardit is the right fit.</p>
-          </div>
-          <div class="cta-band__actions">
-            <a class="btn btn--accent" href="contact.html">Tell us your use case</a>
-            <a class="btn btn--ghost" href="solutions.html">See all solutions</a>
-          </div>
+  <!-- CTA BAND -->
+  <section class="section section--paper">
+    <div class="container reveal">
+      <div class="cta-band">
+        <div>
+          <h2 class="cta-band__title">Don't see your vertical?</h2>
+          <p class="cta-band__lede">If your sector has a payments problem, we have probably switched something close to it. Send us the brief — we will tell you honestly whether Kardit is the right fit.</p>
+        </div>
+        <div class="cta-band__actions">
+          <a class="btn btn--accent" href="contact.html">Tell us your use case</a>
+          <a class="btn btn--outline-green" href="solutions.html">See all solutions</a>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
+  <!-- FOOTER -->
   <footer class="site-footer">
     <div class="site-footer__grid">
       <div class="site-footer__brand">
-        <span class="logo-mark" style="color:#fff;font-size:22px">Kard<span class="logo-mark__i">i</span>t</span>
+        <span class="logo-mark logo-mark--on-ink">Kard<span class="logo-mark__i">ı</span>t</span>
         <p>Kardit is a subsidiary of Chams Holdco Plc — a multichannel electronic payments switch making payments convenient, simple and secure across Nigeria and beyond.</p>
-        <div class="addr">8, Louis Solomon Close, Victoria Island, Lagos<br/>+234-803-394-4566 &middot; support@kardit.com</div>
+        <div class="addr">8, Louis Solomon Close, Victoria Island, Lagos<br/>+234-803-394-4566 · support@kardit.com</div>
       </div>
-      <div class="site-footer__col"><h4>Solutions</h4><ul><li><a href="solutions.html#switching">Switching &amp; Processing</a></li><li><a href="solutions.html#hosted">Hosted Services</a></li><li><a href="solutions.html#epayment">E-Payment Solutions</a></li><li><a href="solutions.html#mx">MX Suite</a></li></ul></div>
-      <div class="site-footer__col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="about.html#leadership">Management Team</a></li><li><a href="about.html#brands">Our Brands</a></li></ul></div>
+      <div class="site-footer__col"><h4>Solutions</h4><ul><li><a href="solutions.html#switching">Switching & Processing</a></li><li><a href="solutions.html#hosted">Hosted Services</a></li><li><a href="solutions.html#epayment">E-Payment Solutions</a></li><li><a href="solutions.html#mx">MX Suite</a></li></ul></div>
+      <div class="site-footer__col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="about.html#leadership">Management Team</a></li><li><a href="about.html#brands">Our Brands</a></li><li><a href="about.html#investors">Investor Relations</a></li></ul></div>
       <div class="site-footer__col"><h4>Industries</h4><ul><li><a href="#financial">Financial Institutions</a></li><li><a href="#government">Government</a></li><li><a href="#education">Education</a></li><li><a href="#health">Healthcare</a></li></ul></div>
-      <div class="site-footer__col"><h4>Resources</h4><ul><li><a href="partners.html">Partners</a></li><li><a href="contact.html">Contact Us</a></li></ul></div>
+      <div class="site-footer__col"><h4>Resources</h4><ul><li><a href="#docs">Documentation</a></li><li><a href="#insights">News & Insights</a></li><li><a href="partners.html">Partners</a></li><li><a href="contact.html">Contact Us</a></li></ul></div>
     </div>
-    <div class="site-footer__rule"><div class="row"><div class="copy">&copy; 2026 Kardit Limited &middot; A subsidiary of Chams Holdco Plc</div><div class="site-footer__badges"><span class="b1">PCI-DSS</span><span class="b2">ISO 27001</span><span class="b3">OWASP</span></div></div></div>
+    <div class="site-footer__rule"><div class="row"><div class="copy">© 2026 Kardit Limited · A subsidiary of Chams Holdco Plc</div><div class="site-footer__badges"><span class="b1">PCI-DSS</span><span class="b2">ISO 27001</span><span class="b3">OWASP</span></div></div></div>
   </footer>
 
-  <script>(function(){var h=document.querySelector('.site-header');if(h){var s=function(){h.classList.toggle('is-scrolled',window.scrollY>8)};s();window.addEventListener('scroll',s,{passive:true})}var els=document.querySelectorAll('.reveal');if(els.length&&'IntersectionObserver'in window){var io=new IntersectionObserver(function(e){e.forEach(function(en){if(en.isIntersecting){en.target.classList.add('is-visible');io.unobserve(en.target)}})},{threshold:.12,rootMargin:'0px 0px -40px 0px'});els.forEach(function(el){io.observe(el)})}else{els.forEach(function(el){el.classList.add('is-visible')})}var btn=document.querySelector('.btn-mobile');var menu=document.getElementById('mobile-menu');if(btn&&menu){btn.addEventListener('click',function(){var open=menu.classList.toggle('is-open');btn.setAttribute('aria-expanded',open?'true':'false')});menu.querySelectorAll('a').forEach(function(l){l.addEventListener('click',function(){menu.classList.remove('is-open');btn.setAttribute('aria-expanded','false')})})}})();</script>
+  <script src="assets/site.js"></script>
 </body>
 </html>

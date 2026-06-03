@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kardit — Complete page inventory</title>
+  <link rel="stylesheet" href="colors_and_type.css">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: var(--cs-font-body);
+      background: var(--cs-paper);
+      color: var(--cs-ink-700);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 32px 64px;
+    }
+
+    /* Header */
+    .head h1 {
+      font-family: var(--cs-font-display);
+      font-weight: 800;
+      font-size: 56px;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--cs-ink-900);
+      margin: 0 0 14px;
+    }
+    .head .sub {
+      font-size: 16px;
+      color: var(--cs-ink-200);
+      margin: 0 0 18px;
+      max-width: 720px;
+    }
+    .pill-count {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: var(--cs-green-100);
+      color: var(--cs-green-900);
+      border: 1px solid var(--cs-green-300);
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .rule {
+      border: 0;
+      border-top: 1px solid var(--cs-line);
+      margin: 36px 0 48px;
+    }
+
+    /* Sections */
+    .section {
+      margin-bottom: 48px;
+    }
+    .section h2 {
+      font-family: var(--cs-font-display);
+      font-weight: 700;
+      font-size: 22px;
+      letter-spacing: -0.01em;
+      color: var(--cs-ink-900);
+      margin: 0 0 16px;
+    }
+    .section .sec-rule {
+      border: 0;
+      border-top: 1px solid var(--cs-line);
+      margin: 0 0 22px;
+    }
+
+    /* Card grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 1000px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 740px)  { .grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 500px)  { .grid { grid-template-columns: 1fr; } }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--cs-line);
+      border-radius: 12px;
+      padding: 18px 18px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 120ms ease, transform 120ms ease, box-shadow 120ms ease;
+    }
+    .card:hover {
+      border-color: var(--cs-line-strong);
+      transform: translateY(-1px);
+      box-shadow: var(--cs-shadow-sm);
+    }
+    .card .title {
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--cs-ink-900);
+      line-height: 1.3;
+    }
+    .card .desc {
+      font-size: 13px;
+      color: var(--cs-ink-200);
+      line-height: 1.45;
+      flex: 1;
+    }
+
+    /* Type pills */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      align-self: flex-start;
+      border: 1px solid transparent;
+    }
+    .tag.landing { background: var(--cs-green-100); color: var(--cs-green-900); border-color: var(--cs-green-300); }
+    .tag.public  { background: var(--cs-mist);      color: var(--cs-ink-400);   border-color: var(--cs-line); }
+    .tag.portal  { background: var(--cs-mist);      color: var(--cs-ink-400);   border-color: var(--cs-line); }
+    .tag.flow    { background: var(--cs-mist);      color: var(--cs-ink-400);   border-color: var(--cs-line); }
+    .tag.auth    { background: #fff; color: var(--cs-red-700); border-color: var(--cs-red-300); }
+    .tag.action  { background: #fff; color: var(--cs-red-700); border-color: var(--cs-red-300); }
+    .tag.journey { background: #fff; color: var(--cs-red-700); border-color: var(--cs-red-300); }
+
+    /* Footer */
+    .foot {
+      margin-top: 56px;
+      padding-top: 24px;
+      border-top: 1px solid var(--cs-line);
+      text-align: center;
+      font-size: 13px;
+      color: var(--cs-ink-100);
+    }
+    .foot a {
+      color: var(--cs-green-700);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .foot a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <!-- Header -->
+    <header class="head">
+      <h1>Kardit</h1>
+      <p class="sub">Trade payment infrastructure for Africa-Asia commerce. Complete page inventory.</p>
+      <span class="pill-count">43 pages · Standalone HTML</span>
+    </header>
+    <hr class="rule">
+
+    <!-- Marketing Site -->
+    <section class="section">
+      <h2>Marketing Site</h2>
+      <hr class="sec-rule">
+      <div class="grid">
+        <a class="card" href="index.html">
+          <div class="title">Home</div>
+          <div class="desc">Landing page — hero, trust strip, stats, audience</div>
+          <span class="tag landing">LANDING</span>
+        </a>
+        <a class="card" href="about.html">
+          <div class="title">About</div>
+          <div class="desc">Company story, milestones, leadership, brands</div>
+          <span class="tag public">PUBLIC</span>
+        </a>
+        <a class="card" href="solutions.html">
+          <div class="title">Solutions</div>
+          <div class="desc">ChamsPay, Naira.com, MX Suite, Switching</div>
+          <span class="tag public">PUBLIC</span>
+        </a>
+        <a class="card" href="industries.html">
+          <div class="title">Industries</div>
+          <div class="desc">Financial, Gov, Education, Healthcare, Transport</div>
+          <span class="tag public">PUBLIC</span>
+        </a>
+        <a class="card" href="partners.html">
+          <div class="title">Partners</div>
+          <div class="desc">Affiliate models, onboarding wizard, journey</div>
+          <span class="tag public">PUBLIC</span>
+        </a>
+        <a class="card" href="contact.html">
+          <div class="title">Contact</div>
+          <div class="desc">Enquiry form, offices, direct lines</div>
+          <span class="tag public">PUBLIC</span>
+        </a>
+        <a class="card" href="signin.html">
+          <div class="title">Sign In</div>
+          <div class="desc">Authentication page</div>
+          <span class="tag auth">AUTH</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Portal — Dashboard & Operations -->
+    <section class="section">
+      <h2>Portal — Dashboard &amp; Operations</h2>
+      <hr class="sec-rule">
+      <div class="grid">
+        <a class="card" href="portal/index.html">
+          <div class="title">Dashboard</div>
+          <div class="desc">Portal home — KPI tiles, recent activity</div>
+          <span class="tag portal">PORTAL</span>
+        </a>
+        <a class="card" href="portal/customers/index.html">
+          <div class="title">Customers List</div>
+          <div class="desc">Customer search and listing</div>
+          <span class="tag portal">PORTAL</span>
+        </a>
+        <a class="card" href="portal/customers/01-form.html">
+          <div class="title">New Customer</div>
+          <div class="desc">Customer capture form</div>
+          <span class="tag portal">PORTAL</span>
+        </a>
+        <a class="card" href="portal/customers/02-saved.html">
+          <div class="title">Customer Saved</div>
+          <div class="desc">Saved draft confirmation</div>
+          <span class="tag portal">PORTAL</span>
+        </a>
+        <a class="card" href="portal/customers/profile.html">
+          <div class="title">Customer Profile</div>
+          <div class="desc">Customer detail with cards</div>
+          <span class="tag portal">PORTAL</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Portal — Card Services -->
+    <section class="section">
+      <h2>Portal — Card Services</h2>
+      <hr class="sec-rule">
+      <div class="grid">
+        <a class="card" href="portal/card/index.html">
+          <div class="title">Card Detail</div>
+          <div class="desc">Card view — balance, status, actions</div>
+          <span class="tag portal">PORTAL</span>
+        </a>
+        <a class="card" href="portal/card/freeze.html">
+          <div class="title">Freeze Card</div>
+          <div class="desc">Freeze confirmation</div>
+          <span class="tag action">ACTION</span>
+        </a>
+        <a class="card" href="portal/card/unfreeze.html">
+          <div class="title">Unfreeze Card</div>
+          <div class="desc">Unfreeze confirmation</div>
+          <span class="tag action">ACTION</span>
+        </a>
+        <a class="card" href="portal/issue-card/01-start.html">
+          <div class="title">Issue Card — Start</div>
+          <div class="desc">Cold + warm start options</div>
+          <span class="tag flow">FLOW</span>
+        </a>
+        <a class="card" href="portal/issue-card/02-customer.html">
+          <div class="title">Issue Card — Customer</div>
+          <div class="desc">Customer capture</div>
+          <span class="tag flow">FLOW</span>
+        </a>
+        <a class="card" href="portal/issue-card/03-card.html">
+          <div class="title">Issue Card — Select</div>
+          <div class="desc">Bank → product → type</div>
+          <span class="tag flow">FLOW</span>
+        </a>
+        <a class="card" href="portal/issue-card/04-delivery.html">
+          <div class="title">Issue Card — Delivery</div>
+          <div class="desc">Physical delivery</div>
+          <span class="tag flow">FLOW</span>
+        </a>
+        <a class="card" href="portal/issue-card/05-review.html">
+          <div class="title">Issue Card — Review</div>
+          <div class="desc">Review + idempotency</div>
+          <span class="tag flow">FLOW</span>
+        </a>
+        <a class="card" href="portal/issue-card/06-result.html">
+          <div class="title">Issue Card — Result</div>
+          <div class="desc">Issuance outcome</div>
+          <span class="tag flow">FLOW</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Portal — Load Funds -->
+    <section class="section">
+      <h2>Portal — Load Funds</h2>
+      <hr class="sec-rule">
+      <div class="grid">
+        <a class="card" href="portal/load-funds/01-form.html">
+          <div class="title">Load Form</div>
+          <div class="desc">Fund load request</div>
+          <span class="tag flow">FLOW</span>
+        </a>
+        <a class="card" href="portal/load-funds/02-review.html">
+          <div class="title">Load Review</div>
+          <div class="desc">Review before submission</div>
+          <span class="tag flow">FLOW</span>
+        </a>
+        <a class="card" href="portal/load-funds/03-result.html">
+          <div class="title">Load Result</div>
+          <div class="desc">Transaction result</div>
+          <span class="tag flow">FLOW</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Portal — Batches & Reports -->
+    <section class="section">
+      <h2>Portal — Batches &amp; Reports</h2>
+      <hr class="sec-rule">
+      <div class="grid">
+        <a class="card" href="portal/batches/01-dashboard.html">
+          <div class="title">Batches Dashboard</div>
+          <div class="desc">Batch processing dashboard</div>
+          <span class="tag portal">PORTAL</span>
+        </a>
+        <a class="card" href="portal/batches/00-welcome.html">
+          <div class="title">Bat. Welcome</div>
+          <div class="desc">Batch journey landing</div>
+          <span class="tag flow">FLOW</span>
+        </a>
+        <a class="card" href="portal/batches/02-upload.html">
+          <div class="title">Bat. Upload</div>
+          <div class="desc">Upload batch file</div>
+          <span class="tag flow">FLOW</span>
+        </a>
+        <a class="card" href="portal/batches/03-validation.html">
+          <div class="title">Bat. Validation</div>
+          <div class="desc">Validation summary</div>
+          <span class="tag flow">FLOW</span>
+        </a>
+        <a class="card" href="portal/batches/04-submit.html">
+          <div class="title">Bat. Submit</div>
+          <div class="desc">Submit for approval</div>
+          <span class="tag flow">FLOW</span>
+        </a>
+        <a class="card" href="portal/batches/05-approval.html">
+          <div class="title">Bat. Approval</div>
+          <div class="desc">Approval queue</div>
+          <span class="tag flow">FLOW</span>
+        </a>
+        <a class="card" href="portal/batches/06-processing.html">
+          <div class="title">Bat. Processing</div>
+          <div class="desc">Live processing monitor</div>
+          <span class="tag flow">FLOW</span>
+        </a>
+        <a class="card" href="portal/batches/07-result.html">
+          <div class="title">Bat. Result</div>
+          <div class="desc">Result summary</div>
+          <span class="tag flow">FLOW</span>
+        </a>
+        <a class="card" href="portal/reports/index.html">
+          <div class="title">Reports</div>
+          <div class="desc">Analytics and reporting</div>
+          <span class="tag portal">PORTAL</span>
+        </a>
+        <a class="card" href="portal/bank/index.html">
+          <div class="title">Bank Portfolio</div>
+          <div class="desc">Bank-scoped KPIs</div>
+          <span class="tag portal">PORTAL</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Onboarding (expanded) -->
+    <section class="section">
+      <h2>Affiliate Onboarding</h2>
+      <hr class="sec-rule">
+      <div class="grid">
+        <a class="card" href="onboarding/index.html">
+          <div class="title">Onb. Start</div>
+          <div class="desc">Welcome — new application + draft picker</div>
+          <span class="tag journey">JOURNEY</span>
+        </a>
+        <a class="card" href="onboarding/org.html">
+          <div class="title">Onb. Organization</div>
+          <div class="desc">Step 1: organization &amp; contact</div>
+          <span class="tag journey">JOURNEY</span>
+        </a>
+        <a class="card" href="onboarding/docs.html">
+          <div class="title">Onb. Documents</div>
+          <div class="desc">Step 2: KYB / KYC document upload</div>
+          <span class="tag journey">JOURNEY</span>
+        </a>
+        <a class="card" href="onboarding/banks.html">
+          <div class="title">Onb. Banks</div>
+          <div class="desc">Step 3: issuing bank selection</div>
+          <span class="tag journey">JOURNEY</span>
+        </a>
+        <a class="card" href="onboarding/review.html">
+          <div class="title">Onb. Review</div>
+          <div class="desc">Step 4: review &amp; submit (terms gate)</div>
+          <span class="tag journey">JOURNEY</span>
+        </a>
+        <a class="card" href="onboarding/submitted.html">
+          <div class="title">Onb. Submitted</div>
+          <div class="desc">Success state with case ID</div>
+          <span class="tag journey">JOURNEY</span>
+        </a>
+        <a class="card" href="onboarding/errors.html">
+          <div class="title">Onb. Errors</div>
+          <div class="desc">Validation issues with fix-now links</div>
+          <span class="tag journey">JOURNEY</span>
+        </a>
+        <a class="card" href="onboarding/status.html">
+          <div class="title">Onb. Status</div>
+          <div class="desc">Application tracking timeline</div>
+          <span class="tag journey">JOURNEY</span>
+        </a>
+        <a class="card" href="onboarding/respond.html">
+          <div class="title">Onb. Respond</div>
+          <div class="desc">Reply to compliance clarification</div>
+          <span class="tag journey">JOURNEY</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <div class="foot">
+      Kardit project · <a href="index.html">Go to landing page</a>
+    </div>
+
+  </div>
+</body>
+</html>

@@ -1,8 +1,8 @@
 /* ─────────────────────────────────────────────────────────────
    Kardit Mini CMS — Card Servicing module
-   : View balance (SCR-CARD detail, )
-   : Freeze card ()
-   : Unfreeze card ()
+   UJR015: View balance (SCR-CARD detail, FR-BAL-API-01)
+   UJR009: Freeze card (FR-FRZ-API-01)
+   UJR010: Unfreeze card (FR-UFR-API-01)
    ───────────────────────────────────────────────────────────── */
 
 // Mock customer dataset — subset duplicated from /portal/customers/app.js for
@@ -78,7 +78,7 @@ function findCard(cardId) {
       };
     }
   }
-  // Then check the just-minted-card pool (from  result)
+  // Then check the just-minted-card pool (from UJR008 result)
   try {
     const iss = JSON.parse(sessionStorage.getItem("kardit_iss_state_v1") || "{}");
     if (iss.outcome && iss.outcome.cardId === cardId) {
@@ -121,7 +121,7 @@ function mockBalance(cardId) {
   };
 }
 
-// Mock recent transactions (placeholder for )
+// Mock recent transactions (placeholder for UJR018)
 function mockTxns(cardId) {
   const seed = cardId.split("").reduce((a, c) => a + c.charCodeAt(0), 0);
   const pool = [
@@ -257,7 +257,7 @@ function renderCardVisual(card, cardholderName, klass) {
 }
 
 // ─────────────────────────────────────────────────────────────
-//  — View balance (card detail page)
+// UJR015 — View balance (card detail page)
 // ─────────────────────────────────────────────────────────────
 function initCardDetail() {
   const cardId = getParam("cardId");
@@ -295,7 +295,7 @@ function initCardDetail() {
   // Card visual
   document.getElementById("card-visual-mount").innerHTML = renderCardVisual(card, card.owner.fullName);
 
-  // Balance (-12)
+  // Balance (FR-BAL-API-01-12)
   const b = mockBalance(card.id);
   // Simulate cached vs CMS based on cardId hash (just for demo realism)
   const isCached = (cardId.charCodeAt(cardId.length - 1) % 4) === 0;
@@ -305,7 +305,7 @@ function initCardDetail() {
   document.getElementById("balance-mount").innerHTML = `
     <div class="balance-card">
       <div class="balance-head">
-        <span class="balance-label">Available balance · -12</span>
+        <span class="balance-label">Available balance · FR-BAL-API-01-12</span>
         <span class="balance-source-pill ${isCached ? "cached" : ""}">
           ${isCached
             ? `<i data-lucide="database"></i> CACHED`
@@ -329,7 +329,7 @@ function initCardDetail() {
       ${isCached ? `
         <div class="balance-stale-banner">
           <i data-lucide="alert-triangle"></i>
-          <div><strong>Cached snapshot.</strong> CMS was unreachable — value may not be real-time (-14).</div>
+          <div><strong>Cached snapshot.</strong> CMS was unreachable — value may not be real-time (FR-BAL-API-01-14).</div>
         </div>
       ` : ""}
     </div>
@@ -349,13 +349,13 @@ function initCardDetail() {
         <a class="card-action" href="unfreeze.html?cardId=${encodeURIComponent(card.id)}">
           <i data-lucide="play"></i><span class="label">Unfreeze</span>
         </a>` : ""}
-      <a class="card-action ${isTerminated ? "disabled" : ""}" href="#" onclick="event.preventDefault(); alert(' (Transactions) — coming later');">
+      <a class="card-action ${isTerminated ? "disabled" : ""}" href="#" onclick="event.preventDefault(); alert('UJR018 (Transactions) — coming later');">
         <i data-lucide="list"></i><span class="label">Transactions</span>
       </a>
       <a class="card-action ${isTerminated || !isActive ? "disabled" : ""}" href="${isActive ? `../load-funds/01-form.html?cardId=${encodeURIComponent(card.id)}` : '#'}" ${!isActive ? 'onclick="event.preventDefault()"' : ''}>
         <i data-lucide="wallet"></i><span class="label">Load funds</span>
       </a>
-      <a class="card-action ${isTerminated ? "disabled" : ""}" href="#" onclick="event.preventDefault(); alert(' (Limit increase) — coming later');">
+      <a class="card-action ${isTerminated ? "disabled" : ""}" href="#" onclick="event.preventDefault(); alert('UJR016 (Limit increase) — coming later');">
         <i data-lucide="sliders"></i><span class="label">Limits</span>
       </a>
     </div>
@@ -381,12 +381,12 @@ function initCardDetail() {
     </div>
   `;
 
-  // Transactions snippet (placeholder for )
+  // Transactions snippet (placeholder for UJR018)
   const txns = mockTxns(card.id);
   document.getElementById("txns-mount").innerHTML = `
     <div class="panel-head" style="padding:14px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--cs-line)">
       <span class="panel-title">Recent activity</span>
-      <a href="#" onclick="event.preventDefault(); alert(' (Full transactions list) — coming later');" class="cta-link" style="font-size:12px;font-weight:700;color:var(--cs-green-700)">View all → <span style="font-size:10px;color:var(--cs-ink-100);font-family:var(--font-mono);margin-left:4px"></span></a>
+      <a href="#" onclick="event.preventDefault(); alert('UJR018 (Full transactions list) — coming later');" class="cta-link" style="font-size:12px;font-weight:700;color:var(--cs-green-700)">View all → <span style="font-size:10px;color:var(--cs-ink-100);font-family:var(--font-mono);margin-left:4px">UJR018</span></a>
     </div>
     <div class="txn-snippet">
       ${txns.map(t => `
@@ -427,7 +427,7 @@ function renderNotFound(cardId) {
             ? `No card in your tenant scope with reference <span class="mono" style="color:var(--cs-ink-700)">${cardId}</span>.`
             : "No card reference was provided."
           }
-          <br/>Per -05, you only see cards in your authorised scope.
+          <br/>Per FR-BAL-API-01-05, you only see cards in your authorised scope.
         </div>
         <a href="../customers/index.html" class="btn btn-primary"><i data-lucide="arrow-left"></i> Back to customers</a>
       </div>
@@ -437,7 +437,7 @@ function renderNotFound(cardId) {
 }
 
 // ─────────────────────────────────────────────────────────────
-//  — Freeze card
+// UJR009 — Freeze card
 // ─────────────────────────────────────────────────────────────
 function initFreeze() {
   const cardId = getParam("cardId");
@@ -500,7 +500,7 @@ function initFreeze() {
             <option value="">Select a reason…</option>
             ${FREEZE_REASONS.map(r => `<option value="${r.value}">${r.label}</option>`).join("")}
           </select>
-          <div class="help" style="font-size:11.5px;color:var(--cs-ink-100);margin-top:5px">Recorded in CardLifecycleEvent (-14) and AuditLog (-17).</div>
+          <div class="help" style="font-size:11.5px;color:var(--cs-ink-100);margin-top:5px">Recorded in CardLifecycleEvent (FR-FRZ-API-01-14) and AuditLog (FR-FRZ-API-01-17).</div>
         </div>
 
         <div class="confirm-actions">
@@ -529,7 +529,7 @@ function initFreeze() {
     setTimeout(() => {
       const cmsRef = genCmsRef("CMS-SRV");
       const changedAt = new Date().toISOString();
-      // Per -11: update CardAccount.status to FROZEN
+      // Per FR-FRZ-API-01-11: update CardAccount.status to FROZEN
       setOverride(card.id, { status: "FROZEN", changedAt, cmsRef, reason });
       window.location.href = `index.html?cardId=${encodeURIComponent(card.id)}&just=froze`;
     }, 1100);
@@ -537,7 +537,7 @@ function initFreeze() {
 }
 
 // ─────────────────────────────────────────────────────────────
-//  — Unfreeze card
+// UJR010 — Unfreeze card
 // ─────────────────────────────────────────────────────────────
 function initUnfreeze() {
   const cardId = getParam("cardId");
@@ -597,7 +597,7 @@ function initUnfreeze() {
             <option value="">Select a reason…</option>
             ${UNFREEZE_REASONS.map(r => `<option value="${r.value}">${r.label}</option>`).join("")}
           </select>
-          <div class="help" style="font-size:11.5px;color:var(--cs-ink-100);margin-top:5px">Recorded in CardLifecycleEvent (-14) and AuditLog.</div>
+          <div class="help" style="font-size:11.5px;color:var(--cs-ink-100);margin-top:5px">Recorded in CardLifecycleEvent (FR-UFR-API-01-14) and AuditLog.</div>
         </div>
 
         <div class="confirm-actions">

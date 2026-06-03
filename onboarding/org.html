@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Organization & Contact · Kardit Onboarding</title>
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="onb-scr">
+    <div id="appbar-mount"></div>
+    <div class="onb-body">
+      <div id="rail-mount"></div>
+      <main class="onb-main">
+        <div class="container">
+          <div class="onb-eyebrow">Step 1 of 4</div>
+          <h2 class="onb-title">Tell us about your organization</h2>
+          <p class="onb-sub">All fields are required unless marked optional. Use your registered business name and address as on file with CAC.</p>
+
+          <form id="org-form" autocomplete="off">
+            <div class="onb-card pad">
+              <h4>Organization details</h4>
+              <div style="display:flex; flex-direction:column; gap:16px">
+                <div class="onb-field" id="f-legalName">
+                  <label for="legalName">Legal business name</label>
+                  <input id="legalName" type="text" placeholder="e.g. Acme Microfinance Bank Ltd">
+                  <span class="err" style="display:none"><i data-lucide="alert-circle"></i> Legal name is required</span>
+                </div>
+                <div class="onb-grid-2">
+                  <div class="onb-field" id="f-regNo">
+                    <label for="regNo">RC / Registration number</label>
+                    <input id="regNo" type="text" placeholder="RC 1234567">
+                    <span class="err" style="display:none"><i data-lucide="alert-circle"></i> RC / registration number is required</span>
+                  </div>
+                  <div class="onb-field">
+                    <label for="tin">Tax ID (TIN) <span class="opt">· optional</span></label>
+                    <input id="tin" type="text" placeholder="0000000-0001">
+                  </div>
+                </div>
+                <div class="onb-field">
+                  <label for="address">Registered address</label>
+                  <input id="address" type="text" placeholder="Street, city, state">
+                </div>
+                <div class="onb-grid-2">
+                  <div class="onb-field">
+                    <label for="country">Country</label>
+                    <select id="country">
+                      <option>Nigeria</option><option>Ghana</option><option>Kenya</option>
+                    </select>
+                  </div>
+                  <div class="onb-field">
+                    <label for="industry">Industry</label>
+                    <select id="industry">
+                      <option>Microfinance</option><option>Fintech</option><option>Retail</option><option>Government</option><option>Healthcare</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="onb-card pad" style="margin-top:18px">
+              <h4>Primary contact</h4>
+              <div style="display:flex; flex-direction:column; gap:16px">
+                <div class="onb-grid-2">
+                  <div class="onb-field" id="f-contactName">
+                    <label for="contactName">Full name</label>
+                    <input id="contactName" type="text" placeholder="Adaeze Okafor">
+                    <span class="err" style="display:none"><i data-lucide="alert-circle"></i> Primary contact name is required</span>
+                  </div>
+                  <div class="onb-field">
+                    <label for="contactRole">Role</label>
+                    <input id="contactRole" type="text" placeholder="Head of Operations">
+                  </div>
+                </div>
+                <div class="onb-grid-2">
+                  <div class="onb-field" id="f-email">
+                    <label for="email">Work email</label>
+                    <input id="email" type="email" placeholder="adaeze@acme.ng">
+                    <span class="err" style="display:none"><i data-lucide="alert-circle"></i> A valid work email is required</span>
+                  </div>
+                  <div class="onb-field">
+                    <label for="phone">Phone</label>
+                    <input id="phone" type="text" placeholder="+234 803 000 0000">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="onb-step-actions">
+              <a href="index.html" class="onb-btn onb-btn-ghost">← Cancel</a>
+              <div style="display:flex; gap:10px">
+                <a href="index.html" class="onb-btn onb-btn-secondary">Save Draft</a>
+                <button type="submit" class="onb-btn onb-btn-primary">Next: Documents <i data-lucide="arrow-right"></i></button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="app.js"></script>
+  <script>
+    // Hydrate form from saved state
+    document.addEventListener("DOMContentLoaded", () => {
+      const state = getState();
+      const f = state.formData;
+      ["legalName","regNo","tin","address","country","industry","contactName","contactRole","email","phone"].forEach(k => {
+        const el = document.getElementById(k);
+        if (el) el.value = f[k] || "";
+      });
+
+      document.getElementById("org-form").addEventListener("submit", e => {
+        e.preventDefault();
+        const newF = {};
+        ["legalName","regNo","tin","address","country","industry","contactName","contactRole","email","phone"].forEach(k => {
+          newF[k] = document.getElementById(k).value.trim();
+        });
+
+        // Validate
+        const errors = {};
+        if (!newF.legalName) errors.legalName = true;
+        if (!newF.regNo) errors.regNo = true;
+        if (!newF.contactName) errors.contactName = true;
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newF.email)) errors.email = true;
+
+        ["legalName","regNo","contactName","email"].forEach(k => {
+          const wrap = document.getElementById("f-"+k);
+          if (!wrap) return;
+          if (errors[k]) {
+            wrap.classList.add("has-error");
+            wrap.querySelector(".err").style.display = "flex";
+          } else {
+            wrap.classList.remove("has-error");
+            wrap.querySelector(".err").style.display = "none";
+          }
+        });
+
+        if (Object.keys(errors).length) return;
+        setState({ formData: newF });
+        window.location.href = "docs.html";
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Action required · Kardit Onboarding</title>
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="onb-scr">
+    <div id="appbar-mount"></div>
+    <div class="onb-body">
+      <div id="rail-mount"></div>
+      <main class="onb-main">
+        <div style="max-width:600px; margin:32px auto; padding:32px">
+          <div style="width:72px; height:72px; border-radius:999px; background:var(--cs-red-100); color:var(--cs-red-700); display:grid; place-items:center; margin:0 auto 18px; border:3px solid var(--cs-red-300)">
+            <i data-lucide="alert-circle" style="width:32px; height:32px"></i>
+          </div>
+          <h2 class="onb-title" style="font-size:28px; text-align:center">We can't submit yet.</h2>
+          <p class="onb-sub" style="text-align:center; margin:8px auto 22px">A few items need attention before your application can be sent for review.</p>
+
+          <div class="onb-card">
+            <div style="padding:14px 22px; border-bottom:1px solid var(--cs-line); font-weight:700; color:var(--cs-ink-700); font-size:14px; display:flex; justify-content:space-between">
+              <span>3 issues to fix</span>
+              <span class="onb-tag err">Action required</span>
+            </div>
+            <div style="display:flex; align-items:flex-start; gap:14px; padding:16px 22px; border-bottom:1px solid var(--cs-line)">
+              <div style="width:28px; height:28px; border-radius:999px; background:var(--cs-red-100); color:var(--cs-red-700); display:grid; place-items:center; flex-shrink:0"><i data-lucide="alert-circle" style="width:14px; height:14px"></i></div>
+              <div style="flex:1">
+                <div style="font-size:11px; color:var(--cs-ink-100); text-transform:uppercase; letter-spacing:0.08em; font-weight:700">org</div>
+                <div style="font-weight:600; font-size:14px; color:var(--cs-ink-700); margin-top:2px">TIN Number</div>
+                <div style="font-size:13px; color:var(--cs-ink-200); margin-top:4px">TIN appears invalid — must be 10 digits.</div>
+              </div>
+              <a href="org.html" class="onb-btn onb-btn-secondary" style="padding:6px 12px; font-size:13px">Fix Now →</a>
+            </div>
+            <div style="display:flex; align-items:flex-start; gap:14px; padding:16px 22px; border-bottom:1px solid var(--cs-line)">
+              <div style="width:28px; height:28px; border-radius:999px; background:var(--cs-red-100); color:var(--cs-red-700); display:grid; place-items:center; flex-shrink:0"><i data-lucide="alert-circle" style="width:14px; height:14px"></i></div>
+              <div style="flex:1">
+                <div style="font-size:11px; color:var(--cs-ink-100); text-transform:uppercase; letter-spacing:0.08em; font-weight:700">docs</div>
+                <div style="font-weight:600; font-size:14px; color:var(--cs-ink-700); margin-top:2px">Proof of Address</div>
+                <div style="font-size:13px; color:var(--cs-ink-200); margin-top:4px">No file uploaded. Required for KYB.</div>
+              </div>
+              <a href="docs.html" class="onb-btn onb-btn-secondary" style="padding:6px 12px; font-size:13px">Fix Now →</a>
+            </div>
+            <div style="display:flex; align-items:flex-start; gap:14px; padding:16px 22px">
+              <div style="width:28px; height:28px; border-radius:999px; background:var(--cs-red-100); color:var(--cs-red-700); display:grid; place-items:center; flex-shrink:0"><i data-lucide="alert-circle" style="width:14px; height:14px"></i></div>
+              <div style="flex:1">
+                <div style="font-size:11px; color:var(--cs-ink-100); text-transform:uppercase; letter-spacing:0.08em; font-weight:700">banks</div>
+                <div style="font-weight:600; font-size:14px; color:var(--cs-ink-700); margin-top:2px">Issuing Banks</div>
+                <div style="font-size:13px; color:var(--cs-ink-200); margin-top:4px">Select at least one issuing bank.</div>
+              </div>
+              <a href="banks.html" class="onb-btn onb-btn-secondary" style="padding:6px 12px; font-size:13px">Fix Now →</a>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:10px; justify-content:center; margin-top:22px">
+            <a href="review.html" class="onb-btn onb-btn-ghost">← Back to review</a>
+            <a href="org.html" class="onb-btn onb-btn-primary">Fix all issues <i data-lucide="arrow-right"></i></a>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="app.js"></script>
+</body>
+</html>

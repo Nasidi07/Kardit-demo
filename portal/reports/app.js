@@ -1,9 +1,9 @@
-/*  — Reports */
+/* UJR020 — Reports */
 
 const REPORTS = [
   { id: "issuance",  icon: "credit-card",   name: "Card Issuance Report",       desc: "Issuance volumes by bank, product, and type. Virtual account provisioning success rate.",         format: "CSV / XLSX" },
   { id: "status",    icon: "shield",        name: "Card Status Report",         desc: "Snapshot of card statuses across the tenant — Active, Frozen, Terminated, Personalizing.",         format: "CSV / XLSX" },
-  { id: "funding",   icon: "wallet",        name: "Funding Transactions Report", desc: "All FundingTransaction entries — final states only (). Excludes reversed loads.",        format: "CSV / XLSX" },
+  { id: "funding",   icon: "wallet",        name: "Funding Transactions Report", desc: "All FundingTransaction entries — final states only (FR-RPT-12). Excludes reversed loads.",        format: "CSV / XLSX" },
   { id: "unload",    icon: "arrow-down-circle", name: "Unload Transactions Report", desc: "All unload / transfer-out transactions completed within the date range.",                       format: "CSV / XLSX" },
   { id: "txns",      icon: "list",          name: "Card Transaction Report",    desc: "Card spend, authorisations, and reversals. Filter by status and amount range.",                   format: "CSV / XLSX" },
   { id: "mc",        icon: "users",         name: "Pending Maker–Checker Report", desc: "Open approvals waiting for a checker. Use to spot stuck items.",                                 format: "CSV / XLSX" },
