@@ -1,0 +1,201 @@
+/* ChamsSwitch Design System — Colors & Type */
+/* ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  /* ---------- Brand Colors ---------- */
+  /* Sourced from the Chams Switch logo: a deep evergreen and a vivid scarlet
+     riding on a clean white base. The brand uses these two highly saturated
+     hues as accents — they are not used as flat fills for large surfaces. */
+
+  --cs-green-900: #0F4F2E;   /* deepest green — wordmark "Chams" */
+  --cs-green-700: #1B7A45;   /* primary green — "Switch" italic */
+  --cs-green-500: #2BA15D;   /* interactive green */
+  --cs-green-300: #BFE5CE;   /* tinted backgrounds */
+  --cs-green-100: #E8F6EE;   /* surface tint */
+
+  --cs-red-900:   #9A1A1A;
+  --cs-red-700:   #C8242C;   /* primary red — the swoosh */
+  --cs-red-500:   #E63946;   /* alerts, key CTAs */
+  --cs-red-300:   #F5B5B9;
+  --cs-red-100:   #FCEAEC;
+
+  /* ---------- Neutrals ---------- */
+  --cs-white:     #FFFFFF;
+  --cs-paper:     #FAFBF9;   /* page background — barely-warm white */
+  --cs-mist:      #F2F4F1;   /* subtle surface */
+  --cs-line:      #E4E7E2;   /* hairline borders */
+  --cs-line-strong: #C9CEC4;
+
+  --cs-ink-100:   #8C9189;   /* tertiary text */
+  --cs-ink-200:   #5C6359;   /* secondary text */
+  --cs-ink-400:   #2F3530;   /* body text */
+  --cs-ink-700:   #161A17;   /* headings */
+  --cs-ink-900:   #0A0C0A;   /* maximum contrast */
+
+  /* ---------- Semantic ---------- */
+  --cs-fg:           var(--cs-ink-700);
+  --cs-fg-muted:     var(--cs-ink-200);
+  --cs-fg-subtle:    var(--cs-ink-100);
+  --cs-fg-on-brand:  var(--cs-white);
+
+  --cs-bg:           var(--cs-paper);
+  --cs-bg-elevated:  var(--cs-white);
+  --cs-bg-tint:      var(--cs-mist);
+
+  --cs-border:       var(--cs-line);
+  --cs-border-strong:var(--cs-line-strong);
+
+  --cs-primary:      var(--cs-green-700);
+  --cs-primary-hover:var(--cs-green-900);
+  --cs-accent:       var(--cs-red-700);
+  --cs-accent-hover: var(--cs-red-900);
+
+  --cs-success:      var(--cs-green-500);
+  --cs-danger:       var(--cs-red-500);
+  --cs-warning:      #E0A416;
+  --cs-info:         #2978B5;
+
+  /* ---------- Typography ---------- */
+  /* The Chams Switch wordmark uses a humanist, slightly squared sans with an
+     italic flourish on "Switch". Plus Jakarta Sans (display) and Lato (body)
+     are the closest free Google Fonts equivalents.
+     ⚠ FONT SUBSTITUTION FLAG: please supply the brand's licensed display
+     face if available — the live site appears to use a custom or paid
+     foundry font. */
+
+  --cs-font-display: "Plus Jakarta Sans", "Lato", system-ui, sans-serif;
+  --cs-font-body:    "Lato", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --cs-font-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Type scale — modular 1.20 (minor third), good for content-dense fintech UI */
+  --cs-text-xs:   12px;
+  --cs-text-sm:   14px;
+  --cs-text-base: 16px;
+  --cs-text-md:   18px;
+  --cs-text-lg:   22px;
+  --cs-text-xl:   28px;
+  --cs-text-2xl:  36px;
+  --cs-text-3xl:  48px;
+  --cs-text-4xl:  64px;
+
+  --cs-leading-tight: 1.15;
+  --cs-leading-snug:  1.35;
+  --cs-leading-body:  1.55;
+  --cs-leading-loose: 1.75;
+
+  --cs-tracking-tight: -0.02em;
+  --cs-tracking-normal: 0;
+  --cs-tracking-wide:  0.06em;
+  --cs-tracking-caps:  0.12em;
+
+  /* ---------- Spacing ---------- */
+  --cs-space-1: 4px;
+  --cs-space-2: 8px;
+  --cs-space-3: 12px;
+  --cs-space-4: 16px;
+  --cs-space-5: 24px;
+  --cs-space-6: 32px;
+  --cs-space-7: 48px;
+  --cs-space-8: 64px;
+  --cs-space-9: 96px;
+
+  /* ---------- Radii ---------- */
+  --cs-radius-xs: 4px;
+  --cs-radius-sm: 6px;
+  --cs-radius-md: 10px;
+  --cs-radius-lg: 16px;
+  --cs-radius-xl: 24px;
+  --cs-radius-pill: 999px;
+
+  /* ---------- Shadows ---------- */
+  --cs-shadow-xs: 0 1px 2px rgba(15, 79, 46, 0.06);
+  --cs-shadow-sm: 0 2px 6px rgba(15, 30, 18, 0.06), 0 1px 2px rgba(15,30,18,0.04);
+  --cs-shadow-md: 0 6px 18px rgba(15, 30, 18, 0.08), 0 2px 4px rgba(15,30,18,0.05);
+  --cs-shadow-lg: 0 18px 48px rgba(15, 30, 18, 0.12), 0 4px 12px rgba(15,30,18,0.06);
+  --cs-shadow-focus: 0 0 0 3px rgba(43, 161, 93, 0.30);
+  --cs-shadow-focus-red: 0 0 0 3px rgba(230, 57, 70, 0.25);
+}
+
+/* ---------- Semantic element styles ---------- */
+.cs-h1, h1.cs {
+  font-family: var(--cs-font-display);
+  font-weight: 800;
+  font-size: var(--cs-text-3xl);
+  line-height: var(--cs-leading-tight);
+  letter-spacing: var(--cs-tracking-tight);
+  color: var(--cs-ink-900);
+  margin: 0;
+}
+.cs-h2, h2.cs {
+  font-family: var(--cs-font-display);
+  font-weight: 700;
+  font-size: var(--cs-text-2xl);
+  line-height: var(--cs-leading-tight);
+  letter-spacing: var(--cs-tracking-tight);
+  color: var(--cs-ink-700);
+  margin: 0;
+}
+.cs-h3, h3.cs {
+  font-family: var(--cs-font-display);
+  font-weight: 700;
+  font-size: var(--cs-text-xl);
+  line-height: var(--cs-leading-snug);
+  color: var(--cs-ink-700);
+  margin: 0;
+}
+.cs-h4, h4.cs {
+  font-family: var(--cs-font-display);
+  font-weight: 600;
+  font-size: var(--cs-text-lg);
+  line-height: var(--cs-leading-snug);
+  color: var(--cs-ink-700);
+  margin: 0;
+}
+.cs-eyebrow {
+  font-family: var(--cs-font-body);
+  font-weight: 700;
+  font-size: var(--cs-text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--cs-tracking-caps);
+  color: var(--cs-green-700);
+}
+.cs-p, p.cs {
+  font-family: var(--cs-font-body);
+  font-weight: 400;
+  font-size: var(--cs-text-base);
+  line-height: var(--cs-leading-body);
+  color: var(--cs-ink-400);
+  margin: 0;
+}
+.cs-small {
+  font-family: var(--cs-font-body);
+  font-size: var(--cs-text-sm);
+  color: var(--cs-ink-200);
+  line-height: var(--cs-leading-body);
+}
+.cs-code, code.cs {
+  font-family: var(--cs-font-mono);
+  font-size: 0.9em;
+  background: var(--cs-mist);
+  border: 1px solid var(--cs-line);
+  border-radius: var(--cs-radius-xs);
+  padding: 1px 6px;
+  color: var(--cs-ink-700);
+}
+.cs-amount {
+  font-family: var(--cs-font-display);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--cs-tracking-tight);
+  color: var(--cs-ink-900);
+}
+
+body.cs-base {
+  font-family: var(--cs-font-body);
+  color: var(--cs-fg);
+  background: var(--cs-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}

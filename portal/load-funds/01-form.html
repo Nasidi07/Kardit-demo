@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Load funds · Kardit CMS</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="cs-tokens.css">
+  <style>
+    .card-pick-tile.is-active { border-color: var(--cs-green-700); background: var(--cs-green-100); }
+    .card-pick-tile.is-active .pan { color: var(--cs-green-900); }
+    .card-pick-tile .check-mark { display: none; position: absolute; top: 8px; right: 8px; width: 20px; height: 20px; border-radius: 50%; background: var(--cs-green-700); color: #fff; place-items: center; font-size: 11px; }
+    .card-pick-tile.is-active .check-mark { display: grid; }
+    .selected-card-mini { display:flex; align-items:center; gap:16px; }
+  </style>
+</head>
+<body>
+  <div class="scr">
+    <div id="appbar-mount"></div>
+    <aside class="scr-side" aria-label="Main navigation">
+      <div class="side-section">
+        <div class="side-label">Operations</div>
+        <nav class="side-nav">
+          <a href="../index.html" class="side-link"><i data-lucide="home"></i><span>Dashboard</span></a>
+          <a href="../customers/index.html" class="side-link"><i data-lucide="users"></i><span>Customers</span></a>
+          <a href="../issue-card/01-start.html" class="side-link"><i data-lucide="credit-card"></i><span>Cards</span></a>
+          <a href="../batches/01-dashboard.html" class="side-link"><i data-lucide="upload-cloud"></i><span>Batches</span></a>
+          <a href="01-form.html" class="side-link is-active"><i data-lucide="wallet"></i><span>Funds</span></a>
+          <a href="../reports/index.html" class="side-link"><i data-lucide="bar-chart-3"></i><span>Reports</span></a>
+        </nav>
+      </div>
+      <div class="side-tenant"><div class="name">Kardit Lagos</div><div class="role">Affiliate</div></div>
+    </aside>
+    <div class="scr-content">
+      <div id="hstepper-mount"></div>
+      <main class="scr-main">
+        <div class="container container--narrow">
+          <header class="page-head">
+            <div>
+              <h1 class="page-title">Load funds</h1>
+              <p class="page-sub">Top up a card's linked virtual account. All loads pass through maker-checker before funds are credited.</p>
+            </div>
+          </header>
+
+          <!-- Pre-rendered card picker grid -->
+          <section class="card card-pad-lg" style="margin-bottom:18px">
+            <div class="form-section-head" style="margin-bottom:12px">
+              <h2 class="form-section-title">Select card</h2>
+              <span class="form-section-meta">Funds are loaded to its linked virtual account</span>
+            </div>
+            <div id="card-picker" class="card-pick-grid">
+              <a href="01-form.html?cardId=CARD-2026-VRP01029" class="card-pick-tile" data-card-id="CARD-2026-VRP01029">
+                <div class="thumb"></div>
+                <div class="info">
+                  <div class="pan">5061 •••• •••• 4421</div>
+                  <div class="meta">Tunde Bakare · Zenith Bank</div>
+                </div>
+                <div class="check-mark">✓</div>
+              </a>
+              <a href="01-form.html?cardId=CARD-2026-VRP01028" class="card-pick-tile" data-card-id="CARD-2026-VRP01028">
+                <div class="thumb"></div>
+                <div class="info">
+                  <div class="pan">5061 •••• •••• 0091</div>
+                  <div class="meta">Chiamaka Eze · Zenith Bank</div>
+                </div>
+                <div class="check-mark">✓</div>
+              </a>
+              <a href="01-form.html?cardId=CARD-2026-VRP00984" class="card-pick-tile" data-card-id="CARD-2026-VRP00984">
+                <div class="thumb"></div>
+                <div class="info">
+                  <div class="pan">5061 •••• •••• 7732</div>
+                  <div class="meta">Chiamaka Eze · GTBank</div>
+                </div>
+                <div class="check-mark">✓</div>
+              </a>
+              <a href="01-form.html?cardId=CARD-2026-VRP00973" class="card-pick-tile" data-card-id="CARD-2026-VRP00973">
+                <div class="thumb"></div>
+                <div class="info">
+                  <div class="pan">5061 •••• •••• 5566</div>
+                  <div class="meta">Ngozi Anyanwu · Access Bank</div>
+                </div>
+                <div class="check-mark">✓</div>
+              </a>
+            </div>
+          </section>
+
+          <!-- Pre-rendered form -->
+          <div id="form-area">
+            <div class="maker-checker-banner">
+              <div class="icn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg></div>
+              <div>
+                <div class="title">Maker-checker required</div>
+                <div class="body">As a maker, your load request is submitted for checker approval The funds are not credited until the checker approves. You cannot approve your own request.</div>
+              </div>
+            </div>
+            <form id="load-form" class="card card-pad-lg" autocomplete="off">
+              <input type="hidden" id="selectedCardId" name="selectedCardId" value="">
+              <section class="form-section">
+                <div class="form-section-head"><h2 class="form-section-title">Amount</h2><span class="form-section-meta">In NGN</span></div>
+                <div class="amount-input-wrap">
+                  <span class="currency">₦</span>
+                  <input id="amount" name="amount" type="number" inputmode="decimal" step="0.01" min="100" required placeholder="0.00">
+                </div>
+                <div class="amount-chips">
+                  <button type="button" class="amount-chip" data-quick="5000">₦5,000.00</button>
+                  <button type="button" class="amount-chip" data-quick="10000">₦10,000.00</button>
+                  <button type="button" class="amount-chip" data-quick="25000">₦25,000.00</button>
+                  <button type="button" class="amount-chip" data-quick="50000">₦50,000.00</button>
+                  <button type="button" class="amount-chip" data-quick="100000">₦100,000.00</button>
+                </div>
+              </section>
+              <section class="form-section">
+                <div class="form-section-head"><h2 class="form-section-title">Funding reference</h2><span class="form-section-meta">VA must already be funded</span></div>
+                <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px">
+                  <label class="radio-pill" style="padding:14px 18px;flex-direction:column;gap:4px">
+                    <div style="display:flex;align-items:center;gap:10px;width:100%">
+                      <input type="radio" name="proofType" value="BANK_TRANSFER_CONFIRMED" checked>
+                      <span class="dot"></span>
+                      <span style="font-weight:700;color:var(--cs-ink-900);font-size:13.5px">Bank transfer confirmed</span>
+                    </div>
+                    <div style="font-size:11.5px;color:var(--cs-ink-100);padding-left:30px">Customer transferred to VA · transfer reference required</div>
+                  </label>
+                  <label class="radio-pill" style="padding:14px 18px;flex-direction:column;gap:4px">
+                    <div style="display:flex;align-items:center;gap:10px;width:100%">
+                      <input type="radio" name="proofType" value="INTERNAL_FUND_MOVE">
+                      <span class="dot"></span>
+                      <span style="font-weight:700;color:var(--cs-ink-900);font-size:13.5px">Internal fund move</span>
+                    </div>
+                    <div style="font-size:11.5px;color:var(--cs-ink-100);padding-left:30px">Affiliate-pool to VA · internal reference required</div>
+                  </label>
+                  <label class="radio-pill" style="padding:14px 18px;flex-direction:column;gap:4px">
+                    <div style="display:flex;align-items:center;gap:10px;width:100%">
+                      <input type="radio" name="proofType" value="VA_DIRECT_CREDIT">
+                      <span class="dot"></span>
+                      <span style="font-weight:700;color:var(--cs-ink-900);font-size:13.5px">Virtual account credit</span>
+                    </div>
+                    <div style="font-size:11.5px;color:var(--cs-ink-100);padding-left:30px">Direct credit into VA from issuing bank</div>
+                  </label>
+                </div>
+                <div class="form-grid">
+                  <div class="field is-mono">
+                    <label for="vaNumber">Linked virtual account number<span class="req">*</span></label>
+                    <input id="vaNumber" name="vaNumber" type="text" required inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="1234567890" value="1234567890">
+                    <div class="help">10-digit NUBAN of the VA linked to this card</div>
+                  </div>
+                  <div class="field is-mono">
+                    <label for="transferRef">Bank transfer reference<span class="req">*</span></label>
+                    <input id="transferRef" name="transferRef" type="text" required maxlength="32" placeholder="TRF-2026-009811" value="TRF-2026-009811">
+                    <div class="help">Reference printed on the bank transfer receipt</div>
+                  </div>
+                </div>
+              </section>
+              <section class="form-section">
+                <div class="form-section-head"><h2 class="form-section-title">Reference</h2><span class="form-section-meta">Optional — appears in audit log</span></div>
+                <div class="field">
+                  <input id="reference" name="reference" type="text" maxlength="64" placeholder="e.g. Salary advance — March">
+                </div>
+              </section>
+              <div class="form-foot">
+                <a href="../index.html" class="btn btn-ghost btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg> Cancel</a>
+                <button type="submit" class="btn btn-primary">Continue to review <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="app.js"></script>
+  <script>
+    try { initForm(); } catch(e) { console.warn('initForm error', e); }
+    if (window.lucide) lucide.createIcons();
+  </script>
+  <script src="https://unpkg.com/lucide@latest" onload="if(window.lucide)lucide.createIcons()"></script>
+</body>
+</html>

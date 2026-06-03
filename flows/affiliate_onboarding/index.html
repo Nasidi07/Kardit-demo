@@ -1,0 +1,1966 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Kardit · Affiliate Onboarding</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+/* Kardit Design System — Colors & Type */
+/* ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  /* ---------- Brand Colors ---------- */
+  /* Sourced from the Chams Switch logo: a deep evergreen and a vivid scarlet
+     riding on a clean white base. The brand uses these two highly saturated
+     hues as accents — they are not used as flat fills for large surfaces. */
+
+  --cs-green-900: #0F4F2E;   /* deepest green — wordmark "Chams" */
+  --cs-green-700: #1B7A45;   /* primary green — "Switch" italic */
+  --cs-green-500: #2BA15D;   /* interactive green */
+  --cs-green-300: #BFE5CE;   /* tinted backgrounds */
+  --cs-green-100: #E8F6EE;   /* surface tint */
+
+  --cs-red-900:   #9A1A1A;
+  --cs-red-700:   #C8242C;   /* primary red — the swoosh */
+  --cs-red-500:   #E63946;   /* alerts, key CTAs */
+  --cs-red-300:   #F5B5B9;
+  --cs-red-100:   #FCEAEC;
+
+  /* ---------- Neutrals ---------- */
+  --cs-white:     #FFFFFF;
+  --cs-paper:     #FAFBF9;   /* page background — barely-warm white */
+  --cs-mist:      #F2F4F1;   /* subtle surface */
+  --cs-line:      #E4E7E2;   /* hairline borders */
+  --cs-line-strong: #C9CEC4;
+
+  --cs-ink-100:   #8C9189;   /* tertiary text */
+  --cs-ink-200:   #5C6359;   /* secondary text */
+  --cs-ink-400:   #2F3530;   /* body text */
+  --cs-ink-700:   #161A17;   /* headings */
+  --cs-ink-900:   #0A0C0A;   /* maximum contrast */
+
+  /* ---------- Semantic ---------- */
+  --cs-fg:           var(--cs-ink-700);
+  --cs-fg-muted:     var(--cs-ink-200);
+  --cs-fg-subtle:    var(--cs-ink-100);
+  --cs-fg-on-brand:  var(--cs-white);
+
+  --cs-bg:           var(--cs-paper);
+  --cs-bg-elevated:  var(--cs-white);
+  --cs-bg-tint:      var(--cs-mist);
+
+  --cs-border:       var(--cs-line);
+  --cs-border-strong:var(--cs-line-strong);
+
+  --cs-primary:      var(--cs-green-700);
+  --cs-primary-hover:var(--cs-green-900);
+  --cs-accent:       var(--cs-red-700);
+  --cs-accent-hover: var(--cs-red-900);
+
+  --cs-success:      var(--cs-green-500);
+  --cs-danger:       var(--cs-red-500);
+  --cs-warning:      #E0A416;
+  --cs-info:         #2978B5;
+
+  /* ---------- Typography ---------- */
+  /* The Chams Switch wordmark uses a humanist, slightly squared sans with an
+     italic flourish on "Switch". Plus Jakarta Sans (display) and Lato (body)
+     are the closest free Google Fonts equivalents.
+     ⚠ FONT SUBSTITUTION FLAG: please supply the brand's licensed display
+     face if available — the live site appears to use a custom or paid
+     foundry font. */
+
+  --cs-font-display: "Plus Jakarta Sans", "Lato", system-ui, sans-serif;
+  --cs-font-body:    "Lato", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --cs-font-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Type scale — modular 1.20 (minor third), good for content-dense fintech UI */
+  --cs-text-xs:   12px;
+  --cs-text-sm:   14px;
+  --cs-text-base: 16px;
+  --cs-text-md:   18px;
+  --cs-text-lg:   22px;
+  --cs-text-xl:   28px;
+  --cs-text-2xl:  36px;
+  --cs-text-3xl:  48px;
+  --cs-text-4xl:  64px;
+
+  --cs-leading-tight: 1.15;
+  --cs-leading-snug:  1.35;
+  --cs-leading-body:  1.55;
+  --cs-leading-loose: 1.75;
+
+  --cs-tracking-tight: -0.02em;
+  --cs-tracking-normal: 0;
+  --cs-tracking-wide:  0.06em;
+  --cs-tracking-caps:  0.12em;
+
+  /* ---------- Spacing ---------- */
+  --cs-space-1: 4px;
+  --cs-space-2: 8px;
+  --cs-space-3: 12px;
+  --cs-space-4: 16px;
+  --cs-space-5: 24px;
+  --cs-space-6: 32px;
+  --cs-space-7: 48px;
+  --cs-space-8: 64px;
+  --cs-space-9: 96px;
+
+  /* ---------- Radii ---------- */
+  --cs-radius-xs: 4px;
+  --cs-radius-sm: 6px;
+  --cs-radius-md: 10px;
+  --cs-radius-lg: 16px;
+  --cs-radius-xl: 24px;
+  --cs-radius-pill: 999px;
+
+  /* ---------- Shadows ---------- */
+  --cs-shadow-xs: 0 1px 2px rgba(15, 79, 46, 0.06);
+  --cs-shadow-sm: 0 2px 6px rgba(15, 30, 18, 0.06), 0 1px 2px rgba(15,30,18,0.04);
+  --cs-shadow-md: 0 6px 18px rgba(15, 30, 18, 0.08), 0 2px 4px rgba(15,30,18,0.05);
+  --cs-shadow-lg: 0 18px 48px rgba(15, 30, 18, 0.12), 0 4px 12px rgba(15,30,18,0.06);
+  --cs-shadow-focus: 0 0 0 3px rgba(43, 161, 93, 0.30);
+  --cs-shadow-focus-red: 0 0 0 3px rgba(230, 57, 70, 0.25);
+}
+
+/* ---------- Semantic element styles ---------- */
+.cs-h1, h1.cs {
+  font-family: var(--cs-font-display);
+  font-weight: 800;
+  font-size: var(--cs-text-3xl);
+  line-height: var(--cs-leading-tight);
+  letter-spacing: var(--cs-tracking-tight);
+  color: var(--cs-ink-900);
+  margin: 0;
+}
+.cs-h2, h2.cs {
+  font-family: var(--cs-font-display);
+  font-weight: 700;
+  font-size: var(--cs-text-2xl);
+  line-height: var(--cs-leading-tight);
+  letter-spacing: var(--cs-tracking-tight);
+  color: var(--cs-ink-700);
+  margin: 0;
+}
+.cs-h3, h3.cs {
+  font-family: var(--cs-font-display);
+  font-weight: 700;
+  font-size: var(--cs-text-xl);
+  line-height: var(--cs-leading-snug);
+  color: var(--cs-ink-700);
+  margin: 0;
+}
+.cs-h4, h4.cs {
+  font-family: var(--cs-font-display);
+  font-weight: 600;
+  font-size: var(--cs-text-lg);
+  line-height: var(--cs-leading-snug);
+  color: var(--cs-ink-700);
+  margin: 0;
+}
+.cs-eyebrow {
+  font-family: var(--cs-font-body);
+  font-weight: 700;
+  font-size: var(--cs-text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--cs-tracking-caps);
+  color: var(--cs-green-700);
+}
+.cs-p, p.cs {
+  font-family: var(--cs-font-body);
+  font-weight: 400;
+  font-size: var(--cs-text-base);
+  line-height: var(--cs-leading-body);
+  color: var(--cs-ink-400);
+  margin: 0;
+}
+.cs-small {
+  font-family: var(--cs-font-body);
+  font-size: var(--cs-text-sm);
+  color: var(--cs-ink-200);
+  line-height: var(--cs-leading-body);
+}
+.cs-code, code.cs {
+  font-family: var(--cs-font-mono);
+  font-size: 0.9em;
+  background: var(--cs-mist);
+  border: 1px solid var(--cs-line);
+  border-radius: var(--cs-radius-xs);
+  padding: 1px 6px;
+  color: var(--cs-ink-700);
+}
+.cs-amount {
+  font-family: var(--cs-font-display);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--cs-tracking-tight);
+  color: var(--cs-ink-900);
+}
+
+body.cs-base {
+  font-family: var(--cs-font-body);
+  color: var(--cs-fg);
+  background: var(--cs-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Shared chrome + tokens for the affiliate onboarding prototype */
+
+
+/* Reset within prototype frames */
+.scr * { box-sizing: border-box; }
+
+/* Screen frame — a faux-browser/app shell */
+.scr {
+  font-family: var(--cs-font-body);
+  color: var(--cs-fg);
+  background: var(--cs-paper);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Top app bar within each screen */
+.scr-app-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--cs-space-5);
+  padding: 14px 28px;
+  background: #fff;
+  border-bottom: 1px solid var(--cs-line);
+  flex-shrink: 0;
+}
+.scr-app-bar img.logo { height: 32px; }
+.scr-app-bar .logo-mark {
+  font-family: var(--cs-font-display, 'Plus Jakarta Sans', system-ui, sans-serif);
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--cs-green-900);
+  display: inline-flex;
+  align-items: baseline;
+  user-select: none;
+}
+.scr-app-bar .logo-mark__i { position: relative; display: inline-block; }
+.scr-app-bar .logo-mark__i::after {
+  content: "";
+  position: absolute;
+  top: -0.18em; left: 50%;
+  width: 0.22em; height: 0.22em;
+  border-radius: 50%;
+  background: var(--cs-red-700, #B0261D);
+  transform: translate(-50%, 0);
+}
+.scr-app-bar .crumbs {
+  display: flex; gap: 8px; align-items: center;
+  font-size: 13px; color: var(--cs-ink-200);
+}
+.scr-app-bar .crumbs strong { color: var(--cs-ink-700); font-weight: 600; }
+.scr-app-bar .spacer { flex: 1; }
+.scr-app-bar .user {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px; color: var(--cs-ink-200);
+}
+.scr-app-bar .avatar {
+  width: 32px; height: 32px; border-radius: 999px;
+  background: var(--cs-green-100); color: var(--cs-green-900);
+  display: grid; place-items: center;
+  font-weight: 700; font-size: 13px;
+  border: 1px solid var(--cs-green-300);
+}
+
+/* Two-column layout: left progress rail + main content */
+.scr-body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  min-height: 0;
+}
+.scr-rail {
+  background: #fff;
+  border-right: 1px solid var(--cs-line);
+  padding: 28px 22px;
+  overflow: auto;
+}
+.scr-rail h6 {
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--cs-ink-100); font-weight: 700; margin: 0 0 14px;
+}
+.scr-rail ol {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.scr-rail li {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 10px 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: var(--cs-ink-400);
+  cursor: pointer;
+  transition: background 120ms ease;
+}
+.scr-rail li:hover { background: var(--cs-mist); }
+.scr-rail li.is-active {
+  background: var(--cs-green-100);
+  color: var(--cs-ink-700);
+  font-weight: 600;
+}
+.scr-rail li.is-done { color: var(--cs-ink-200); }
+.scr-rail .step-dot {
+  width: 22px; height: 22px; border-radius: 999px; flex-shrink: 0;
+  display: grid; place-items: center;
+  font-size: 11px; font-weight: 700;
+  background: var(--cs-mist); color: var(--cs-ink-200);
+  border: 1px solid var(--cs-line-strong);
+}
+.scr-rail li.is-active .step-dot {
+  background: var(--cs-green-700); color: #fff; border-color: var(--cs-green-700);
+}
+.scr-rail li.is-done .step-dot {
+  background: var(--cs-green-500); color: #fff; border-color: var(--cs-green-500);
+}
+.scr-rail .step-meta { font-size: 11px; color: var(--cs-ink-100); margin-top: 2px; }
+
+/* Main content area */
+.scr-main {
+  overflow: auto;
+  padding: 36px 48px 48px;
+}
+.scr-main .container { max-width: 720px; margin: 0 auto; }
+
+/* Headings */
+.scr-eyebrow {
+  font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--cs-green-700); font-weight: 700;
+}
+.scr-title {
+  font-family: var(--cs-font-display); font-weight: 800;
+  font-size: 32px; letter-spacing: -0.02em; color: var(--cs-ink-900);
+  margin: 8px 0 8px;
+}
+.scr-sub {
+  font-size: 16px; color: var(--cs-ink-200); line-height: 1.55;
+  max-width: 640px; margin: 0 0 28px;
+}
+
+/* Cards */
+.cs-card {
+  background: #fff;
+  border: 1px solid var(--cs-line);
+  border-radius: 16px;
+  box-shadow: var(--cs-shadow-sm);
+}
+.cs-card.pad { padding: 28px; }
+
+/* Form controls */
+.field {
+  display: flex; flex-direction: column; gap: 6px;
+}
+.field label {
+  font-size: 13px; font-weight: 600; color: var(--cs-ink-700);
+}
+.field .hint { font-size: 12px; color: var(--cs-ink-100); }
+.field .err  { font-size: 12px; color: var(--cs-red-700); display: flex; gap: 6px; align-items: center; }
+.field input, .field select, .field textarea {
+  font-family: var(--cs-font-body); font-size: 14px; color: var(--cs-ink-700);
+  padding: 11px 13px;
+  background: #fff;
+  border: 1px solid var(--cs-line-strong);
+  border-radius: 8px;
+  outline: none;
+  transition: border 120ms ease, box-shadow 120ms ease;
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  border-color: var(--cs-green-700);
+  box-shadow: var(--cs-shadow-focus);
+}
+.field.has-error input, .field.has-error select, .field.has-error textarea {
+  border-color: var(--cs-red-700);
+  background: var(--cs-red-100);
+  color: var(--cs-red-900);
+}
+.field.has-error input:focus { box-shadow: var(--cs-shadow-focus-red); }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; }
+
+/* Buttons */
+.btn {
+  font-family: var(--cs-font-body); font-weight: 700; font-size: 14px;
+  padding: 12px 20px; border-radius: 10px;
+  border: none; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+}
+.btn:active { transform: scale(0.98); }
+.btn-primary { background: var(--cs-green-700); color: #fff; box-shadow: 0 2px 6px rgba(15,30,18,0.10); }
+.btn-primary:hover { background: var(--cs-green-900); }
+.btn-accent  { background: var(--cs-red-700); color: #fff; box-shadow: 0 2px 6px rgba(200,36,44,0.20); }
+.btn-accent:hover { background: var(--cs-red-900); }
+.btn-secondary {
+  background: #fff; color: var(--cs-green-700);
+  border: 1.5px solid var(--cs-green-700);
+}
+.btn-secondary:hover { background: var(--cs-green-100); }
+.btn-ghost {
+  background: transparent; color: var(--cs-ink-700);
+}
+.btn-ghost:hover { background: var(--cs-mist); }
+.btn[disabled] { background: var(--cs-line); color: var(--cs-ink-100); cursor: not-allowed; box-shadow: none; }
+
+/* Toolbar at bottom of step content */
+.step-actions {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 24px; gap: 12px;
+}
+
+/* Pill tags */
+.tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px; border-radius: 999px;
+  font-size: 12px; font-weight: 700;
+  border: 1px solid transparent;
+}
+.tag.ok    { background: var(--cs-green-100); color: var(--cs-green-900); border-color: var(--cs-green-300); }
+.tag.warn  { background: #FFF6DD; color: #7A5800; border-color: #F2DC9E; }
+.tag.err   { background: var(--cs-red-100); color: var(--cs-red-900); border-color: var(--cs-red-300); }
+.tag.info  { background: #E6F0F9; color: #1B547F; border-color: #B7D2EA; }
+.tag.muted { background: var(--cs-mist); color: var(--cs-ink-200); border-color: var(--cs-line); }
+
+/* Responsive: collapse rail on smaller frames */
+@media (max-width: 880px) {
+  .scr-body { grid-template-columns: 1fr; }
+  .scr-rail { display: none; }
+  .scr-main { padding: 24px; }
+}
+
+    body { margin: 0; background: var(--cs-paper); }
+    .artboard-wrap { width: 100%; height: 100%; display: flex; flex-direction: column; }
+  </style>
+</head>
+<body data-screen-label="Affiliate Onboarding · Canvas">
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <script type="text/babel" data-presets="env,react">
+/* === design-canvas.jsx === */
+
+
+// DesignCanvas.jsx — Figma-ish design canvas wrapper
+// Warm gray grid bg + Sections + Artboards + PostIt notes.
+// Artboards are reorderable (grip-drag), labels/titles are inline-editable,
+// and any artboard can be opened in a fullscreen focus overlay (←/→/Esc).
+// State persists to a .design-canvas.state.json sidecar via the host
+// bridge. No assets, no deps.
+//
+// Usage:
+//   <DesignCanvas>
+//     <DCSection id="onboarding" title="Onboarding" subtitle="First-run variants">
+//       <DCArtboard id="a" label="A · Dusk" width={260} height={480}>…</DCArtboard>
+//       <DCArtboard id="b" label="B · Minimal" width={260} height={480}>…</DCArtboard>
+//     </DCSection>
+//   </DesignCanvas>
+
+const DC = {
+  bg: '#f0eee9',
+  grid: 'rgba(0,0,0,0.06)',
+  label: 'rgba(60,50,40,0.7)',
+  title: 'rgba(40,30,20,0.85)',
+  subtitle: 'rgba(60,50,40,0.6)',
+  postitBg: '#fef4a8',
+  postitText: '#5a4a2a',
+  font: '-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif',
+};
+
+// One-time CSS injection (classes are dc-prefixed so they don't collide with
+// the hosted design's own styles).
+if (typeof document !== 'undefined' && !document.getElementById('dc-styles')) {
+  const s = document.createElement('style');
+  s.id = 'dc-styles';
+  s.textContent = [
+    '.dc-editable{cursor:text;outline:none;white-space:nowrap;border-radius:3px;padding:0 2px;margin:0 -2px}',
+    '.dc-editable:focus{background:#fff;box-shadow:0 0 0 1.5px #c96442}',
+    '[data-dc-slot]{transition:transform .18s cubic-bezier(.2,.7,.3,1)}',
+    '[data-dc-slot].dc-dragging{transition:none;z-index:10;pointer-events:none}',
+    '[data-dc-slot].dc-dragging .dc-card{box-shadow:0 12px 40px rgba(0,0,0,.25),0 0 0 2px #c96442;transform:scale(1.02)}',
+    '.dc-card{transition:box-shadow .15s,transform .15s}',
+    '.dc-card *{scrollbar-width:none}',
+    '.dc-card *::-webkit-scrollbar{display:none}',
+    '.dc-labelrow{display:flex;align-items:center;gap:4px;height:24px}',
+    '.dc-grip{cursor:grab;display:flex;align-items:center;padding:5px 4px;border-radius:4px;transition:background .12s}',
+    '.dc-grip:hover{background:rgba(0,0,0,.08)}',
+    '.dc-grip:active{cursor:grabbing}',
+    '.dc-labeltext{cursor:pointer;border-radius:4px;padding:3px 6px;display:flex;align-items:center;transition:background .12s}',
+    '.dc-labeltext:hover{background:rgba(0,0,0,.05)}',
+    '.dc-expand{position:absolute;bottom:100%;right:0;margin-bottom:5px;z-index:2;opacity:0;transition:opacity .12s,background .12s;',
+    '  width:22px;height:22px;border-radius:5px;border:none;cursor:pointer;padding:0;',
+    '  background:transparent;color:rgba(60,50,40,.7);display:flex;align-items:center;justify-content:center}',
+    '.dc-expand:hover{background:rgba(0,0,0,.06);color:#2a251f}',
+    '[data-dc-slot]:hover .dc-expand{opacity:1}',
+  ].join('\n');
+  document.head.appendChild(s);
+}
+
+const DCCtx = React.createContext(null);
+
+// ─────────────────────────────────────────────────────────────
+// DesignCanvas — stateful wrapper around the pan/zoom viewport.
+// Owns runtime state (per-section order, renamed titles/labels, focused
+// artboard). Order/titles/labels persist to a .design-canvas.state.json
+// sidecar next to the HTML. Reads go via plain fetch() so the saved
+// arrangement is visible anywhere the HTML + sidecar are served together
+// (omelette preview, direct link, downloaded zip). Writes go through the
+// host's window.omelette bridge — editing requires the omelette runtime.
+// Focus is ephemeral.
+// ─────────────────────────────────────────────────────────────
+const DC_STATE_FILE = '.design-canvas.state.json';
+
+function DesignCanvas({ children, minScale, maxScale, style }) {
+  const [state, setState] = React.useState({ sections: {}, focus: null });
+  // Hold rendering until the sidecar read settles so the saved order/titles
+  // appear on first paint (no source-order flash). didRead gates writes until
+  // the read settles so the empty initial state can't clobber a slow read;
+  // skipNextWrite suppresses the one echo-write that would otherwise follow
+  // hydration.
+  const [ready, setReady] = React.useState(false);
+  const didRead = React.useRef(false);
+  const skipNextWrite = React.useRef(false);
+
+  React.useEffect(() => {
+    let off = false;
+    fetch('./' + DC_STATE_FILE)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((saved) => {
+        if (off || !saved || !saved.sections) return;
+        skipNextWrite.current = true;
+        setState((s) => ({ ...s, sections: saved.sections }));
+      })
+      .catch(() => {})
+      .finally(() => { didRead.current = true; if (!off) setReady(true); });
+    const t = setTimeout(() => { if (!off) setReady(true); }, 150);
+    return () => { off = true; clearTimeout(t); };
+  }, []);
+
+  React.useEffect(() => {
+    if (!didRead.current) return;
+    if (skipNextWrite.current) { skipNextWrite.current = false; return; }
+    const t = setTimeout(() => {
+      window.omelette?.writeFile(DC_STATE_FILE, JSON.stringify({ sections: state.sections })).catch(() => {});
+    }, 250);
+    return () => clearTimeout(t);
+  }, [state.sections]);
+
+  // Build registries synchronously from children so FocusOverlay can read
+  // them in the same render. Only direct DCSection > DCArtboard children are
+  // walked — wrapping them in other elements opts out of focus/reorder.
+  const registry = {};     // slotId -> { sectionId, artboard }
+  const sectionMeta = {};  // sectionId -> { title, subtitle, slotIds[] }
+  const sectionOrder = [];
+  React.Children.forEach(children, (sec) => {
+    if (!sec || sec.type !== DCSection) return;
+    const sid = sec.props.id ?? sec.props.title;
+    if (!sid) return;
+    sectionOrder.push(sid);
+    const persisted = state.sections[sid] || {};
+    const srcIds = [];
+    React.Children.forEach(sec.props.children, (ab) => {
+      if (!ab || ab.type !== DCArtboard) return;
+      const aid = ab.props.id ?? ab.props.label;
+      if (!aid) return;
+      registry[`${sid}/${aid}`] = { sectionId: sid, artboard: ab };
+      srcIds.push(aid);
+    });
+    const kept = (persisted.order || []).filter((k) => srcIds.includes(k));
+    sectionMeta[sid] = {
+      title: persisted.title ?? sec.props.title,
+      subtitle: sec.props.subtitle,
+      slotIds: [...kept, ...srcIds.filter((k) => !kept.includes(k))],
+    };
+  });
+
+  const api = React.useMemo(() => ({
+    state,
+    section: (id) => state.sections[id] || {},
+    patchSection: (id, p) => setState((s) => ({
+      ...s,
+      sections: { ...s.sections, [id]: { ...s.sections[id], ...(typeof p === 'function' ? p(s.sections[id] || {}) : p) } },
+    })),
+    setFocus: (slotId) => setState((s) => ({ ...s, focus: slotId })),
+  }), [state]);
+
+  // Esc exits focus; any outside pointerdown commits an in-progress rename.
+  React.useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Escape') api.setFocus(null); };
+    const onPd = (e) => {
+      const ae = document.activeElement;
+      if (ae && ae.isContentEditable && !ae.contains(e.target)) ae.blur();
+    };
+    document.addEventListener('keydown', onKey);
+    document.addEventListener('pointerdown', onPd, true);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.removeEventListener('pointerdown', onPd, true);
+    };
+  }, [api]);
+
+  return (
+    <DCCtx.Provider value={api}>
+      <DCViewport minScale={minScale} maxScale={maxScale} style={style}>{ready && children}</DCViewport>
+      {state.focus && registry[state.focus] && (
+        <DCFocusOverlay entry={registry[state.focus]} sectionMeta={sectionMeta} sectionOrder={sectionOrder} />
+      )}
+    </DCCtx.Provider>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// DCViewport — transform-based pan/zoom (internal)
+//
+// Input mapping (Figma-style):
+//   • trackpad pinch  → zoom   (ctrlKey wheel; Safari gesture* events)
+//   • trackpad scroll → pan    (two-finger)
+//   • mouse wheel     → zoom   (notched; distinguished from trackpad scroll)
+//   • middle-drag / primary-drag-on-bg → pan
+//
+// Transform state lives in a ref and is written straight to the DOM
+// (translate3d + will-change) so wheel ticks don't go through React —
+// keeps pans at 60fps on dense canvases.
+// ─────────────────────────────────────────────────────────────
+function DCViewport({ children, minScale = 0.1, maxScale = 8, style = {} }) {
+  const vpRef = React.useRef(null);
+  const worldRef = React.useRef(null);
+  const tf = React.useRef({ x: 0, y: 0, scale: 1 });
+
+  const apply = React.useCallback(() => {
+    const { x, y, scale } = tf.current;
+    const el = worldRef.current;
+    if (el) el.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${scale})`;
+  }, []);
+
+  React.useEffect(() => {
+    const vp = vpRef.current;
+    if (!vp) return;
+
+    const zoomAt = (cx, cy, factor) => {
+      const r = vp.getBoundingClientRect();
+      const px = cx - r.left, py = cy - r.top;
+      const t = tf.current;
+      const next = Math.min(maxScale, Math.max(minScale, t.scale * factor));
+      const k = next / t.scale;
+      // keep the world point under the cursor fixed
+      t.x = px - (px - t.x) * k;
+      t.y = py - (py - t.y) * k;
+      t.scale = next;
+      apply();
+    };
+
+    // Mouse-wheel vs trackpad-scroll heuristic. A physical wheel sends
+    // line-mode deltas (Firefox) or large integer pixel deltas with no X
+    // component (Chrome/Safari, typically multiples of 100/120). Trackpad
+    // two-finger scroll sends small/fractional pixel deltas, often with
+    // non-zero deltaX. ctrlKey is set by the browser for trackpad pinch.
+    const isMouseWheel = (e) =>
+      e.deltaMode !== 0 ||
+      (e.deltaX === 0 && Number.isInteger(e.deltaY) && Math.abs(e.deltaY) >= 40);
+
+    const onWheel = (e) => {
+      e.preventDefault();
+      if (isGesturing) return; // Safari: gesture* owns the pinch — discard concurrent wheels
+      if (e.ctrlKey) {
+        // trackpad pinch (or explicit ctrl+wheel)
+        zoomAt(e.clientX, e.clientY, Math.exp(-e.deltaY * 0.01));
+      } else if (isMouseWheel(e)) {
+        // notched mouse wheel — fixed-ratio step per click
+        zoomAt(e.clientX, e.clientY, Math.exp(-Math.sign(e.deltaY) * 0.18));
+      } else {
+        // trackpad two-finger scroll — pan
+        tf.current.x -= e.deltaX;
+        tf.current.y -= e.deltaY;
+        apply();
+      }
+    };
+
+    // Safari sends native gesture* events for trackpad pinch with a smooth
+    // e.scale; preferring these over the ctrl+wheel fallback gives a much
+    // better feel there. No-ops on other browsers. Safari also fires
+    // ctrlKey wheel events during the same pinch — isGesturing makes
+    // onWheel drop those entirely so they neither zoom nor pan.
+    let gsBase = 1;
+    let isGesturing = false;
+    const onGestureStart = (e) => { e.preventDefault(); isGesturing = true; gsBase = tf.current.scale; };
+    const onGestureChange = (e) => {
+      e.preventDefault();
+      zoomAt(e.clientX, e.clientY, (gsBase * e.scale) / tf.current.scale);
+    };
+    const onGestureEnd = (e) => { e.preventDefault(); isGesturing = false; };
+
+    // Drag-pan: middle button anywhere, or primary button on canvas
+    // background (anything that isn't an artboard or an inline editor).
+    let drag = null;
+    const onPointerDown = (e) => {
+      const onBg = !e.target.closest('[data-dc-slot], .dc-editable');
+      if (!(e.button === 1 || (e.button === 0 && onBg))) return;
+      e.preventDefault();
+      vp.setPointerCapture(e.pointerId);
+      drag = { id: e.pointerId, lx: e.clientX, ly: e.clientY };
+      vp.style.cursor = 'grabbing';
+    };
+    const onPointerMove = (e) => {
+      if (!drag || e.pointerId !== drag.id) return;
+      tf.current.x += e.clientX - drag.lx;
+      tf.current.y += e.clientY - drag.ly;
+      drag.lx = e.clientX; drag.ly = e.clientY;
+      apply();
+    };
+    const onPointerUp = (e) => {
+      if (!drag || e.pointerId !== drag.id) return;
+      vp.releasePointerCapture(e.pointerId);
+      drag = null;
+      vp.style.cursor = '';
+    };
+
+    vp.addEventListener('wheel', onWheel, { passive: false });
+    vp.addEventListener('gesturestart', onGestureStart, { passive: false });
+    vp.addEventListener('gesturechange', onGestureChange, { passive: false });
+    vp.addEventListener('gestureend', onGestureEnd, { passive: false });
+    vp.addEventListener('pointerdown', onPointerDown);
+    vp.addEventListener('pointermove', onPointerMove);
+    vp.addEventListener('pointerup', onPointerUp);
+    vp.addEventListener('pointercancel', onPointerUp);
+    return () => {
+      vp.removeEventListener('wheel', onWheel);
+      vp.removeEventListener('gesturestart', onGestureStart);
+      vp.removeEventListener('gesturechange', onGestureChange);
+      vp.removeEventListener('gestureend', onGestureEnd);
+      vp.removeEventListener('pointerdown', onPointerDown);
+      vp.removeEventListener('pointermove', onPointerMove);
+      vp.removeEventListener('pointerup', onPointerUp);
+      vp.removeEventListener('pointercancel', onPointerUp);
+    };
+  }, [apply, minScale, maxScale]);
+
+  const gridSvg = `url("data:image/svg+xml,%3Csvg width='120' height='120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M120 0H0v120' fill='none' stroke='${encodeURIComponent(DC.grid)}' stroke-width='1'/%3E%3C/svg%3E")`;
+  return (
+    <div
+      ref={vpRef}
+      className="design-canvas"
+      style={{
+        height: '100vh', width: '100vw',
+        background: DC.bg,
+        overflow: 'hidden',
+        overscrollBehavior: 'none',
+        touchAction: 'none',
+        position: 'relative',
+        fontFamily: DC.font,
+        boxSizing: 'border-box',
+        ...style,
+      }}
+    >
+      <div
+        ref={worldRef}
+        style={{
+          position: 'absolute', top: 0, left: 0,
+          transformOrigin: '0 0',
+          willChange: 'transform',
+          width: 'max-content', minWidth: '100%',
+          minHeight: '100%',
+          padding: '60px 0 80px',
+        }}
+      >
+        <div style={{ position: 'absolute', inset: -6000, backgroundImage: gridSvg, backgroundSize: '120px 120px', pointerEvents: 'none', zIndex: -1 }} />
+        {children}
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// DCSection — editable title + h-row of artboards in persisted order
+// ─────────────────────────────────────────────────────────────
+function DCSection({ id, title, subtitle, children, gap = 48 }) {
+  const ctx = React.useContext(DCCtx);
+  const sid = id ?? title;
+  const all = React.Children.toArray(children);
+  const artboards = all.filter((c) => c && c.type === DCArtboard);
+  const rest = all.filter((c) => !(c && c.type === DCArtboard));
+  const srcOrder = artboards.map((a) => a.props.id ?? a.props.label);
+  const sec = (ctx && sid && ctx.section(sid)) || {};
+
+  const order = React.useMemo(() => {
+    const kept = (sec.order || []).filter((k) => srcOrder.includes(k));
+    return [...kept, ...srcOrder.filter((k) => !kept.includes(k))];
+  }, [sec.order, srcOrder.join('|')]);
+
+  const byId = Object.fromEntries(artboards.map((a) => [a.props.id ?? a.props.label, a]));
+
+  return (
+    <div data-dc-section={sid} style={{ marginBottom: 80, position: 'relative' }}>
+      <div style={{ padding: '0 60px 56px' }}>
+        <DCEditable tag="div" value={sec.title ?? title}
+          onChange={(v) => ctx && sid && ctx.patchSection(sid, { title: v })}
+          style={{ fontSize: 28, fontWeight: 600, color: DC.title, letterSpacing: -0.4, marginBottom: 6, display: 'inline-block' }} />
+        {subtitle && <div style={{ fontSize: 16, color: DC.subtitle }}>{subtitle}</div>}
+      </div>
+      <div style={{ display: 'flex', gap, padding: '0 60px', alignItems: 'flex-start', width: 'max-content' }}>
+        {order.map((k) => (
+          <DCArtboardFrame key={k} sectionId={sid} artboard={byId[k]} order={order}
+            label={(sec.labels || {})[k] ?? byId[k].props.label}
+            onRename={(v) => ctx && ctx.patchSection(sid, (x) => ({ labels: { ...x.labels, [k]: v } }))}
+            onReorder={(next) => ctx && ctx.patchSection(sid, { order: next })}
+            onFocus={() => ctx && ctx.setFocus(`${sid}/${k}`)} />
+        ))}
+      </div>
+      {rest}
+    </div>
+  );
+}
+
+// DCArtboard — marker; rendered by DCArtboardFrame via DCSection.
+function DCArtboard() { return null; }
+
+function DCArtboardFrame({ sectionId, artboard, label, order, onRename, onReorder, onFocus }) {
+  const { id: rawId, label: rawLabel, width = 260, height = 480, children, style = {} } = artboard.props;
+  const id = rawId ?? rawLabel;
+  const ref = React.useRef(null);
+
+  // Live drag-reorder: dragged card sticks to cursor; siblings slide into
+  // their would-be slots in real time via transforms. DOM order only
+  // changes on drop.
+  const onGripDown = (e) => {
+    e.preventDefault(); e.stopPropagation();
+    const me = ref.current;
+    // translateX is applied in local (pre-scale) space but pointer deltas and
+    // getBoundingClientRect().left are screen-space — divide by the viewport's
+    // current scale so the dragged card tracks the cursor at any zoom level.
+    const scale = me.getBoundingClientRect().width / me.offsetWidth || 1;
+    const peers = Array.from(document.querySelectorAll(`[data-dc-section="${sectionId}"] [data-dc-slot]`));
+    const homes = peers.map((el) => ({ el, id: el.dataset.dcSlot, x: el.getBoundingClientRect().left }));
+    const slotXs = homes.map((h) => h.x);
+    const startIdx = order.indexOf(id);
+    const startX = e.clientX;
+    let liveOrder = order.slice();
+    me.classList.add('dc-dragging');
+
+    const layout = () => {
+      for (const h of homes) {
+        if (h.id === id) continue;
+        const slot = liveOrder.indexOf(h.id);
+        h.el.style.transform = `translateX(${(slotXs[slot] - h.x) / scale}px)`;
+      }
+    };
+
+    const move = (ev) => {
+      const dx = ev.clientX - startX;
+      me.style.transform = `translateX(${dx / scale}px)`;
+      const cur = homes[startIdx].x + dx;
+      let nearest = 0, best = Infinity;
+      for (let i = 0; i < slotXs.length; i++) {
+        const d = Math.abs(slotXs[i] - cur);
+        if (d < best) { best = d; nearest = i; }
+      }
+      if (liveOrder.indexOf(id) !== nearest) {
+        liveOrder = order.filter((k) => k !== id);
+        liveOrder.splice(nearest, 0, id);
+        layout();
+      }
+    };
+
+    const up = () => {
+      document.removeEventListener('pointermove', move);
+      document.removeEventListener('pointerup', up);
+      const finalSlot = liveOrder.indexOf(id);
+      me.classList.remove('dc-dragging');
+      me.style.transform = `translateX(${(slotXs[finalSlot] - homes[startIdx].x) / scale}px)`;
+      // After the settle transition, kill transitions + clear transforms +
+      // commit the reorder in the same frame so there's no visual snap-back.
+      setTimeout(() => {
+        for (const h of homes) { h.el.style.transition = 'none'; h.el.style.transform = ''; }
+        if (liveOrder.join('|') !== order.join('|')) onReorder(liveOrder);
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          for (const h of homes) h.el.style.transition = '';
+        }));
+      }, 180);
+    };
+    document.addEventListener('pointermove', move);
+    document.addEventListener('pointerup', up);
+  };
+
+  return (
+    <div ref={ref} data-dc-slot={id} style={{ position: 'relative', flexShrink: 0 }}>
+      <div className="dc-labelrow" style={{ position: 'absolute', bottom: '100%', left: -4, marginBottom: 4, color: DC.label }}>
+        <div className="dc-grip" onPointerDown={onGripDown} title="Drag to reorder">
+          <svg width="9" height="13" viewBox="0 0 9 13" fill="currentColor"><circle cx="2" cy="2" r="1.1"/><circle cx="7" cy="2" r="1.1"/><circle cx="2" cy="6.5" r="1.1"/><circle cx="7" cy="6.5" r="1.1"/><circle cx="2" cy="11" r="1.1"/><circle cx="7" cy="11" r="1.1"/></svg>
+        </div>
+        <div className="dc-labeltext" onClick={onFocus} title="Click to focus">
+          <DCEditable value={label} onChange={onRename} onClick={(e) => e.stopPropagation()}
+            style={{ fontSize: 15, fontWeight: 500, color: DC.label, lineHeight: 1 }} />
+        </div>
+      </div>
+      <button className="dc-expand" onClick={onFocus} onPointerDown={(e) => e.stopPropagation()} title="Focus">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"><path d="M7 1h4v4M5 11H1V7M11 1L7.5 4.5M1 11l3.5-3.5"/></svg>
+      </button>
+      <div className="dc-card"
+        style={{ borderRadius: 2, boxShadow: '0 1px 3px rgba(0,0,0,.08),0 4px 16px rgba(0,0,0,.06)', overflow: 'hidden', width, height, background: '#fff', ...style }}>
+        {children || <div style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#bbb', fontSize: 13, fontFamily: DC.font }}>{id}</div>}
+      </div>
+    </div>
+  );
+}
+
+// Inline rename — commits on blur or Enter.
+function DCEditable({ value, onChange, style, tag = 'span', onClick }) {
+  const T = tag;
+  return (
+    <T className="dc-editable" contentEditable suppressContentEditableWarning
+      onClick={onClick}
+      onPointerDown={(e) => e.stopPropagation()}
+      onBlur={(e) => onChange && onChange(e.currentTarget.textContent)}
+      onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); e.currentTarget.blur(); } }}
+      style={style}>{value}</T>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// Focus mode — overlay one artboard; ←/→ within section, ↑/↓ across
+// sections, Esc or backdrop click to exit.
+// ─────────────────────────────────────────────────────────────
+function DCFocusOverlay({ entry, sectionMeta, sectionOrder }) {
+  const ctx = React.useContext(DCCtx);
+  const { sectionId, artboard } = entry;
+  const sec = ctx.section(sectionId);
+  const meta = sectionMeta[sectionId];
+  const peers = meta.slotIds;
+  const aid = artboard.props.id ?? artboard.props.label;
+  const idx = peers.indexOf(aid);
+  const secIdx = sectionOrder.indexOf(sectionId);
+
+  const go = (d) => { const n = peers[(idx + d + peers.length) % peers.length]; if (n) ctx.setFocus(`${sectionId}/${n}`); };
+  const goSection = (d) => {
+    const ns = sectionOrder[(secIdx + d + sectionOrder.length) % sectionOrder.length];
+    const first = sectionMeta[ns] && sectionMeta[ns].slotIds[0];
+    if (first) ctx.setFocus(`${ns}/${first}`);
+  };
+
+  React.useEffect(() => {
+    const k = (e) => {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+      if (e.key === 'ArrowUp') { e.preventDefault(); goSection(-1); }
+      if (e.key === 'ArrowDown') { e.preventDefault(); goSection(1); }
+    };
+    document.addEventListener('keydown', k);
+    return () => document.removeEventListener('keydown', k);
+  });
+
+  const { width = 260, height = 480, children } = artboard.props;
+  const [vp, setVp] = React.useState({ w: window.innerWidth, h: window.innerHeight });
+  React.useEffect(() => { const r = () => setVp({ w: window.innerWidth, h: window.innerHeight }); window.addEventListener('resize', r); return () => window.removeEventListener('resize', r); }, []);
+  const scale = Math.max(0.1, Math.min((vp.w - 200) / width, (vp.h - 260) / height, 2));
+
+  const [ddOpen, setDd] = React.useState(false);
+  const Arrow = ({ dir, onClick }) => (
+    <button onClick={(e) => { e.stopPropagation(); onClick(); }}
+      style={{ position: 'absolute', top: '50%', [dir]: 28, transform: 'translateY(-50%)',
+        border: 'none', background: 'rgba(255,255,255,.08)', color: 'rgba(255,255,255,.9)',
+        width: 44, height: 44, borderRadius: 22, fontSize: 18, cursor: 'pointer',
+        display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'background .15s' }}
+      onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,.18)')}
+      onMouseLeave={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,.08)')}>
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+        <path d={dir === 'left' ? 'M11 3L5 9l6 6' : 'M7 3l6 6-6 6'} /></svg>
+    </button>
+  );
+
+  // Portal to body so position:fixed is the real viewport regardless of any
+  // transform on DesignCanvas's ancestors (including the canvas zoom itself).
+  return ReactDOM.createPortal(
+    <div onClick={() => ctx.setFocus(null)}
+      onWheel={(e) => e.preventDefault()}
+      style={{ position: 'fixed', inset: 0, zIndex: 100, background: 'rgba(24,20,16,.6)', backdropFilter: 'blur(14px)',
+        fontFamily: DC.font, color: '#fff' }}>
+
+      {/* top bar: section dropdown (left) · close (right) */}
+      <div onClick={(e) => e.stopPropagation()}
+        style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 72, display: 'flex', alignItems: 'flex-start', padding: '16px 20px 0', gap: 16 }}>
+        <div style={{ position: 'relative' }}>
+          <button onClick={() => setDd((o) => !o)}
+            style={{ border: 'none', background: 'transparent', color: '#fff', cursor: 'pointer', padding: '6px 8px',
+              borderRadius: 6, textAlign: 'left', fontFamily: 'inherit' }}>
+            <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <span style={{ fontSize: 18, fontWeight: 600, letterSpacing: -0.3 }}>{meta.title}</span>
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" style={{ opacity: .7 }}><path d="M2 4l3.5 3.5L9 4"/></svg>
+            </span>
+            {meta.subtitle && <span style={{ display: 'block', fontSize: 13, opacity: .6, fontWeight: 400, marginTop: 2 }}>{meta.subtitle}</span>}
+          </button>
+          {ddOpen && (
+            <div style={{ position: 'absolute', top: '100%', left: 0, marginTop: 4, background: '#2a251f', borderRadius: 8,
+              boxShadow: '0 8px 32px rgba(0,0,0,.4)', padding: 4, minWidth: 200, zIndex: 10 }}>
+              {sectionOrder.map((sid) => (
+                <button key={sid} onClick={() => { setDd(false); const f = sectionMeta[sid].slotIds[0]; if (f) ctx.setFocus(`${sid}/${f}`); }}
+                  style={{ display: 'block', width: '100%', textAlign: 'left', border: 'none', cursor: 'pointer',
+                    background: sid === sectionId ? 'rgba(255,255,255,.1)' : 'transparent', color: '#fff',
+                    padding: '8px 12px', borderRadius: 5, fontSize: 14, fontWeight: sid === sectionId ? 600 : 400, fontFamily: 'inherit' }}>
+                  {sectionMeta[sid].title}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+        <div style={{ flex: 1 }} />
+        <button onClick={() => ctx.setFocus(null)}
+          onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,.12)')}
+          onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+          style={{ border: 'none', background: 'transparent', color: 'rgba(255,255,255,.7)', width: 32, height: 32,
+            borderRadius: 16, fontSize: 20, cursor: 'pointer', lineHeight: 1, transition: 'background .12s' }}>×</button>
+      </div>
+
+      {/* card centered, label + index below — only the card itself stops
+          propagation so any backdrop click (including the margins around
+          the card) exits focus */}
+      <div
+        style={{ position: 'absolute', top: 64, bottom: 56, left: 100, right: 100, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 16 }}>
+        <div onClick={(e) => e.stopPropagation()} style={{ width: width * scale, height: height * scale, position: 'relative' }}>
+          <div style={{ width, height, transform: `scale(${scale})`, transformOrigin: 'top left', background: '#fff', borderRadius: 2, overflow: 'hidden',
+            boxShadow: '0 20px 80px rgba(0,0,0,.4)' }}>
+            {children || <div style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#bbb' }}>{aid}</div>}
+          </div>
+        </div>
+        <div onClick={(e) => e.stopPropagation()} style={{ fontSize: 14, fontWeight: 500, opacity: .85, textAlign: 'center' }}>
+          {(sec.labels || {})[aid] ?? artboard.props.label}
+          <span style={{ opacity: .5, marginLeft: 10, fontVariantNumeric: 'tabular-nums' }}>{idx + 1} / {peers.length}</span>
+        </div>
+      </div>
+
+      <Arrow dir="left" onClick={() => go(-1)} />
+      <Arrow dir="right" onClick={() => go(1)} />
+
+      {/* dots */}
+      <div onClick={(e) => e.stopPropagation()}
+        style={{ position: 'absolute', bottom: 20, left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: 8 }}>
+        {peers.map((p, i) => (
+          <button key={p} onClick={() => ctx.setFocus(`${sectionId}/${p}`)}
+            style={{ border: 'none', padding: 0, cursor: 'pointer', width: 6, height: 6, borderRadius: 3,
+              background: i === idx ? '#fff' : 'rgba(255,255,255,.3)' }} />
+        ))}
+      </div>
+    </div>,
+    document.body,
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// Post-it — absolute-positioned sticky note
+// ─────────────────────────────────────────────────────────────
+function DCPostIt({ children, top, left, right, bottom, rotate = -2, width = 180 }) {
+  return (
+    <div style={{
+      position: 'absolute', top, left, right, bottom, width,
+      background: DC.postitBg, padding: '14px 16px',
+      fontFamily: '"Comic Sans MS", "Marker Felt", "Segoe Print", cursive',
+      fontSize: 14, lineHeight: 1.4, color: DC.postitText,
+      boxShadow: '0 2px 8px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08)',
+      transform: `rotate(${rotate}deg)`,
+      zIndex: 5,
+    }}>{children}</div>
+  );
+}
+
+
+
+/* === shell.jsx === */
+
+/* Shared shell components for the affiliate onboarding screens */
+/* Exposes: AppBar, Stepper, ScreenFrame, Field, Button, Tag, Icon */
+
+const STEPS = [
+  { id: 'org',     n: 1, label: 'Organization & Contact',  meta: 'Tell us about your business' },
+  { id: 'docs',    n: 2, label: 'KYB / KYC Documents',     meta: 'Upload required documents' },
+  { id: 'banks',   n: 3, label: 'Issuing Banks',           meta: 'Select your banking partners' },
+  { id: 'review',  n: 4, label: 'Review & Submit',         meta: 'Confirm and send for approval' },
+  { id: 'status',  n: 5, label: 'Status & Tracking',       meta: 'Track your application' },
+];
+
+function Icon({ name, size = 18, color = 'currentColor' }) {
+  const s = { width: size, height: size, stroke: color, fill: 'none', strokeWidth: 1.75, strokeLinecap: 'round', strokeLinejoin: 'round' };
+  const paths = {
+    arrow:        <line x1="5" y1="12" x2="19" y2="12"/>,
+    chevronRight: <polyline points="9 18 15 12 9 6"/>,
+    chevronLeft:  <polyline points="15 18 9 12 15 6"/>,
+    check:        <polyline points="20 6 9 17 4 12"/>,
+    upload:       <><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></>,
+    file:         <><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></>,
+    trash:        <><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></>,
+    swap:         <><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></>,
+    search:       <><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></>,
+    bank:         <><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7 12 2"/></>,
+    edit:         <><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></>,
+    alert:        <><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></>,
+    success:      <><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 9"/></>,
+    refresh:      <><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></>,
+    message:      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>,
+    clock:        <><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></>,
+    info:         <><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></>,
+    plus:         <><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></>,
+    download:     <><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></>,
+    help:         <><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></>,
+  };
+  return <svg viewBox="0 0 24 24" style={s}>{paths[name]}</svg>;
+}
+
+function AppBar({ title = 'Affiliate Portal', step }) {
+  return (
+    <div className="scr-app-bar">
+      <span className="logo-mark">Kard<span className="logo-mark__i">ı</span>t</span>
+      <div style={{ width: 1, height: 28, background: 'var(--cs-line)' }}></div>
+      <div className="crumbs">
+        <span>{title}</span>
+        {step && <><Icon name="chevronRight" size={14} color="var(--cs-ink-100)" /><strong>{step}</strong></>}
+      </div>
+      <div className="spacer"></div>
+      <a href="#" style={{ fontSize: 13, color: 'var(--cs-ink-200)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 6 }}>
+        <Icon name="help" size={16} /> Help
+      </a>
+      <div className="user">
+        <div className="avatar">AO</div>
+        <div>
+          <div style={{ color: 'var(--cs-ink-700)', fontWeight: 600 }}>Adaeze O.</div>
+          <div style={{ fontSize: 11, color: 'var(--cs-ink-100)' }}>Acme Microfinance</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Stepper({ activeStep, doneSteps = [], onJump }) {
+  return (
+    <aside className="scr-rail">
+      <h6>Onboarding Progress</h6>
+      <ol>
+        {STEPS.map(s => {
+          const isActive = s.id === activeStep;
+          const isDone = doneSteps.includes(s.id);
+          return (
+            <li key={s.id}
+                className={[isActive && 'is-active', isDone && 'is-done'].filter(Boolean).join(' ')}
+                onClick={() => onJump && onJump(s.id)}>
+              <div className="step-dot">{isDone ? '✓' : s.n}</div>
+              <div style={{ flex: 1 }}>
+                <div>{s.label}</div>
+                <div className="step-meta">{s.meta}</div>
+              </div>
+            </li>
+          );
+        })}
+      </ol>
+      <div style={{ marginTop: 32, padding: 14, background: 'var(--cs-green-100)', border: '1px solid var(--cs-green-300)', borderRadius: 12 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, fontWeight: 700, color: 'var(--cs-green-900)' }}>
+          <Icon name="info" size={14} color="var(--cs-green-900)" /> Need help?
+        </div>
+        <div style={{ fontSize: 12, color: 'var(--cs-ink-200)', marginTop: 6, lineHeight: 1.5 }}>
+          Save your progress at any time. Our team is available 9am–6pm WAT to walk you through the process.
+        </div>
+        <a href="#" style={{ fontSize: 12, fontWeight: 700, color: 'var(--cs-green-700)', textDecoration: 'none', marginTop: 10, display: 'inline-block' }}>
+          Talk to a Consultant →
+        </a>
+      </div>
+    </aside>
+  );
+}
+
+function ScreenFrame({ activeStep, doneSteps, title, children, onJump, hideRail = false }) {
+  return (
+    <div className="scr">
+      <AppBar step={title} />
+      <div className="scr-body" style={hideRail ? { gridTemplateColumns: '1fr' } : undefined}>
+        {!hideRail && <Stepper activeStep={activeStep} doneSteps={doneSteps} onJump={onJump} />}
+        <main className="scr-main">
+          <div className="container">{children}</div>
+        </main>
+      </div>
+    </div>
+  );
+}
+
+window.Icon = Icon;
+window.Stepper = Stepper;
+
+
+/* === screens-1-5.jsx === */
+
+/* Screens 1-5: Onboarding Start, Org details, Doc upload, Banks, Review */
+
+
+
+
+
+
+function ScrStart({ go }) {
+  return (
+    <div className="scr">
+      <AppBar />
+      <main style={{ flex: 1, overflow: 'auto', position: 'relative' }}>
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgMjIwIiBmaWxsPSJub25lIiBhcmlhLWhpZGRlbj0idHJ1ZSI+CiAgPHBhdGggZD0iTTEwIDE4MCBDIDEyMCAyMzAsIDI2MCAyMDAsIDM2MCAxMzAgQyA0NjAgNjAsIDU0MCA2MCwgNTkwIDcwIiBzdHJva2U9IiNDODI0MkMiIHN0cm9rZS13aWR0aD0iMjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZmlsbD0ibm9uZSI+PC9wYXRoPgogIDxwYXRoIGQ9Ik0zMCAyMDAgQyAxNTAgMjQwLCAyOTAgMjE1LCAzODAgMTU1IiBzdHJva2U9IiNFNjM5NDYiIHN0cm9rZS13aWR0aD0iMTAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZmlsbD0ibm9uZSIgb3BhY2l0eT0iMC41NSI+PC9wYXRoPgo8L3N2Zz4=" alt="" style={{ position: 'absolute', right: -120, top: -60, width: 600, opacity: 0.16, pointerEvents: 'none' }} />
+        <div style={{ maxWidth: 880, margin: '0 auto', padding: '64px 32px', position: 'relative' }}>
+          <div className="scr-eyebrow">Affiliate Onboarding</div>
+          <h1 className="scr-title" style={{ fontSize: 44 }}>Welcome to Kardit.</h1>
+          <p className="scr-sub" style={{ fontSize: 18 }}>
+            Let's get your organization onboarded as a Kardit affiliate. The process takes about 15 minutes — you can save your progress and come back at any time.
+          </p>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 20, marginTop: 32 }}>
+            <div className="cs-card pad" style={{ borderTop: '4px solid var(--cs-green-700)' }}>
+              <div className="scr-eyebrow" style={{ color: 'var(--cs-green-700)' }}>New application</div>
+              <h3 style={{ fontFamily: 'var(--cs-font-display)', fontWeight: 700, fontSize: 22, color: 'var(--cs-ink-900)', margin: '6px 0 8px' }}>Start fresh</h3>
+              <p style={{ fontSize: 14, color: 'var(--cs-ink-200)', margin: '0 0 18px', lineHeight: 1.6 }}>
+                Begin a new onboarding application. We'll guide you through 4 short steps.
+              </p>
+              <ul style={{ margin: '0 0 22px', padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 10 }}>
+                {['Organization & contact details', 'KYB / KYC documents', 'Issuing bank selection', 'Review & submit'].map((t,i) => (
+                  <li key={t} style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 13, color: 'var(--cs-ink-400)' }}>
+                    <span style={{ width: 22, height: 22, borderRadius: 999, background: 'var(--cs-green-100)', color: 'var(--cs-green-900)', display: 'grid', placeItems: 'center', fontWeight: 700, fontSize: 11, border: '1px solid var(--cs-green-300)' }}>{i+1}</span>
+                    {t}
+                  </li>
+                ))}
+              </ul>
+              <button className="btn btn-primary" onClick={() => go('org')}>
+                Start Onboarding <Icon name="arrow" />
+              </button>
+            </div>
+
+            <div className="cs-card pad">
+              <div className="scr-eyebrow" style={{ color: 'var(--cs-ink-100)' }}>Drafts</div>
+              <h3 style={{ fontFamily: 'var(--cs-font-display)', fontWeight: 700, fontSize: 18, color: 'var(--cs-ink-700)', margin: '6px 0 14px' }}>Continue where you left off</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                <div style={{ padding: 14, border: '1px solid var(--cs-line)', borderRadius: 10 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 8 }}>
+                    <div style={{ fontWeight: 600, fontSize: 14, color: 'var(--cs-ink-700)' }}>Acme Microfinance</div>
+
+                  </div>
+                  <div style={{ fontSize: 12, color: 'var(--cs-ink-100)', marginTop: 4 }}>Last edited 2 days ago</div>
+                  <button className="btn btn-secondary" style={{ marginTop: 12, padding: '8px 14px', fontSize: 13 }} onClick={() => go('org')}>Continue Draft</button>
+                </div>
+              </div>
+              <div style={{ marginTop: 22, padding: '14px 16px', background: 'var(--cs-mist)', borderRadius: 10, fontSize: 12, color: 'var(--cs-ink-200)', lineHeight: 1.55 }}>
+                <strong style={{ color: 'var(--cs-ink-700)' }}>Tip:</strong> Have your CAC certificate, TIN and director IDs ready before you start.
+              </div>
+            </div>
+          </div>
+
+          <div style={{ marginTop: 28, fontSize: 13, color: 'var(--cs-ink-100)' }}>
+            Trouble starting? <a href="#" style={{ color: 'var(--cs-green-700)', fontWeight: 600 }}>Contact support</a> or call +234-803-394-4566.
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+}
+
+function ScrOrg({ go, jump, formData, setFormData, errors }) {
+  const f = formData;
+  const set = (k, v) => setFormData({ ...formData, [k]: v });
+  return (
+    <ScreenFrame activeStep="org" doneSteps={[]} title="Organization & Contact" onJump={jump}>
+
+      <h2 className="scr-title">Tell us about your organization</h2>
+      <p className="scr-sub">All fields are required unless marked optional. Use your registered business name and address as on file with CAC.</p>
+
+      <div className="cs-card pad">
+        <h4 style={{ fontFamily: 'var(--cs-font-display)', fontWeight: 700, fontSize: 18, color: 'var(--cs-ink-700)', margin: '0 0 18px' }}>Organization details</h4>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <div className={`field ${errors.legalName ? 'has-error' : ''}`}>
+            <label>Legal business name</label>
+            <input value={f.legalName} onChange={e => set('legalName', e.target.value)} placeholder="e.g. Acme Microfinance Bank Ltd" />
+            {errors.legalName && <span className="err"><Icon name="alert" size={13} color="var(--cs-red-700)" />{errors.legalName}</span>}
+          </div>
+          <div className="grid-2">
+            <div className={`field ${errors.regNo ? 'has-error' : ''}`}>
+              <label>RC / Registration number</label>
+              <input value={f.regNo} onChange={e => set('regNo', e.target.value)} placeholder="RC 1234567" />
+              {errors.regNo && <span className="err"><Icon name="alert" size={13} color="var(--cs-red-700)" />{errors.regNo}</span>}
+            </div>
+            <div className="field">
+              <label>Tax ID (TIN) <span style={{ color: 'var(--cs-ink-100)', fontWeight: 400 }}>· optional</span></label>
+              <input value={f.tin} onChange={e => set('tin', e.target.value)} placeholder="0000000-0001" />
+            </div>
+          </div>
+          <div className="field">
+            <label>Registered address</label>
+            <input value={f.address} onChange={e => set('address', e.target.value)} placeholder="Street, city, state" />
+          </div>
+          <div className="grid-2">
+            <div className="field">
+              <label>Country</label>
+              <select value={f.country} onChange={e => set('country', e.target.value)}>
+                <option>Nigeria</option><option>Ghana</option><option>Kenya</option>
+              </select>
+            </div>
+            <div className="field">
+              <label>Industry</label>
+              <select value={f.industry} onChange={e => set('industry', e.target.value)}>
+                <option>Microfinance</option><option>Fintech</option><option>Retail</option><option>Government</option><option>Healthcare</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="cs-card pad" style={{ marginTop: 18 }}>
+        <h4 style={{ fontFamily: 'var(--cs-font-display)', fontWeight: 700, fontSize: 18, color: 'var(--cs-ink-700)', margin: '0 0 18px' }}>Primary contact</h4>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <div className="grid-2">
+            <div className={`field ${errors.contactName ? 'has-error' : ''}`}>
+              <label>Full name</label>
+              <input value={f.contactName} onChange={e => set('contactName', e.target.value)} placeholder="Adaeze Okafor" />
+              {errors.contactName && <span className="err"><Icon name="alert" size={13} color="var(--cs-red-700)" />{errors.contactName}</span>}
+            </div>
+            <div className="field">
+              <label>Role</label>
+              <input value={f.contactRole} onChange={e => set('contactRole', e.target.value)} placeholder="Head of Operations" />
+            </div>
+          </div>
+          <div className="grid-2">
+            <div className={`field ${errors.email ? 'has-error' : ''}`}>
+              <label>Work email</label>
+              <input type="email" value={f.email} onChange={e => set('email', e.target.value)} placeholder="adaeze@acme.ng" />
+              {errors.email && <span className="err"><Icon name="alert" size={13} color="var(--cs-red-700)" />{errors.email}</span>}
+            </div>
+            <div className="field">
+              <label>Phone</label>
+              <input value={f.phone} onChange={e => set('phone', e.target.value)} placeholder="+234 803 000 0000" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="step-actions">
+        <button className="btn btn-ghost" onClick={() => go('start')}>← Cancel</button>
+        <div style={{ display: 'flex', gap: 10 }}>
+          <button className="btn btn-secondary" onClick={() => go('start')}>Save Draft</button>
+          <button className="btn btn-primary" onClick={() => go('docs', { validate: 'org' })}>Next: Documents <Icon name="arrow" /></button>
+        </div>
+      </div>
+    </ScreenFrame>
+  );
+}
+
+function ScrDocs({ go, jump, docs, setDocs }) {
+  const required = [
+    { key: 'cac',     label: 'CAC Certificate',          desc: 'Certificate of Incorporation (PDF, max 5MB)' },
+    { key: 'memart',  label: 'Memorandum & Articles',    desc: 'MEMART or constitution document' },
+    { key: 'tin',     label: 'TIN Certificate',          desc: 'Tax Identification Number certificate' },
+    { key: 'directors', label: 'Director ID(s)',         desc: 'Government-issued ID for each director' },
+    { key: 'utility', label: 'Proof of Address',         desc: 'Utility bill, dated within 3 months' },
+  ];
+  const toggle = (k) => setDocs({ ...docs, [k]: docs[k] ? null : { name: `${k}_certificate.pdf`, size: '1.2 MB' } });
+
+  return (
+    <ScreenFrame activeStep="docs" doneSteps={['org']} title="KYB / KYC Documents" onJump={jump}>
+
+      <h2 className="scr-title">Upload required documents</h2>
+      <p className="scr-sub">All documents must be in PDF, JPG or PNG format and under 5MB. We accept clear scans or smartphone photos.</p>
+
+      <div className="cs-card pad" style={{ borderStyle: 'dashed', borderColor: 'var(--cs-green-300)', background: 'var(--cs-green-100)', marginBottom: 18 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          <div style={{ width: 48, height: 48, borderRadius: 12, background: '#fff', color: 'var(--cs-green-700)', display: 'grid', placeItems: 'center' }}>
+            <Icon name="upload" size={22} color="var(--cs-green-700)" />
+          </div>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontWeight: 700, color: 'var(--cs-ink-900)' }}>Drag and drop files here</div>
+            <div style={{ fontSize: 13, color: 'var(--cs-ink-200)', marginTop: 2 }}>or click to browse — we'll auto-detect document type where possible.</div>
+          </div>
+          <button className="btn btn-secondary">Browse files</button>
+        </div>
+      </div>
+
+      <div className="cs-card">
+        <div style={{ padding: '14px 22px', borderBottom: '1px solid var(--cs-line)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div style={{ fontWeight: 700, fontSize: 14, color: 'var(--cs-ink-700)' }}>Required documents ({Object.values(docs).filter(Boolean).length}/{required.length})</div>
+          <span className="tag info">{required.length - Object.values(docs).filter(Boolean).length} remaining</span>
+        </div>
+        {required.map((d, i) => {
+          const file = docs[d.key];
+          return (
+            <div key={d.key} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '16px 22px', borderBottom: i < required.length - 1 ? '1px solid var(--cs-line)' : 'none' }}>
+              <div style={{ width: 40, height: 40, borderRadius: 10, background: file ? 'var(--cs-green-100)' : 'var(--cs-mist)', color: file ? 'var(--cs-green-700)' : 'var(--cs-ink-100)', display: 'grid', placeItems: 'center', flexShrink: 0 }}>
+                <Icon name={file ? 'check' : 'file'} size={18} />
+              </div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontWeight: 600, fontSize: 14, color: 'var(--cs-ink-700)' }}>{d.label}</div>
+                <div style={{ fontSize: 12, color: 'var(--cs-ink-100)', marginTop: 2 }}>
+                  {file ? <><strong style={{ color: 'var(--cs-ink-400)' }}>{file.name}</strong> · {file.size} · uploaded</> : d.desc}
+                </div>
+              </div>
+              {file ? (
+                <div style={{ display: 'flex', gap: 6 }}>
+                  <button className="btn btn-ghost" style={{ padding: '6px 10px', fontSize: 12 }}><Icon name="swap" size={14} /> Replace</button>
+                  <button className="btn btn-ghost" style={{ padding: '6px 10px', fontSize: 12, color: 'var(--cs-red-700)' }} onClick={() => toggle(d.key)}><Icon name="trash" size={14} /></button>
+                </div>
+              ) : (
+                <button className="btn btn-secondary" style={{ padding: '8px 14px', fontSize: 13 }} onClick={() => toggle(d.key)}>Upload</button>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="step-actions">
+        <button className="btn btn-ghost" onClick={() => go('org')}>← Back</button>
+        <div style={{ display: 'flex', gap: 10 }}>
+          <button className="btn btn-secondary" onClick={() => go('start')}>Save Draft</button>
+          <button className="btn btn-primary" onClick={() => go('banks', { validate: 'docs' })}>Next: Banks <Icon name="arrow" /></button>
+        </div>
+      </div>
+    </ScreenFrame>
+  );
+}
+
+function ScrBanks({ go, jump, banks, setBanks }) {
+  const all = [
+    { id: 'gtb', name: 'Guaranty Trust Bank', code: '058' },
+    { id: 'access', name: 'Access Bank', code: '044' },
+    { id: 'zenith', name: 'Zenith Bank', code: '057' },
+    { id: 'firstbank', name: 'First Bank of Nigeria', code: '011' },
+    { id: 'uba', name: 'United Bank for Africa', code: '033' },
+    { id: 'fidelity', name: 'Fidelity Bank', code: '070' },
+    { id: 'stanbic', name: 'Stanbic IBTC Bank', code: '221' },
+    { id: 'wema', name: 'Wema Bank', code: '035' },
+    { id: 'sterling', name: 'Sterling Bank', code: '232' },
+    { id: 'union', name: 'Union Bank', code: '032' },
+  ];
+  const [q, setQ] = React.useState('');
+  const filtered = all.filter(b => b.name.toLowerCase().includes(q.toLowerCase()));
+  const toggle = id => setBanks(banks.includes(id) ? banks.filter(x => x !== id) : [...banks, id]);
+
+  return (
+    <ScreenFrame activeStep="banks" doneSteps={['org', 'docs']} title="Issuing Banks" onJump={jump}>
+
+      <h2 className="scr-title">Select your issuing banks</h2>
+      <p className="scr-sub">Choose the banks Kardit will route transactions through on your behalf. You can add more later from your dashboard.</p>
+
+      <div className="cs-card">
+        <div style={{ padding: '14px 22px', borderBottom: '1px solid var(--cs-line)', display: 'flex', alignItems: 'center', gap: 14 }}>
+          <div style={{ position: 'relative', flex: 1 }}>
+            <span style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--cs-ink-100)' }}>
+              <Icon name="search" size={16} />
+            </span>
+            <input value={q} onChange={e => setQ(e.target.value)} placeholder="Search banks..." style={{ width: '100%', padding: '10px 12px 10px 38px', borderRadius: 8, border: '1px solid var(--cs-line-strong)', fontSize: 14, outline: 'none' }} />
+          </div>
+          <span className="tag ok">{banks.length} selected</span>
+        </div>
+        <div style={{ maxHeight: 360, overflow: 'auto' }}>
+          {filtered.map((b, i) => {
+            const sel = banks.includes(b.id);
+            return (
+              <label key={b.id} style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '14px 22px', borderBottom: i < filtered.length - 1 ? '1px solid var(--cs-line)' : 'none', cursor: 'pointer', background: sel ? 'var(--cs-green-100)' : '#fff' }}>
+                <input type="checkbox" checked={sel} onChange={() => toggle(b.id)} style={{ width: 18, height: 18, accentColor: 'var(--cs-green-700)' }} />
+                <div style={{ width: 36, height: 36, borderRadius: 8, background: 'var(--cs-mist)', color: 'var(--cs-ink-200)', display: 'grid', placeItems: 'center' }}>
+                  <Icon name="bank" size={18} />
+                </div>
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontWeight: 600, fontSize: 14, color: 'var(--cs-ink-700)' }}>{b.name}</div>
+                  <div style={{ fontSize: 12, color: 'var(--cs-ink-100)' }}>CBN code · {b.code}</div>
+                </div>
+                {sel && <Icon name="check" size={18} color="var(--cs-green-700)" />}
+              </label>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="step-actions">
+        <button className="btn btn-ghost" onClick={() => go('docs')}>← Back</button>
+        <div style={{ display: 'flex', gap: 10 }}>
+          <button className="btn btn-secondary" onClick={() => go('start')}>Save Draft</button>
+          <button className="btn btn-primary" onClick={() => go('review', { validate: 'banks' })}>Review & Submit <Icon name="arrow" /></button>
+        </div>
+      </div>
+    </ScreenFrame>
+  );
+}
+
+function ScrReview({ go, jump, formData, docs, banks, setConfirmed, confirmed }) {
+  const docsCount = Object.values(docs).filter(Boolean).length;
+  return (
+    <ScreenFrame activeStep="review" doneSteps={['org', 'docs', 'banks']} title="Review & Submit" onJump={jump}>
+
+      <h2 className="scr-title">Review your application</h2>
+      <p className="scr-sub">Take a moment to confirm everything is right. Once submitted, our team will review within 2 working days.</p>
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+        <ReviewSection title="Organization & contact" onEdit={() => go('org')}>
+          <ReviewRow k="Legal name"  v={formData.legalName || '—'} />
+          <ReviewRow k="RC number"   v={formData.regNo || '—'} />
+          <ReviewRow k="TIN"         v={formData.tin || '—'} />
+          <ReviewRow k="Address"     v={formData.address || '—'} />
+          <ReviewRow k="Industry"    v={formData.industry} />
+          <ReviewRow k="Contact"     v={`${formData.contactName} · ${formData.contactRole}`} />
+          <ReviewRow k="Email"       v={formData.email} />
+          <ReviewRow k="Phone"       v={formData.phone} />
+        </ReviewSection>
+
+        <ReviewSection title={`Documents (${docsCount}/5)`} onEdit={() => go('docs')}>
+          {Object.entries(docs).map(([k, v]) => (
+            <ReviewRow key={k} k={k.toUpperCase()} v={v ? <><Icon name="check" size={13} color="var(--cs-green-700)" /> {v.name}</> : <span style={{ color: 'var(--cs-red-700)' }}>Missing</span>} />
+          ))}
+        </ReviewSection>
+
+        <ReviewSection title={`Issuing banks (${banks.length})`} onEdit={() => go('banks')}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+            {banks.length ? banks.map(b => <span key={b} className="tag ok" style={{ textTransform: 'uppercase' }}>{b}</span>) : <span style={{ color: 'var(--cs-red-700)', fontSize: 13 }}>No banks selected</span>}
+          </div>
+        </ReviewSection>
+      </div>
+
+      <div className="cs-card pad" style={{ marginTop: 18 }}>
+        <label style={{ display: 'flex', gap: 12, alignItems: 'flex-start', cursor: 'pointer' }}>
+          <input type="checkbox" checked={confirmed.terms} onChange={e => setConfirmed({ ...confirmed, terms: e.target.checked })} style={{ marginTop: 3, width: 18, height: 18, accentColor: 'var(--cs-green-700)' }} />
+          <span style={{ fontSize: 14, color: 'var(--cs-ink-400)', lineHeight: 1.55 }}>
+            I confirm that all information provided is accurate, and I have authority to submit this application on behalf of my organization. I accept the <a href="#" style={{ color: 'var(--cs-green-700)', fontWeight: 600 }}>Kardit Affiliate Terms</a> and <a href="#" style={{ color: 'var(--cs-green-700)', fontWeight: 600 }}>Privacy Policy</a>.
+          </span>
+        </label>
+        <label style={{ display: 'flex', gap: 12, alignItems: 'flex-start', cursor: 'pointer', marginTop: 12 }}>
+          <input type="checkbox" checked={confirmed.contact} onChange={e => setConfirmed({ ...confirmed, contact: e.target.checked })} style={{ marginTop: 3, width: 18, height: 18, accentColor: 'var(--cs-green-700)' }} />
+          <span style={{ fontSize: 14, color: 'var(--cs-ink-400)', lineHeight: 1.55 }}>
+            Kardit may contact me about my application via email or phone.
+          </span>
+        </label>
+      </div>
+
+      <div className="step-actions">
+        <button className="btn btn-ghost" onClick={() => go('banks')}>← Back</button>
+        <button className="btn btn-accent" disabled={!confirmed.terms} onClick={() => go('submitted', { validate: 'submit' })}>
+          Submit application <Icon name="arrow" />
+        </button>
+      </div>
+    </ScreenFrame>
+  );
+}
+
+function ReviewSection({ title, children, onEdit }) {
+  return (
+    <div className="cs-card">
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 22px', borderBottom: '1px solid var(--cs-line)' }}>
+        <div style={{ fontFamily: 'var(--cs-font-display)', fontWeight: 700, fontSize: 16, color: 'var(--cs-ink-700)' }}>{title}</div>
+        <button className="btn btn-ghost" style={{ padding: '6px 10px', fontSize: 13, color: 'var(--cs-green-700)' }} onClick={onEdit}><Icon name="edit" size={14} /> Edit</button>
+      </div>
+      <div style={{ padding: '8px 22px 16px' }}>{children}</div>
+    </div>
+  );
+}
+function ReviewRow({ k, v }) {
+  return (
+    <div style={{ display: 'grid', gridTemplateColumns: '180px 1fr', gap: 14, padding: '8px 0', borderBottom: '1px solid var(--cs-line)', fontSize: 14 }}>
+      <div style={{ color: 'var(--cs-ink-100)', fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 700 }}>{k}</div>
+      <div style={{ color: 'var(--cs-ink-700)', display: 'flex', alignItems: 'center', gap: 6 }}>{v}</div>
+    </div>
+  );
+}
+
+window.ScrOrg = ScrOrg;
+window.ScrBanks = ScrBanks;
+
+
+/* === screens-6-9.jsx === */
+
+/* Screens 6-9: Submitted, Errors, Status tracker, Respond to clarification */
+
+
+
+
+
+
+function ScrSubmitted({ go, caseId }) {
+  return (
+    <div className="scr">
+      <AppBar />
+      <main style={{ flex: 1, overflow: 'auto', position: 'relative', display: 'grid', placeItems: 'center' }}>
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgMjIwIiBmaWxsPSJub25lIiBhcmlhLWhpZGRlbj0idHJ1ZSI+CiAgPHBhdGggZD0iTTEwIDE4MCBDIDEyMCAyMzAsIDI2MCAyMDAsIDM2MCAxMzAgQyA0NjAgNjAsIDU0MCA2MCwgNTkwIDcwIiBzdHJva2U9IiNDODI0MkMiIHN0cm9rZS13aWR0aD0iMjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZmlsbD0ibm9uZSI+PC9wYXRoPgogIDxwYXRoIGQ9Ik0zMCAyMDAgQyAxNTAgMjQwLCAyOTAgMjE1LCAzODAgMTU1IiBzdHJva2U9IiNFNjM5NDYiIHN0cm9rZS13aWR0aD0iMTAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZmlsbD0ibm9uZSIgb3BhY2l0eT0iMC41NSI+PC9wYXRoPgo8L3N2Zz4=" alt="" style={{ position: 'absolute', right: -120, bottom: -80, width: 600, opacity: 0.14, pointerEvents: 'none' }} />
+        <div style={{ maxWidth: 560, padding: 32, textAlign: 'center', position: 'relative' }}>
+          <div style={{ width: 88, height: 88, borderRadius: 999, background: 'var(--cs-green-100)', color: 'var(--cs-green-700)', display: 'grid', placeItems: 'center', margin: '0 auto 22px', border: '4px solid var(--cs-green-300)' }}>
+            <Icon name="check" size={42} color="var(--cs-green-700)" />
+          </div>
+          <div className="scr-eyebrow">Application submitted</div>
+          <h1 className="scr-title" style={{ fontSize: 36 }}>You're all set, Adaeze.</h1>
+          <p className="scr-sub" style={{ fontSize: 16, margin: '12px auto 28px' }}>
+            We've received your application. Our compliance team reviews most submissions within 2 working days, and we'll email you the moment there's news.
+          </p>
+
+          <div className="cs-card pad" style={{ textAlign: 'left' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div>
+                <div style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--cs-ink-100)', fontWeight: 700 }}>Case ID</div>
+                <div style={{ fontFamily: 'var(--cs-font-mono)', fontWeight: 700, fontSize: 22, color: 'var(--cs-ink-900)', marginTop: 4 }}>{caseId}</div>
+              </div>
+              <span className="tag ok" style={{ padding: '6px 14px', fontSize: 13 }}>● Submitted</span>
+            </div>
+            <div style={{ borderTop: '1px solid var(--cs-line)', marginTop: 16, paddingTop: 16, fontSize: 13, color: 'var(--cs-ink-200)' }}>
+              Submitted on {new Date().toLocaleDateString('en-NG', { day: 'numeric', month: 'long', year: 'numeric' })} · Expected response by 2 working days.
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', gap: 10, justifyContent: 'center', marginTop: 22 }}>
+            <button className="btn btn-secondary" onClick={() => go('start')}>Back to dashboard</button>
+            <button className="btn btn-primary" onClick={() => go('status')}>View Status <Icon name="arrow" /></button>
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+}
+
+function ScrErrors({ go }) {
+  const issues = [
+    { section: 'org',   field: 'TIN Number',     msg: 'TIN appears invalid — must be 10 digits.' },
+    { section: 'docs',  field: 'Proof of Address', msg: 'No file uploaded. Required for KYB.' },
+    { section: 'banks', field: 'Issuing Banks',  msg: 'Select at least one issuing bank.' },
+  ];
+  return (
+    <div className="scr">
+      <AppBar />
+      <main style={{ flex: 1, overflow: 'auto', display: 'grid', placeItems: 'center', background: 'var(--cs-paper)' }}>
+        <div style={{ maxWidth: 600, padding: 32 }}>
+          <div style={{ width: 72, height: 72, borderRadius: 999, background: 'var(--cs-red-100)', color: 'var(--cs-red-700)', display: 'grid', placeItems: 'center', margin: '0 auto 18px', border: '3px solid var(--cs-red-300)' }}>
+            <Icon name="alert" size={32} color="var(--cs-red-700)" />
+          </div>
+          <h2 className="scr-title" style={{ fontSize: 28, textAlign: 'center' }}>We can't submit yet.</h2>
+          <p className="scr-sub" style={{ textAlign: 'center', margin: '8px auto 22px' }}>
+            A few items need attention before your application can be sent for review.
+          </p>
+
+          <div className="cs-card">
+            <div style={{ padding: '14px 22px', borderBottom: '1px solid var(--cs-line)', fontWeight: 700, color: 'var(--cs-ink-700)', fontSize: 14, display: 'flex', justifyContent: 'space-between' }}>
+              <span>{issues.length} issue{issues.length === 1 ? '' : 's'} to fix</span>
+              <span className="tag err">Action required</span>
+            </div>
+            {issues.map((it, i) => (
+              <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 14, padding: '16px 22px', borderBottom: i < issues.length - 1 ? '1px solid var(--cs-line)' : 'none' }}>
+                <div style={{ width: 28, height: 28, borderRadius: 999, background: 'var(--cs-red-100)', color: 'var(--cs-red-700)', display: 'grid', placeItems: 'center', flexShrink: 0 }}>
+                  <Icon name="alert" size={14} color="var(--cs-red-700)" />
+                </div>
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontSize: 11, color: 'var(--cs-ink-100)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700 }}>{it.section}</div>
+                  <div style={{ fontWeight: 600, fontSize: 14, color: 'var(--cs-ink-700)', marginTop: 2 }}>{it.field}</div>
+                  <div style={{ fontSize: 13, color: 'var(--cs-ink-200)', marginTop: 4 }}>{it.msg}</div>
+                </div>
+                <button className="btn btn-secondary" style={{ padding: '6px 12px', fontSize: 13 }} onClick={() => go(it.section)}>Fix Now →</button>
+              </div>
+            ))}
+          </div>
+
+          <div style={{ display: 'flex', gap: 10, justifyContent: 'center', marginTop: 22 }}>
+            <button className="btn btn-ghost" onClick={() => go('review')}>← Back to review</button>
+            <button className="btn btn-primary" onClick={() => go('org')}>Fix all issues <Icon name="arrow" /></button>
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+}
+
+function ScrStatus({ go, caseId, statusStage }) {
+  /* statusStage in: 'submitted' | 'review' | 'clarification' | 'approved' | 'rejected' */
+  const order = ['submitted', 'review', 'clarification', 'approved'];
+  const idx = order.indexOf(statusStage);
+  const milestones = [
+    { k: 'submitted',     label: 'Submitted',         desc: 'Application received',                     when: '30 Apr 2026, 09:14' },
+    { k: 'review',        label: 'In Review',          desc: 'Compliance team reviewing your documents', when: '30 Apr 2026, 14:02' },
+    { k: 'clarification', label: 'Clarification',      desc: 'We need a small piece of extra info',      when: '01 May 2026, 11:20' },
+    { k: 'approved',      label: 'Approved',           desc: 'Welcome aboard — credentials issued',      when: '—' },
+  ];
+
+  return (
+    <ScreenFrame activeStep="status" doneSteps={['org','docs','banks','review']} title="Application Status" hideRail>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 24, marginBottom: 24, flexWrap: 'wrap' }}>
+        <div>
+          <div className="scr-eyebrow">Application</div>
+          <h2 className="scr-title">{caseId}</h2>
+          <p style={{ fontSize: 14, color: 'var(--cs-ink-200)', margin: '4px 0 0' }}>Acme Microfinance Bank Ltd · Submitted 30 Apr 2026</p>
+        </div>
+        <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+          <button className="btn btn-ghost" style={{ padding: '8px 12px', fontSize: 13 }}><Icon name="refresh" size={14} /> Refresh</button>
+          <button className="btn btn-secondary" style={{ padding: '8px 14px', fontSize: 13 }}><Icon name="download" size={14} /> Download summary</button>
+        </div>
+      </div>
+
+      {statusStage === 'clarification' && (
+        <div className="cs-card pad" style={{ borderLeft: '4px solid var(--cs-red-700)', background: 'var(--cs-red-100)', marginBottom: 18 }}>
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
+            <div style={{ width: 36, height: 36, borderRadius: 999, background: '#fff', color: 'var(--cs-red-700)', display: 'grid', placeItems: 'center', flexShrink: 0 }}>
+              <Icon name="message" size={18} color="var(--cs-red-700)" />
+            </div>
+            <div style={{ flex: 1 }}>
+              <div style={{ fontWeight: 700, color: 'var(--cs-red-900)' }}>Clarification requested</div>
+              <p style={{ fontSize: 14, color: 'var(--cs-ink-400)', margin: '4px 0 12px', lineHeight: 1.55 }}>
+                Compliance asks: "Could you re-upload the proof of address — the file appears partially redacted on page 2."
+              </p>
+              <div style={{ display: 'flex', gap: 10 }}>
+                <button className="btn btn-accent" onClick={() => go('respond')}>Respond to Clarification <Icon name="arrow" /></button>
+                <button className="btn btn-ghost" style={{ color: 'var(--cs-red-700)' }}>View message</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="cs-card pad">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 22 }}>
+          <h4 style={{ fontFamily: 'var(--cs-font-display)', fontWeight: 700, fontSize: 18, color: 'var(--cs-ink-700)', margin: 0 }}>Timeline</h4>
+          <span className={`tag ${statusStage === 'clarification' ? 'warn' : statusStage === 'approved' ? 'ok' : 'info'}`} style={{ padding: '6px 12px', fontSize: 13 }}>
+            ● {statusStage === 'clarification' ? 'Awaiting your response' : statusStage === 'approved' ? 'Approved' : 'In review'}
+          </span>
+        </div>
+
+        <div style={{ position: 'relative', paddingLeft: 4 }}>
+          {milestones.map((m, i) => {
+            const done = i < idx;
+            const active = i === idx;
+            return (
+              <div key={m.k} style={{ display: 'flex', gap: 18, paddingBottom: i < milestones.length - 1 ? 20 : 0, position: 'relative' }}>
+                {i < milestones.length - 1 && (
+                  <div style={{ position: 'absolute', left: 14, top: 30, bottom: 0, width: 2, background: done ? 'var(--cs-green-500)' : 'var(--cs-line)' }}></div>
+                )}
+                <div style={{
+                  width: 30, height: 30, borderRadius: 999, flexShrink: 0,
+                  background: done ? 'var(--cs-green-500)' : active ? '#fff' : 'var(--cs-mist)',
+                  color: done ? '#fff' : active ? 'var(--cs-green-700)' : 'var(--cs-ink-100)',
+                  border: `2px solid ${done ? 'var(--cs-green-500)' : active ? 'var(--cs-green-700)' : 'var(--cs-line-strong)'}`,
+                  display: 'grid', placeItems: 'center',
+                  boxShadow: active ? '0 0 0 4px rgba(43,161,93,0.20)' : 'none',
+                }}>
+                  {done ? <Icon name="check" size={14} color="#fff" /> : active ? <Icon name="clock" size={14} color="var(--cs-green-700)" /> : <span style={{ fontSize: 11, fontWeight: 700 }}>{i+1}</span>}
+                </div>
+                <div style={{ flex: 1, paddingTop: 3 }}>
+                  <div style={{ fontWeight: 600, color: done || active ? 'var(--cs-ink-700)' : 'var(--cs-ink-100)', fontSize: 15 }}>{m.label}</div>
+                  <div style={{ fontSize: 13, color: 'var(--cs-ink-200)', marginTop: 2 }}>{m.desc}</div>
+                  <div style={{ fontSize: 12, color: 'var(--cs-ink-100)', marginTop: 4 }}>{m.when}</div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="cs-card pad" style={{ marginTop: 14 }}>
+        <h4 style={{ fontFamily: 'var(--cs-font-display)', fontWeight: 700, fontSize: 16, color: 'var(--cs-ink-700)', margin: '0 0 14px' }}>Messages</h4>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+          <div style={{ display: 'flex', gap: 12 }}>
+            <div style={{ width: 32, height: 32, borderRadius: 999, background: 'var(--cs-mist)', color: 'var(--cs-ink-200)', display: 'grid', placeItems: 'center', fontWeight: 700, fontSize: 12, flexShrink: 0 }}>CO</div>
+            <div style={{ flex: 1, background: 'var(--cs-mist)', borderRadius: 12, padding: '10px 14px' }}>
+              <div style={{ fontSize: 12, color: 'var(--cs-ink-100)', display: 'flex', justifyContent: 'space-between' }}>
+                <strong style={{ color: 'var(--cs-ink-400)' }}>Compliance Officer</strong>
+                <span>01 May, 11:20</span>
+              </div>
+              <p style={{ margin: '4px 0 0', fontSize: 14, color: 'var(--cs-ink-400)', lineHeight: 1.5 }}>
+                Hello Adaeze — your proof-of-address upload is partially redacted on page 2. Please re-upload a complete copy. Thanks!
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ScreenFrame>
+  );
+}
+
+function ScrRespond({ go }) {
+  const [msg, setMsg] = React.useState('');
+  const [file, setFile] = React.useState(null);
+  return (
+    <ScreenFrame activeStep="status" doneSteps={['org','docs','banks','review']} title="Respond to Clarification" hideRail>
+      <button className="btn btn-ghost" onClick={() => go('status')} style={{ marginBottom: 14, padding: '6px 10px', fontSize: 13 }}>
+        <Icon name="chevronLeft" size={14} /> Back to status
+      </button>
+
+      <div className="scr-eyebrow">Clarification</div>
+      <h2 className="scr-title">Respond to compliance</h2>
+      <p className="scr-sub">Reply to our message and re-upload any missing or corrected documents. Your application stays in clarification status until you submit a response.</p>
+
+      <div className="cs-card pad" style={{ background: 'var(--cs-mist)' }}>
+        <div style={{ fontSize: 12, color: 'var(--cs-ink-100)', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700 }}>Original request · 01 May, 11:20</div>
+        <p style={{ margin: '8px 0 0', fontSize: 14, color: 'var(--cs-ink-400)', lineHeight: 1.55 }}>
+          "Could you re-upload the proof of address — the file appears partially redacted on page 2."
+        </p>
+      </div>
+
+      <div className="cs-card pad" style={{ marginTop: 14 }}>
+        <h4 style={{ fontFamily: 'var(--cs-font-display)', fontWeight: 700, fontSize: 16, color: 'var(--cs-ink-700)', margin: '0 0 14px' }}>Your reply</h4>
+        <div className="field">
+          <label>Message</label>
+          <textarea value={msg} onChange={e => setMsg(e.target.value)} rows={5} placeholder="Add a short note for the compliance team..." style={{ resize: 'vertical', minHeight: 120 }}></textarea>
+        </div>
+
+        <div style={{ marginTop: 18 }}>
+          <div className="field">
+            <label>Re-upload document</label>
+            <div style={{ border: '2px dashed var(--cs-line-strong)', borderRadius: 12, padding: 22, textAlign: 'center', background: 'var(--cs-paper)' }}>
+              {file ? (
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
+                  <Icon name="file" size={20} color="var(--cs-green-700)" />
+                  <span style={{ fontWeight: 600, color: 'var(--cs-ink-700)' }}>proof_of_address_v2.pdf</span>
+                  <span style={{ fontSize: 12, color: 'var(--cs-ink-100)' }}>1.4 MB</span>
+                  <button className="btn btn-ghost" style={{ padding: '4px 10px', fontSize: 12, color: 'var(--cs-red-700)' }} onClick={() => setFile(null)}>Remove</button>
+                </div>
+              ) : (
+                <>
+                  <Icon name="upload" size={24} color="var(--cs-ink-100)" />
+                  <div style={{ fontWeight: 600, color: 'var(--cs-ink-700)', marginTop: 8 }}>Drop file here or click to browse</div>
+                  <div style={{ fontSize: 12, color: 'var(--cs-ink-100)', marginTop: 4 }}>PDF, JPG, PNG · max 5MB</div>
+                  <button className="btn btn-secondary" style={{ marginTop: 12, padding: '8px 14px', fontSize: 13 }} onClick={() => setFile(true)}>Browse files</button>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="step-actions">
+        <button className="btn btn-ghost" onClick={() => go('status')}>Cancel</button>
+        <button className="btn btn-primary" disabled={!msg && !file} onClick={() => go('status', { resolveClarification: true })}>
+          Submit response <Icon name="arrow" />
+        </button>
+      </div>
+    </ScreenFrame>
+  );
+}
+
+window.ScrErrors = ScrErrors;
+window.ScrRespond = ScrRespond;
+
+
+/* === App === */
+
+
+    function FlowApp({ initial = 'start', initialStatus = 'review' }) {
+      const [screen, setScreen] = React.useState(initial);
+      const [statusStage, setStatusStage] = React.useState(initialStatus);
+      const [formData, setFormData] = React.useState({
+        legalName: 'Acme Microfinance Bank Ltd', regNo: 'RC 1234567', tin: '0123456789',
+        address: '14 Adeola Odeku Street, Victoria Island, Lagos', country: 'Nigeria', industry: 'Microfinance',
+        contactName: 'Adaeze Okafor', contactRole: 'Head of Operations', email: 'adaeze@acme.ng', phone: '+234 803 122 4567',
+      });
+      const [docs, setDocs] = React.useState({
+        cac: { name: 'cac_certificate.pdf', size: '1.2 MB' },
+        memart: { name: 'memart_2024.pdf', size: '2.1 MB' },
+        tin: { name: 'tin_certificate.pdf', size: '0.6 MB' },
+        directors: { name: 'director_ids.pdf', size: '3.4 MB' },
+        utility: null,
+      });
+      const [banks, setBanks] = React.useState(['gtb', 'access', 'zenith']);
+      const [confirmed, setConfirmed] = React.useState({ terms: false, contact: false });
+      const [errors, setErrors] = React.useState({});
+      const caseId = 'CSW-2026-04218';
+
+      const HOLD = (typeof location !== 'undefined') &&
+                   new URLSearchParams(location.search).get('hold') === '1';
+      const broadcast = (target, opts) => {
+        if (typeof window !== 'undefined' && window.parent !== window) {
+          try { window.parent.postMessage({ type: 'flow-advance', from: screen, to: target, opts: opts || {} }, '*'); } catch (e) {}
+        }
+      };
+      const go = (target, opts = {}) => {
+        if (opts.validate === 'org') {
+          const e = {};
+          if (!formData.legalName) e.legalName = 'Required';
+          if (!formData.regNo) e.regNo = 'Required';
+          if (!formData.contactName) e.contactName = 'Required';
+          if (!formData.email || !formData.email.includes('@')) e.email = 'Valid email required';
+          if (Object.keys(e).length) { setErrors(e); return; }
+          setErrors({});
+        }
+        if (opts.validate === 'submit') {
+          const missing = !docs.utility || banks.length === 0;
+          if (missing) {
+            broadcast('errors', opts);
+            if (HOLD) return;
+            setScreen('errors');
+            return;
+          }
+        }
+        if (opts.resolveClarification) setStatusStage('approved');
+        broadcast(target, opts);
+        if (HOLD) return;
+        setScreen(target);
+      };
+      const jump = (id) => {
+        const map = { org: 'org', docs: 'docs', banks: 'banks', review: 'review', status: 'status' };
+        if (map[id]) setScreen(map[id]);
+      };
+      const props = { go, jump, formData, setFormData, docs, setDocs, banks, setBanks,
+                      confirmed, setConfirmed, errors, caseId, statusStage };
+      const screens = { start: ScrStart, org: ScrOrg, docs: ScrDocs, banks: ScrBanks,
+                         review: ScrReview, submitted: ScrSubmitted, errors: ScrErrors,
+                         status: ScrStatus, respond: ScrRespond };
+      const Cmp = screens[screen] || ScrStart;
+      return <Cmp {...props} />;
+    }
+
+    function App() {
+      const W = 1280, H = 820;
+
+      // Single-screen mode: ?screen=<id>[&status=<stage>] renders one screen
+      // full-bleed, used by the partners page to embed live thumbnails.
+      const params = new URLSearchParams(typeof location !== 'undefined' ? location.search : '');
+      const single = params.get('screen');
+      if (single) {
+        const status = params.get('status') || 'review';
+        return (
+          <div style={{ width: '100vw', height: '100vh', overflow: 'hidden', background: 'var(--cs-paper)' }}>
+            <FlowApp initial={single} initialStatus={status} />
+          </div>
+        );
+      }
+
+      return (
+        <DesignCanvas
+          title="Affiliate Onboarding"
+          subtitle="9 screens — interactive end-to-end. Click any screen to focus, then walk through the flow."
+        >
+          <DCSection id="entry" title="Entry & forms">
+            <DCArtboard id="onb-01" label=" · Onboarding Start" width={W} height={H}>
+              <FlowApp initial="start" />
+            </DCArtboard>
+            <DCArtboard id="onb-02" label=" · Organization & Contact" width={W} height={H}>
+              <FlowApp initial="org" />
+            </DCArtboard>
+            <DCArtboard id="onb-03" label=" · KYB / KYC Documents" width={W} height={H}>
+              <FlowApp initial="docs" />
+            </DCArtboard>
+            <DCArtboard id="onb-04" label=" · Issuing Banks" width={W} height={H}>
+              <FlowApp initial="banks" />
+            </DCArtboard>
+          </DCSection>
+          <DCSection id="submit" title="Submission">
+            <DCArtboard id="onb-05" label=" · Review & Submit" width={W} height={H}>
+              <FlowApp initial="review" />
+            </DCArtboard>
+            <DCArtboard id="onb-06" label=" · Submission Success" width={W} height={H}>
+              <FlowApp initial="submitted" />
+            </DCArtboard>
+            <DCArtboard id="onb-07" label=" · Validation Errors" width={W} height={H}>
+              <FlowApp initial="errors" />
+            </DCArtboard>
+          </DCSection>
+          <DCSection id="track" title="Status & follow-up">
+            <DCArtboard id="onb-08" label=" · Status Tracker (Clarification)" width={W} height={H}>
+              <FlowApp initial="status" initialStatus="clarification" />
+            </DCArtboard>
+            <DCArtboard id="onb-09" label=" · Respond to Clarification" width={W} height={H}>
+              <FlowApp initial="respond" initialStatus="clarification" />
+            </DCArtboard>
+          </DCSection>
+        </DesignCanvas>
+      );
+    }
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+
+  </script>
+</body>
+</html>
