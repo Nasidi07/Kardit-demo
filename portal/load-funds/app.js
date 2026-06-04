@@ -1,5 +1,5 @@
 /* ─────────────────────────────────────────────────────────────
-   Kardit Mini CMS —  Load funds (maker-checker)
+   Kardit Mini CMS — UJR012 Load funds (maker-checker)
    ───────────────────────────────────────────────────────────── */
 
 const LOADABLE_CARDS = [
@@ -106,76 +106,142 @@ function initForm() {
   mountStepper(1);
 
   const cardIdParam = getParam("cardId");
-  const savedState = getState();
-  let currentCard = savedState.card || (cardIdParam ? findLoadCard(cardIdParam) : LOADABLE_CARDS[0]);
+  let card = cardIdParam ? findLoadCard(cardIdParam) : null;
+  // If warm-start with valid card, save and continue
+  if (card) setState({ card });
 
-  function selectCard(card) {
-    currentCard = card;
-    if (card) setState({ card: card });
-    document.querySelectorAll(".card-pick-tile").forEach(t => {
-      const match = card && t.getAttribute("data-card-id") === card.id;
-      t.classList.toggle("is-active", match);
-    });
-    const hid = document.getElementById("selectedCardId");
-    if (hid && card) hid.value = card.id;
+  const cardMount = document.getElementById("card-mount");
+  const formMount = document.getElementById("form-mount");
+
+  if (!card) {
+    // Cold start — render card picker
+    cardMount.innerHTML = `
+      <section class="card card-pad-lg" style="margin-bottom:18px">
+        <div class="form-section-head"><h2 class="form-section-title">Choose a card</h2><span class="form-section-meta">Funds will be loaded to its linked virtual account</span></div>
+        <div class="card-pick-grid">
+          ${LOADABLE_CARDS.map(c => `
+            <a href="01-form.html?cardId=${encodeURIComponent(c.id)}" class="card-pick-tile">
+              <div class="thumb"></div>
+              <div class="info">
+                <div class="pan">${c.maskedPan.replace(/\*/g, "•")}</div>
+                <div class="meta">${c.customer} · ${c.bank}</div>
+              </div>
+            </a>
+          `).join("")}
+        </div>
+      </section>
+    `;
+    formMount.style.display = "none";
+    if (window.lucide) lucide.createIcons();
+    return;
   }
 
-  selectCard(currentCard);
+  // Render selected card mini display
+  cardMount.innerHTML = `
+    <section class="card card-pad-lg" style="margin-bottom:18px;display:flex;align-items:center;gap:16px">
+      <div style="width:60px;height:40px;border-radius:6px;background:linear-gradient(135deg,#156A38,#0F4F2E);position:relative;flex-shrink:0">
+        <div style="position:absolute;top:8px;left:7px;width:18px;height:14px;border-radius:2px;background:linear-gradient(140deg,#F5DA94,#C09642)"></div>
+      </div>
+      <div style="flex:1;min-width:0">
+        <div style="font-family:var(--font-mono);font-size:13.5px;color:var(--cs-ink-700);font-weight:600">${card.maskedPan.replace(/\*/g, "•")}</div>
+        <div style="font-size:11.5px;color:var(--cs-ink-100);margin-top:3px">${card.product} · ${card.bank} · ${card.customer}</div>
+      </div>
+      <a href="01-form.html" style="font-size:12px;font-weight:700;color:var(--cs-green-700);text-decoration:none">Change card →</a>
+    </section>
+  `;
 
-  // Card picker click — handle via href for robustness, but also JS for instant
-  document.getElementById("card-picker").addEventListener("click", function(e) {
-    const tile = e.target.closest(".card-pick-tile");
-    if (!tile) return;
-    e.preventDefault();
-    const id = tile.getAttribute("data-card-id");
-    const card = findLoadCard(id);
-    if (card) {
-      selectCard(card);
-      window.history.replaceState(null, "", "01-form.html?cardId=" + encodeURIComponent(id));
-    }
-  });
+  // Form
+  formMount.innerHTML = `
+    <div class="maker-checker-banner">
+      <div class="icn"><i data-lucide="shield-check"></i></div>
+      <div>
+        <div class="title">Maker-checker required</div>
+        <div class="body">As a maker, your load request is submitted for checker approval per FR-LOAD-MC-01. The funds are not credited until the checker approves. You cannot approve your own request.</div>
+      </div>
+    </div>
 
-  // Amount chips
-  document.querySelectorAll(".amount-chip").forEach(function(chip) {
-    chip.addEventListener("click", function() {
+    <form id="load-form" class="card card-pad-lg" autocomplete="off">
+      <section class="form-section">
+        <div class="form-section-head"><h2 class="form-section-title">Amount</h2><span class="form-section-meta">In NGN</span></div>
+        <div class="amount-input-wrap">
+          <span class="currency">₦</span>
+          <input id="amount" name="amount" type="number" inputmode="decimal" step="0.01" min="100" required placeholder="0.00">
+        </div>
+        <div class="amount-chips">
+          ${QUICK_AMOUNTS.map(a => `<button type="button" class="amount-chip" data-quick="${a}">${fmtNaira(a)}</button>`).join("")}
+        </div>
+      </section>
+
+      <section class="form-section">
+        <div class="form-section-head"><h2 class="form-section-title">Funding reference</h2><span class="form-section-meta">FR-LOAD-API-01-07/08 — VA must already be funded</span></div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px">
+          ${FUND_PROOF_TYPES.map((s, i) => `
+            <label class="radio-pill" style="padding:14px 18px;justify-content:flex-start;align-items:flex-start;flex-direction:column;gap:4px;align-items:flex-start">
+              <div style="display:flex;align-items:center;gap:10px;width:100%">
+                <input type="radio" name="proofType" value="${s.value}" ${i === 0 ? "checked" : ""}>
+                <span class="dot"></span>
+                <span style="font-weight:700;color:var(--cs-ink-900);font-size:13.5px">${s.label}</span>
+              </div>
+              <div style="font-size:11.5px;color:var(--cs-ink-100);padding-left:30px">${s.sub}</div>
+            </label>
+          `).join("")}
+        </div>
+        <div class="form-grid">
+          <div class="field is-mono">
+            <label for="vaNumber">Linked virtual account number<span class="req">*</span></label>
+            <input id="vaNumber" name="vaNumber" type="text" required inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="1234567890" value="1234567890">
+            <div class="help">10-digit NUBAN of the VA linked to this card</div>
+          </div>
+          <div class="field is-mono">
+            <label for="transferRef">Bank transfer reference<span class="req">*</span></label>
+            <input id="transferRef" name="transferRef" type="text" required maxlength="32" placeholder="TRF-2026-009811">
+            <div class="help">Reference printed on the bank transfer receipt</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <div class="form-section-head"><h2 class="form-section-title">Reference</h2><span class="form-section-meta">Optional — appears in audit log</span></div>
+        <div class="field">
+          <input id="reference" name="reference" type="text" maxlength="64" placeholder="e.g. Salary advance — March">
+        </div>
+      </section>
+
+      <div class="form-foot">
+        <a href="../index.html" class="btn btn-ghost btn-sm"><i data-lucide="x"></i> Cancel</a>
+        <button type="submit" class="btn btn-primary">Continue to review <i data-lucide="arrow-right"></i></button>
+      </div>
+    </form>
+  `;
+
+  if (window.lucide) lucide.createIcons();
+
+  // Quick amount chips
+  document.querySelectorAll(".amount-chip").forEach(chip => {
+    chip.addEventListener("click", () => {
       document.querySelectorAll(".amount-chip").forEach(c => c.classList.remove("active"));
       chip.classList.add("active");
-      const amt = document.getElementById("amount");
-      if (amt) amt.value = chip.getAttribute("data-quick");
+      const v = chip.getAttribute("data-quick");
+      document.getElementById("amount").value = v;
     });
   });
 
-  // Form submit
-  document.getElementById("load-form").addEventListener("submit", function(e) {
+  // Submit
+  document.getElementById("load-form").addEventListener("submit", e => {
     e.preventDefault();
-    const card = currentCard;
-    if (!card) return;
     const amount = parseFloat(document.getElementById("amount").value);
     const proofType = document.querySelector('input[name="proofType"]:checked')?.value;
     const vaNumber = document.getElementById("vaNumber").value.trim();
     const transferRef = document.getElementById("transferRef").value.trim();
     const reference = document.getElementById("reference").value.trim() || null;
-    const errors = [];
-    if (!amount || amount < 100) errors.push("Enter a valid amount (minimum ₦100).");
-    if (!proofType) errors.push("Select a funding proof type.");
-    if (!vaNumber || vaNumber.length < 10) errors.push("Enter a valid 10-digit virtual account number.");
-    if (!transferRef) errors.push("Enter the bank transfer reference.");
-    document.querySelector(".validation-error")?.remove();
-    if (errors.length) {
-      const banner = document.createElement("div");
-      banner.className = "validation-error maker-checker-banner";
-      banner.style.cssText = "background:#fff0f0;border-color:#e00;margin-bottom:14px";
-      banner.innerHTML = '<div class="icn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg></div><div><div class="title">Fix these before continuing</div><div class="body">' + errors.join('<br>') + '</div></div>';
-      document.getElementById("load-form").querySelector(".form-foot").before(banner);
-      return;
-    }
+    if (!amount || !proofType || !vaNumber || !transferRef) return;
     setState({
-      card: card, amount: amount, reference: reference,
+      card, amount, reference,
       fundingReference: {
         virtualAccountNumber: vaNumber,
         bankId: card.bank === "Zenith Bank" ? "BNK-ZEN-002" : (card.bank === "GTBank" ? "BNK-GTB-001" : "BNK-ACC-005"),
         bankTransferReference: transferRef,
-        proofType: proofType,
+        proofType,
       },
     });
     window.location.href = "02-review.html";
@@ -186,15 +252,10 @@ function initForm() {
 function initReview() {
   mountAppBar("Review load");
   mountStepper(2);
-  if (window.lucide) lucide.createIcons();
 
   const state = getState();
-  if (!state.card || !state.amount || !state.fundingReference) return; // keep pre-rendered sample
+  if (!state.card || !state.amount || !state.fundingReference) { window.location.href = "01-form.html"; return; }
 
-  renderReviewPanels(state);
-}
-
-function renderReviewPanels(state) {
   const c = state.card;
   const fr = state.fundingReference;
   const proofLabel = FUND_PROOF_TYPES.find(p => p.value === fr.proofType)?.label || fr.proofType;
@@ -207,7 +268,7 @@ function renderReviewPanels(state) {
       <div class="icn"><i data-lucide="users"></i></div>
       <div>
         <div class="title">Approval required from a checker</div>
-        <div class="body">On submit, this load enters the pending approval queue. The CMS load only fires after the checker approves AND the VA funding is validated against the bank-transfer reference (-08).</div>
+        <div class="body">On submit, this load enters the pending approval queue. The CMS load only fires after the checker approves AND the VA funding is validated against the bank-transfer reference (FR-LOAD-API-01-08).</div>
       </div>
     </div>
 
@@ -246,7 +307,7 @@ function renderReviewPanels(state) {
 
       <div class="review-panel wide">
         <div class="review-head">
-          <span class="review-title">Funding reference · </span>
+          <span class="review-title">Funding reference · API-LOAD-01</span>
           <a href="01-form.html" class="review-edit"><i data-lucide="edit-2"></i> Edit</a>
         </div>
         <div class="review-body">
@@ -262,7 +323,7 @@ function renderReviewPanels(state) {
 
     <div class="idempotency-strip" style="margin-top:18px">
       <i data-lucide="shield-check"></i>
-      <div>Request <span class="key">${reqId}</span> · Idempotency <span class="key">${idem}</span> — same key replayed returns the same outcome (-21).</div>
+      <div>Request <span class="key">${reqId}</span> · Idempotency <span class="key">${idem}</span> — same key replayed returns the same outcome (FR-LOAD-API-01-21).</div>
     </div>
 
     <div class="form-foot" style="margin-top:24px">
@@ -279,12 +340,13 @@ function renderReviewPanels(state) {
     btn.innerHTML = `<i data-lucide="loader-2" class="spin"></i> Submitting…`;
     if (window.lucide) lucide.createIcons();
     setTimeout(() => {
+      // Simulate maker-checker: auto-approved by "Folake A." (a different user)
       const outcome = {
         txnId: genTxnId(),
         approvedBy: "Folake A.",
         approvedAt: new Date().toISOString(),
         cmsRef: "CMS-FUND-" + String(881000 + Math.floor(Math.random() * 9999)).padStart(7, "0"),
-        balance: 50000 + state.amount,
+        balance: 50000 + state.amount, // simplified — real balance would come from CMS
       };
       setState({ outcome });
       window.location.href = "03-result.html";
@@ -296,10 +358,9 @@ function renderReviewPanels(state) {
 function initResult() {
   mountAppBar("Funds loaded");
   mountStepper(3);
-  if (window.lucide) lucide.createIcons();
 
   const state = getState();
-  if (!state.outcome) return;
+  if (!state.outcome) { window.location.href = "01-form.html"; return; }
 
   const c = state.card;
   const o = state.outcome;

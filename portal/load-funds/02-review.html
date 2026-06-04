@@ -1,11 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Review load · Kardit CMS</title>
+  <title>Review load · UJR012 · Kardit CMS</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="cs-tokens.css">
 </head>
 <body>
   <div class="scr">
@@ -34,57 +33,7 @@
               <p class="page-sub">Maker submits — a different user (checker) approves. Idempotency key prevents duplicate credit.</p>
             </div>
           </header>
-          <div id="review-mount">
-            <div class="maker-checker-banner">
-              <div class="icn"><i data-lucide="users"></i></div>
-              <div>
-                <div class="title">Approval required from a checker</div>
-                <div class="body">On submit, this load enters the pending approval queue. The CMS load only fires after the checker approves AND the VA funding is validated against the bank-transfer reference.</div>
-              </div>
-            </div>
-            <div class="review-grid">
-              <div class="review-panel">
-                <div class="review-head"><span class="review-title">Card</span><a href="01-form.html" class="review-edit"><i data-lucide="edit-2"></i> Edit</a></div>
-                <div class="review-body">
-                  <dl class="profile-specs">
-                    <div><dt>Card ID</dt><dd class="mono">CARD-2026-VRP01029</dd></div>
-                    <div><dt>Masked PAN</dt><dd class="mono">5061 •••• •••• 4421</dd></div>
-                    <div><dt>Cardholder</dt><dd>Tunde Bakare</dd></div>
-                    <div><dt>Bank · Product</dt><dd>Zenith Bank · Verve Prepaid Standard</dd></div>
-                  </dl>
-                </div>
-              </div>
-              <div class="review-panel">
-                <div class="review-head"><span class="review-title">Load</span><a href="01-form.html" class="review-edit"><i data-lucide="edit-2"></i> Edit</a></div>
-                <div class="review-body">
-                  <div style="font-family:var(--font-display);font-size:32px;font-weight:800;color:var(--cs-ink-900);margin-bottom:14px;letter-spacing:-0.02em">₦25,000.00<span style="font-size:14px;color:var(--cs-ink-100);font-weight:600;margin-left:6px">NGN</span></div>
-                  <dl class="profile-specs">
-                    <div><dt>Reference</dt><dd>Salary advance — March</dd></div>
-                    <div><dt>Settlement</dt><dd>Immediate on approval + VA validation</dd></div>
-                  </dl>
-                </div>
-              </div>
-              <div class="review-panel wide">
-                <div class="review-head"><span class="review-title">Funding reference</span><a href="01-form.html" class="review-edit"><i data-lucide="edit-2"></i> Edit</a></div>
-                <div class="review-body">
-                  <dl class="profile-specs">
-                    <div><dt>Proof type</dt><dd>Bank transfer confirmed</dd></div>
-                    <div><dt>Virtual account number</dt><dd class="mono">1234567890</dd></div>
-                    <div><dt>Issuing bank</dt><dd class="mono">BNK-ZEN-002</dd></div>
-                    <div><dt>Bank transfer reference</dt><dd class="mono">TRF-2026-009811</dd></div>
-                  </dl>
-                </div>
-              </div>
-            </div>
-            <div class="idempotency-strip" style="margin-top:18px">
-              <i data-lucide="shield-check"></i>
-              <div>Request <span class="key"></span> — same key replayed returns the same outcome.</div>
-            </div>
-            <div class="form-foot" style="margin-top:24px">
-              <a href="01-form.html" class="btn btn-ghost btn-sm"><i data-lucide="arrow-left"></i> Back</a>
-              <button id="submit-btn" class="btn btn-primary btn-lg"><i data-lucide="send"></i> Submit for approval</button>
-            </div>
-          </div>
+          <div id="review-mount"></div>
         </div>
       </main>
     </div>
